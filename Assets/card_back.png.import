@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byw3yq68tgbnv"
-path="res://.godot/imported/Garde.jpg-c578b0aa56900592aa97d82e5623c2a6.ctex"
+uid="uid://d1gubj60q410c"
+path="res://.godot/imported/card_back.png-8420fb01dae0b17a162d03ee76591ee6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CardsTexture/Garde.jpg"
-dest_files=["res://.godot/imported/Garde.jpg-c578b0aa56900592aa97d82e5623c2a6.ctex"]
+source_file="res://Assets/card_back.png"
+dest_files=["res://.godot/imported/card_back.png-8420fb01dae0b17a162d03ee76591ee6.ctex"]
 
 [params]
 

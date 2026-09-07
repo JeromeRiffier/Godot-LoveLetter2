@@ -9,10 +9,9 @@
 
 [node name="Main" type="Node2D" unique_id=1039833388]
 
-[node name="CardManager" type="Node2D" parent="." unique_id=156546141 node_paths=PackedStringArray("player_hand_reference", "input_manager_reference")]
+[node name="CardManager" type="Node2D" parent="." unique_id=156546141 node_paths=PackedStringArray("player_hand_reference")]
 script = ExtResource("1_0xm2m")
 player_hand_reference = NodePath("../PlayerHand")
-input_manager_reference = NodePath("../InputManager")
 
 [node name="CardSlot" parent="." unique_id=412397040 instance=ExtResource("3_h2yge")]
 position = Vector2(463, 230)

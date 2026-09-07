@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgto3sbw7vu5"
-path="res://.godot/imported/Roi.jpg-1fe4609c992ba28205a90c1e0626e7c5.ctex"
+uid="uid://ca0nmi8x1eipw"
+path="res://.godot/imported/card_slot.png-8cb5e254c56b07e16ff22c24e2ccb377.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CardsTexture/Roi.jpg"
-dest_files=["res://.godot/imported/Roi.jpg-1fe4609c992ba28205a90c1e0626e7c5.ctex"]
+source_file="res://Assets/card_slot.png"
+dest_files=["res://.godot/imported/card_slot.png-8cb5e254c56b07e16ff22c24e2ccb377.ctex"]
 
 [params]
 

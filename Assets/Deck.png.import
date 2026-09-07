@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgcdm2plh0alk"
-path="res://.godot/imported/Chancelier.jpg-beb0187e6bc3fbd41807c0f7f490a5eb.ctex"
+uid="uid://c0bakm5c6m1w2"
+path="res://.godot/imported/Deck.png-cb3d1c592304fc1ee94cbc1c8488aff0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CardsTexture/Chancelier.jpg"
-dest_files=["res://.godot/imported/Chancelier.jpg-beb0187e6bc3fbd41807c0f7f490a5eb.ctex"]
+source_file="res://Assets/Deck.png"
+dest_files=["res://.godot/imported/Deck.png-cb3d1c592304fc1ee94cbc1c8488aff0.ctex"]
 
 [params]
 

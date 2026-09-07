@@ -3,6 +3,8 @@ class_name Card extends Node2D
 signal hovered(card:Card)
 signal hovered_off(card:Card)
 
+var position_in_hand:Vector2
+
 func _ready() -> void:
 	var parent := get_parent()
 	if parent and parent.has_method('connect_card_signals'):

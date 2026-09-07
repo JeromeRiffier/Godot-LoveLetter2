@@ -4,24 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://player_hand.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://card_slot.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://lvckcy05k1d4" path="res://player_hand.gd" id="4_lquwl"]
-[ext_resource type="PackedScene" uid="uid://bvuq84ml7j1t7" path="res://deck.tscn" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://dn04ntq30nkr3" path="res://input_manager.gd" id="6_7mycd"]
 
 [node name="Main" type="Node2D" unique_id=1039833388]
 
-[node name="CardManager" type="Node2D" parent="." unique_id=156546141 node_paths=PackedStringArray("player_hand_reference", "input_manager_reference")]
+[node name="CardManager" type="Node2D" parent="." unique_id=156546141]
 script = ExtResource("1_0xm2m")
-player_hand_reference = NodePath("../PlayerHand")
-input_manager_reference = NodePath("../InputManager")
 
 [node name="CardSlot" parent="." unique_id=412397040 instance=ExtResource("3_h2yge")]
 position = Vector2(463, 230)
 
 [node name="PlayerHand" parent="." unique_id=1330926806 instance=ExtResource("3_1bvp3")]
 script = ExtResource("4_lquwl")
-
-[node name="Deck" parent="." unique_id=336770514 instance=ExtResource("5_lquwl")]
-position = Vector2(102, 579)
-
-[node name="InputManager" type="Node2D" parent="." unique_id=1233530550]
-script = ExtResource("6_7mycd")

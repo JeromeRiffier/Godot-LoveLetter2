@@ -7,6 +7,7 @@
 size = Vector2(70, 94)
 
 [node name="Card" type="Node2D" unique_id=1408348641]
+z_index = 1
 position = Vector2(408, 223)
 script = ExtResource("1_etl2p")
 
