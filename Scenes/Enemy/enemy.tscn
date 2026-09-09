@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://brqs2imb2p7gr"]
+
+[ext_resource type="Script" uid="uid://dwh77f20eqtmc" path="res://Scenes/Enemy/enemy.gd" id="1_am0pq"]
+[ext_resource type="Texture2D" uid="uid://db8dqualo2an5" path="res://icon.svg" id="1_px1sc"]
+[ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="3_am0pq"]
+[ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="4_eqilm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(64, 64)
+
+[node name="Enemy" type="Marker2D" unique_id=1283494019]
+script = ExtResource("1_am0pq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1389323518]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_px1sc")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1175065453]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=322002356]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Hand" parent="." unique_id=1330926806 instance=ExtResource("3_am0pq")]
+position = Vector2(0, 96)
+
+[node name="CardSlot" parent="." unique_id=412397040 instance=ExtResource("4_eqilm")]
+position = Vector2(0, 210)

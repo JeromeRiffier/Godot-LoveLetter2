@@ -20,14 +20,24 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale=2.0
+window/stretch/scale=1.5
 window/stretch/scale_mode="integer"
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "yellow",
+"res://Resources/": "green",
+"res://Scenes/": "blue",
+"res://Scripts/": "red"
+}
 
 [layer_names]
 
 2d_physics/layer_1="Card"
 2d_physics/layer_2="CardSlot"
 2d_physics/layer_3="Deck"
+2d_physics/layer_4="Enemy"
 
 [physics]
 

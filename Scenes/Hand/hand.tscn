@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bubs5svbc6eqb"]
+
+[ext_resource type="Script" uid="uid://lvckcy05k1d4" path="res://Scenes/Hand/hand.gd" id="1_84xvc"]
+[ext_resource type="PackedScene" uid="uid://c7em3t5lv5vr0" path="res://Scenes/Card/card.tscn" id="2_ue2bi"]
+
+[node name="Hand" type="Node2D" unique_id=1330926806]
+script = ExtResource("1_84xvc")
+
+[node name="Example_card" parent="." unique_id=1408348641 instance=ExtResource("2_ue2bi")]
+process_mode = 4
