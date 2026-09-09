@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://odskjtydb46r"]
+
+[ext_resource type="Script" uid="uid://cgdqm83lybqnc" path="res://Resources/CardsInterface/GardeInterface/garde_interface.gd" id="1_556v5"]
+
+[node name="GardeInterface" type="Node2D" unique_id=89186548]
+script = ExtResource("1_556v5")

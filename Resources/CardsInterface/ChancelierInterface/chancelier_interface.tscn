@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dnh7xb10yw55k"]
+
+[ext_resource type="Script" uid="uid://r58xdserdaun" path="res://Resources/CardsInterface/ChancelierInterface/chancelier_interface.gd" id="1_p5xv0"]
+
+[node name="ChancelierInterface" type="Node2D" unique_id=365958636]
+script = ExtResource("1_p5xv0")

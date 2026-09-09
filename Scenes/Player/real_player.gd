@@ -1,40 +1,58 @@
-class_name Player extends Marker2D
-
-const CARD_MASK = 1
-const CARD_SLOT_MASK = 2
-@onready var hand: Hand = $Hand
-@onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var card_slot: CardSlot = $CardSlot
-
+class_name RealPlayer extends Player
 
 var card_being_dragged:Card = null
-var is_playing:bool = false
-var is_protected:bool = false
-var is_alive:bool = false
 
-signal has_played
+#region CardsInterfaces
+@onready var princesse_interface: PrincesseInterface = $CardsInterfaces/PrincesseInterface
+@onready var comtesse_interface: ComtesseInterface = $CardsInterfaces/ComtesseInterface
+@onready var roi_interface: RoiInterface = $CardsInterfaces/RoiInterface
+@onready var chancelier_interface: ChancelierInterface = $CardsInterfaces/ChancelierInterface
+@onready var prince_interface: PrinceInterface = $CardsInterfaces/PrinceInterface
+@onready var baron_interface: BaronInterface = $CardsInterfaces/BaronInterface
+@onready var servante_interface: ServanteInterface = $CardsInterfaces/ServanteInterface
+@onready var pretre_interface: PretreInterface = $CardsInterfaces/PretreInterface
+@onready var garde_interface: GardeInterface = $CardsInterfaces/GardeInterface
+@onready var espionne_interface: EspionneInterface = $CardsInterfaces/EspionneInterface
+#endregion
 
-#func _ready() -> void:
-	### For debug only, card should be received from GameManager
-	#await get_tree().create_timer(0.5).timeout
-	#var card:Card = preload("uid://c7em3t5lv5vr0").instantiate()
-	#add_child(card)
-	#card.set_infos(Constant.ROI)
-	#card.global_position = Vector2.ZERO
-	#draw_card(card)
-	#await get_tree().create_timer(0.5).timeout
-	#
-	#var card_2:Card = preload("uid://c7em3t5lv5vr0").instantiate()
-	#add_child(card_2)
-	#card_2.set_infos(Constant.COMTESSE)
-	#card_2.global_position = Vector2.ZERO
-	#draw_card(card_2)
-	#await get_tree().create_timer(0.5).timeout
-	#is_playing = true
+
+func play_card(card:Card) -> void:
+	print("%s play %s" % [name, card.infos.title])
+	espionne_interface.enter()
 	
-
-func draw_card(card:Card) -> void:
-	hand.add_card_to_hand(card)
+	match card.infos.title:
+		'Princesse':
+			princesse_interface.enter()
+			await princesse_interface.card_played
+		'Comtesse':
+			comtesse_interface.enter()
+			await comtesse_interface.card_played
+		'Roi':
+			roi_interface.enter()
+			await roi_interface.card_played
+		'Chancelier':
+			chancelier_interface.enter()
+			await chancelier_interface.card_played
+		'Prince':
+			prince_interface.enter()
+			await prince_interface.card_played
+		'Baron':
+			baron_interface.enter()
+			await baron_interface.card_played
+		'Servante':
+			servante_interface.enter()
+			await servante_interface.card_played
+		'Prêtre':
+			pretre_interface.enter()
+			await pretre_interface.card_played
+		'Garde':
+			garde_interface.enter()
+			await garde_interface.card_played
+		'Espionne':
+			espionne_interface.enter()
+			await espionne_interface.card_played
+	has_played.emit()
+	
 
 func _input(event: InputEvent) -> void:
 	if not is_playing:
@@ -47,6 +65,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			if card_being_dragged:
 				finish_drag()
+
 
 func start_drag(card:Card) -> void:
 	card_being_dragged = card
@@ -62,7 +81,7 @@ func finish_drag() -> void:
 			card_being_dragged.global_position = card_slot_found.global_position
 			#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 			card_being_dragged.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
-			has_played.emit()
+			play_card(card_being_dragged)
 		else: 
 			await card_being_dragged.animated_card_forbiden()
 			hand.reposition_card(card_being_dragged)
@@ -70,12 +89,6 @@ func finish_drag() -> void:
 		hand.reposition_card(card_being_dragged)
 	card_being_dragged = null
 
-func is_card_playable(card:Card) -> bool:
-	var is_roi_or_prince:bool = [Constant.PRINCE, Constant.ROI].has(card.infos)
-	var hand_contain_comtesse:bool = hand.cards.any(func (element:Card) -> bool: return element.infos == Constant.COMTESSE)
-	if is_roi_or_prince and hand_contain_comtesse:
-		return false
-	return true
 
 #region input
 ### 

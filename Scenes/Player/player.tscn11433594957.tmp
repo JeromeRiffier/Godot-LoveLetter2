@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dvn4ow4kk5m22"]
+
+[ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="1_g1dw6"]
+[ext_resource type="Script" uid="uid://2h2nch4me3ff" path="res://Scenes/Player/player.gd" id="1_yw30f"]
+[ext_resource type="Texture2D" uid="uid://db8dqualo2an5" path="res://icon.svg" id="2_yw30f"]
+[ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="3_qjkh3"]
+[ext_resource type="PackedScene" uid="uid://c5kotnghvvdly" path="res://Resources/CardsInterface/EspionneInterface/espionne_interface.tscn" id="5_htcer"]
+[ext_resource type="PackedScene" uid="uid://odskjtydb46r" path="res://Resources/CardsInterface/GardeInterface/garde_interface.tscn" id="6_dd0ac"]
+
+[node name="Player" type="Marker2D" unique_id=1325730967 groups=["Player"]]
+position = Vector2(526, 342)
+script = ExtResource("1_yw30f")
+
+[node name="Hand" parent="." unique_id=1330926806 instance=ExtResource("1_g1dw6")]
+position = Vector2(0, -74)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1336706745]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_yw30f")
+
+[node name="CardSlot" parent="." unique_id=412397040 node_paths=PackedStringArray("slot_owner") instance=ExtResource("3_qjkh3")]
+position = Vector2(0, -187)
+slot_owner = NodePath("..")
+
+[node name="CardsInterfaces" type="Node2D" parent="." unique_id=614064632]
+
+[node name="EspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_htcer")]
+player_ref = NodePath("../..")
+
+[node name="GardeInterface" parent="CardsInterfaces" unique_id=89186548 instance=ExtResource("6_dd0ac")]

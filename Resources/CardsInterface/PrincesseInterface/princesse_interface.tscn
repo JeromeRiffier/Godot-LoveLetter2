@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpjualdhuxrpy"]
+
+[ext_resource type="Script" uid="uid://bsetbq0fxqsqa" path="res://Resources/CardsInterface/PrincesseInterface/princesse_interface.gd" id="1_avvbe"]
+
+[node name="PrincesseInterface" type="Node2D" unique_id=1055253171]
+script = ExtResource("1_avvbe")

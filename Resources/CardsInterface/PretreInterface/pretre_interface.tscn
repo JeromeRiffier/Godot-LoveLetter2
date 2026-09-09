@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d21usuy3jfyqf"]
+
+[ext_resource type="Script" uid="uid://dft1duwp1ftg8" path="res://Resources/CardsInterface/PretreInterface/pretre_interface.gd" id="1_8d3iu"]
+
+[node name="PretreInterface" type="Node2D" unique_id=633782881]
+script = ExtResource("1_8d3iu")
