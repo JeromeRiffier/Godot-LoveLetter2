@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7em3t5lv5vr0"]
 
 [ext_resource type="Script" uid="uid://d160y13o56qw3" path="res://Scenes/Card/card.gd" id="1_g0nif"]
-[ext_resource type="Texture2D" uid="uid://diup2dwj83d0i" path="res://Assets/CardTextures/espionne.png" id="2_ac5pp"]
+[ext_resource type="Texture2D" uid="uid://diup2dwj83d0i" path="res://Assets/CardTextures/espionne.png" id="2_g0nif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(70, 94)
@@ -12,7 +12,7 @@ script = ExtResource("1_g0nif")
 
 [node name="CardImage" type="Sprite2D" parent="." unique_id=407883355]
 texture_filter = 1
-texture = ExtResource("2_ac5pp")
+texture = ExtResource("2_g0nif")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=357595070]
 

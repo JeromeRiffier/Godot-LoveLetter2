@@ -19,3 +19,5 @@ texture = ExtResource("2_yw30f")
 [node name="CardSlot" parent="." unique_id=412397040 node_paths=PackedStringArray("slot_owner") instance=ExtResource("3_qjkh3")]
 position = Vector2(0, -187)
 slot_owner = NodePath("..")
+
+[node name="CardStateManager" type="Node2D" parent="." unique_id=945493694]
