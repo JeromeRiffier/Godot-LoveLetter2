@@ -2,9 +2,15 @@ class_name EnemyAI extends Player
 
 const ENEMY_MASK:int = 8
 
+var selectable:bool = false
+var _is_hovered:bool = false
+
+
 signal enemy_selected
 
 func _input(event: InputEvent) -> void:
+	if not selectable:
+		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			var space_state := get_world_2d().direct_space_state
@@ -37,3 +43,11 @@ func animate_card_to_slot(card:Card) -> void:
 	var tween = create_tween()
 	tween.tween_property(card, "global_position", card_slot.global_position, 0.2 )
 	await tween.finished
+
+
+func _on_area_2d_mouse_entered() -> void:
+	if selectable:
+		_is_hovered = true
+		print("TODO Do something visually")
+func _on_area_2d_mouse_exited() -> void:
+	_is_hovered = false

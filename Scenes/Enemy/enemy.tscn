@@ -27,3 +27,6 @@ position = Vector2(0, 96)
 
 [node name="CardSlot" parent="." unique_id=412397040 instance=ExtResource("4_eqilm")]
 position = Vector2(0, 210)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
