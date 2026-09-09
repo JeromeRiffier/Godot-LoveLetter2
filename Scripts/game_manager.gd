@@ -18,12 +18,15 @@ func _ready() -> void:
 	#if deck:
 		#deck.deck_is_empty.connect(func () -> void: game_is_running = false) 
 	## start Round
+	set_all_players_alive()
 	give_starting_cards()
 	## manage Round
 	while game_is_running:
 		for player in players:
 			if deck.cards.is_empty():
 				game_is_running = false
+				break
+			if not player.is_alive:
 				break
 			give_card_to_player(player)
 			player.is_playing = true
@@ -45,3 +48,7 @@ func give_card_to_player(player:Player) -> void:
 
 func manage_end_of_round() -> void:
 	print("The game as endend, count points, reset deck if needed, ask if ready etc")
+
+func set_all_players_alive() -> void:
+	for player in players:
+		player.is_alive = true

@@ -10,6 +10,7 @@ const CARD_SLOT_MASK = 2
 var card_being_dragged:Card = null
 var is_playing:bool = false
 var is_protected:bool = false
+var is_alive:bool = false
 
 signal has_played
 
@@ -46,16 +47,25 @@ func finish_drag() -> void:
 	card_being_dragged.is_dragged = false
 	var card_slot_found = raycast_check_for_card_slot()
 	if card_slot_found and card_slot_found == card_slot:
-		hand.remove_card_from_hand(card_being_dragged)
-		card_slot.receive_card(card_being_dragged)
-		card_being_dragged.global_position = card_slot_found.global_position
-		#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
-		card_being_dragged.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
-		has_played.emit()
+		if is_card_playable(card_being_dragged):
+			hand.remove_card_from_hand(card_being_dragged)
+			card_slot.receive_card(card_being_dragged)
+			card_being_dragged.global_position = card_slot_found.global_position
+			#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
+			card_being_dragged.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
+			has_played.emit()
+		else: 
+			await card_being_dragged.animated_card_forbiden()
+			hand.reposition_card(card_being_dragged)
 	else:
 		hand.reposition_card(card_being_dragged)
 	card_being_dragged = null
 
+func is_card_playable(card:Card) -> bool:
+	return false
+	if [Constant.PRINCE, Constant.ROI].has(card.infos) and hand.cards.find_custom(func (card:Card) -> bool: return card.infos == Constant.COMTESSE):
+		return false
+	return true
 #region input
 ### 
 ## Check if the mouse position collide with a card
@@ -93,7 +103,6 @@ func get_card_with_highest_z_index(cards:Array[Card]) -> Card:
 			highest_card = card
 	return highest_card
 
-
 ### 
 ## Check if the mouse position collide with a card slot
 ## return the first card detected
@@ -110,5 +119,4 @@ func raycast_check_for_card_slot() -> CardSlot:
 	if not card_slots:
 		return null
 	return card_slots[0]
-
 #endregion

@@ -29,13 +29,21 @@ func _process(_delta: float) -> void:
 	if is_dragged:
 		var mouse_global_pos = get_global_mouse_position()
 		self.global_position = Vector2(clamp(mouse_global_pos.x, 0, get_tree().get_root().size.x), clamp(mouse_global_pos.y, 0, get_tree().get_root().size.y))
+
 func _on_area_2d_mouse_entered() -> void:
 	hovered.emit(self)
 
 func _on_area_2d_mouse_exited() -> void:
 	hovered_off.emit(self)
 
-
 func hide_card() -> void:
 	front = false
 	card_image.texture = CARD_BACK
+
+func animated_card_forbiden() -> void:
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "rotation_degrees", 30, 0.3)
+	tween.tween_property(self, "rotation_degrees", -30, 0.3)
+	tween.tween_property(self, "rotation_degrees", 0, 0.3)
+	await tween.finished
