@@ -1,9 +1,21 @@
 class_name EnemyAI extends Player
 
-## Disable parent (Player) input management
-func _input(_event: InputEvent) -> void:
-	return
+const ENEMY_MASK:int = 8
 
+signal enemy_selected
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			var space_state := get_world_2d().direct_space_state
+			var parameters := PhysicsPointQueryParameters2D.new()
+			parameters.position = get_global_mouse_position()
+			parameters.collide_with_areas = true
+			parameters.collision_mask = ENEMY_MASK
+			var colision_result := space_state.intersect_point(parameters)
+			if not colision_result.is_empty() && colision_result[0].collider.get_parent() == self:
+				print("Enemy clicked ", name)
+				enemy_selected.emit()
 
 func takeTurn():
 	await get_tree().create_timer(0.2).timeout

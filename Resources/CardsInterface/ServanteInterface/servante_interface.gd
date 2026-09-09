@@ -2,4 +2,5 @@ class_name ServanteInterface extends CardInterface
 
 
 func use() -> void:
-	pass
+	player_ref.is_protected = true
+	validate()
