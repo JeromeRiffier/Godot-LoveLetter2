@@ -25,7 +25,7 @@ func _ready() -> void:
 	if parent and parent.has_method('connect_card_signals'):
 		get_parent().connect_card_signals(self)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_dragged:
 		var mouse_global_pos = get_global_mouse_position()
 		self.global_position = Vector2(clamp(mouse_global_pos.x, 0, get_tree().get_root().size.x), clamp(mouse_global_pos.y, 0, get_tree().get_root().size.y))

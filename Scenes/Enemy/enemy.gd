@@ -1,7 +1,7 @@
 class_name Enemy extends Player
 
 ## Disable parent (Player) input management
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	return
 
 

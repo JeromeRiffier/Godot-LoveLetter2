@@ -36,13 +36,13 @@ func _input(event: InputEvent) -> void:
 				start_drag(card)
 		else:
 			if card_being_dragged:
-				finish_drag(card_being_dragged)
+				finish_drag()
 
 func start_drag(card:Card) -> void:
 	card_being_dragged = card
 	card.is_dragged = true
 
-func finish_drag(card:Card) -> void:
+func finish_drag() -> void:
 	card_being_dragged.is_dragged = false
 	var card_slot_found = raycast_check_for_card_slot()
 	if card_slot_found and card_slot_found == card_slot:

@@ -32,6 +32,10 @@ folder_colors={
 "res://Scripts/": "red"
 }
 
+[global_group]
+
+Player="Node Player or Enemy"
+
 [layer_names]
 
 2d_physics/layer_1="Card"

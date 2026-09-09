@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(64, 64)
 
-[node name="Enemy" type="Marker2D" unique_id=1283494019]
+[node name="Enemy" type="Marker2D" unique_id=1283494019 groups=["Player"]]
 script = ExtResource("1_am0pq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1389323518]

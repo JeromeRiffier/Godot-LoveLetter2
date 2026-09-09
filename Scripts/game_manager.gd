@@ -11,10 +11,7 @@ var game_is_running:bool = true
 
 func _ready() -> void:
 	#region debug For debug only
-	players.append(the_player)
-	players.append(enemy)
-	players.append(enemy_2)
-	players.append(enemy_3)
+	players.assign( get_tree().get_nodes_in_group("Player") )
 	await get_tree().create_timer(0.5).timeout
 	 #endregion
 	## Connect signals
