@@ -17,6 +17,7 @@ var mouse_offset:Vector2 = Vector2.ZERO
 
 @export var player_hand_reference:PlayerHand
 @export var input_manager_reference:InputManager
+@export var deck_reference:Deck
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -30,10 +31,13 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			var result := input_manager_reference.raycast_event()
-			var card := result.card
-			if card:
-				mouse_offset = get_global_mouse_position() - card.global_position
-				start_drag(card)
+			if result.deck:
+				deck_reference.draw_card()
+				return
+				
+			if result.card:
+				mouse_offset = get_global_mouse_position() - result.card.global_position
+				start_drag(result.card)
 		elif card_being_dragged:
 			finish_drag()
 

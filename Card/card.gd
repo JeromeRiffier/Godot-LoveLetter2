@@ -1,9 +1,17 @@
 class_name Card extends Node2D
 
+var infos:CardInfos
+
+@onready var card_image: Sprite2D = $CardImage
+
 signal hovered(card:Card)
 signal hovered_off(card:Card)
 
 var position_in_hand:Vector2
+
+func set_infos(value:CardInfos) -> void:
+	infos = value
+	card_image.texture = value.texture
 
 func _ready() -> void:
 	var parent := get_parent()

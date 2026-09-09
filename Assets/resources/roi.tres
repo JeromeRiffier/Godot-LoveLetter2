@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardInfos" format=3 uid="uid://rjnbcqdlwdu8"]
+
+[ext_resource type="Script" uid="uid://cp1o01hq8ru7b" path="res://Resources/CardInfos.gd" id="1_egdwn"]
+[ext_resource type="Texture2D" uid="uid://57trqxhcmj1i" path="res://Assets/CustomTextures/roi.png" id="2_20g11"]
+
+[resource]
+script = ExtResource("1_egdwn")
+title = "ROI"
+description = "Echange ta carte avec un autre joueur"
+texture = ExtResource("2_20g11")
+metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

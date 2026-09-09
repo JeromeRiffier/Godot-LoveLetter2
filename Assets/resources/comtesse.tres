@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardInfos" format=3 uid="uid://chy6weh1ghk1s"]
+
+[ext_resource type="Script" uid="uid://cp1o01hq8ru7b" path="res://Resources/CardInfos.gd" id="1_pbtl4"]
+[ext_resource type="Texture2D" uid="uid://bogkg0l5cvq7f" path="res://Assets/CustomTextures/comtesse.png" id="2_ddmnv"]
+
+[resource]
+script = ExtResource("1_pbtl4")
+title = "COMTESSE"
+description = "Ne fais rien mais obligé de la jouer si ton autre carte est un prince ou un roi"
+texture = ExtResource("2_ddmnv")
+metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

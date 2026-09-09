@@ -29,7 +29,7 @@ func update_hand_positions() -> void:
 	for i in range(player_hand.size()):
 		var new_position =  Vector2(calculate_card_positions_x(i), get_viewport_rect().size.y - HAND_Y_POS)
 		var card := player_hand[i]
-		card.position_in_hand = new_position
+		card.position_in_hand = Vector2.ZERO
 		animate_card_to_position(card, new_position)
 
 func calculate_card_positions_x(index:int) -> int:

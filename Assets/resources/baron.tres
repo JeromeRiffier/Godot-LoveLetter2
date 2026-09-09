@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardInfos" format=3 uid="uid://bqbljbxuhm6sw"]
+
+[ext_resource type="Script" uid="uid://cp1o01hq8ru7b" path="res://Resources/CardInfos.gd" id="1_ym3ww"]
+[ext_resource type="Texture2D" uid="uid://bxt3gcge487d5" path="res://Assets/CustomTextures/baron.png" id="2_ck1qs"]
+
+[resource]
+script = ExtResource("1_ym3ww")
+title = "BARON"
+description = "Compare ta main"
+texture = ExtResource("2_ck1qs")
+metadata/_custom_type_script = "uid://cp1o01hq8ru7b"
