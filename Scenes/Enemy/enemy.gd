@@ -1,4 +1,4 @@
-class_name Enemy extends Player
+class_name EnemyAI extends Player
 
 ## Disable parent (Player) input management
 func _input(_event: InputEvent) -> void:

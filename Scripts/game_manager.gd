@@ -2,9 +2,6 @@ class_name GameManager extends Node2D
 
 @export var deck:Deck
 @export var the_player:Player
-@onready var enemy: Enemy = $"../Enemy"
-@onready var enemy_2: Enemy = $"../Enemy2"
-@onready var enemy_3: Enemy = $"../Enemy3"
 
 var players: Array[Player]
 var game_is_running:bool = true
@@ -30,7 +27,7 @@ func _ready() -> void:
 				break
 			give_card_to_player(player)
 			player.is_playing = true
-			if player is Enemy:
+			if player is EnemyAI:
 				player.takeTurn()
 			await player.has_played
 			player.is_playing = false

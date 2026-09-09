@@ -62,7 +62,6 @@ func finish_drag() -> void:
 	card_being_dragged = null
 
 func is_card_playable(card:Card) -> bool:
-	return false
 	if [Constant.PRINCE, Constant.ROI].has(card.infos) and hand.cards.find_custom(func (card:Card) -> bool: return card.infos == Constant.COMTESSE):
 		return false
 	return true
