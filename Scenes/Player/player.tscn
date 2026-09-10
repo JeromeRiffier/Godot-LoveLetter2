@@ -56,11 +56,9 @@ visible = false
 player_ref = NodePath("../..")
 
 [node name="RoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_oikmp")]
-visible = false
 player_ref = NodePath("../..")
 
 [node name="ComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_06tpx")]
-visible = false
 player_ref = NodePath("../..")
 
 [node name="PrincesseInterface" parent="CardsInterfaces" unique_id=1055253171 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_7g0yx")]
