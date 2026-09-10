@@ -50,6 +50,10 @@ func select_enemy(enemy:Player) -> void:
 	await get_tree().create_timer(1).timeout
 	validate()
 
+
+#endregion
+
+#region Card positioning
 func animate_cards_to_center(player_card:Card,enemy_card:Card) -> void:
 	var center_y := (get_tree().root.size.y /2.0) +  80.0
 	cards.assign([player_card, enemy_card])
@@ -58,10 +62,6 @@ func animate_cards_to_center(player_card:Card,enemy_card:Card) -> void:
 		var card := cards[i]
 		card.position_in_hand = new_position
 		animate_card_to_position(card, new_position)
-#endregion
-
-#region Card positioning
-
 
 
 func calculate_card_positions_x(index:int) -> float:

@@ -17,6 +17,7 @@ func _ready() -> void:
 		players[realPlayerIndex].need_to_select_enemy.connect(manage_enemy_selection_state)
 	for player in players:
 		player.need_card.connect(give_card_to_player)
+		player.return_card.connect(deck.take_back)
 	#if deck:
 		#deck.deck_is_empty.connect(func () -> void: game_is_running = false) 
 	## start Round

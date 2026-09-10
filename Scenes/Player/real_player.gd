@@ -95,7 +95,7 @@ func finish_drag() -> void:
 ## return the first card detected
 ### 
 func raycast_check_for_card() -> Card:
-	var colision_result:Array[Dictionary] = ray_cast_at_cursor(CARD_MASK)
+	var colision_result:Array[Dictionary] = ray_cast_at_cursor(Constant.CARD_MASK)
 	var cards :Array[Card]
 	cards.assign(colision_result.map(
 			func (element:Dictionary) -> Card: return element.collider.get_parent()
@@ -131,7 +131,7 @@ func get_card_with_highest_z_index(cards:Array[Card]) -> Card:
 ## return the first card detected
 ### 
 func raycast_check_for_card_slot() -> CardSlot:
-	var colision_result:Array[Dictionary] = ray_cast_at_cursor(CARD_SLOT_MASK)
+	var colision_result:Array[Dictionary] = ray_cast_at_cursor(Constant.CARD_SLOT_MASK)
 	var card_slots :Array[CardSlot]
 	card_slots.assign(colision_result.map(
 			func (element:Dictionary) -> CardSlot: return element.collider.get_parent()

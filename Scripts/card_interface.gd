@@ -4,15 +4,19 @@ class_name CardInterface extends Node2D
 
 @export var player_ref:RealPlayer
 
+var is_active:bool
+
 
 signal card_played
 
 
 func enter() -> void:
+	is_active = true
 	if player_ref:
 		player_ref.is_protected = false
 
 
 func validate() -> void:
 	await  get_tree().create_timer(0.1).timeout
+	is_active = false
 	card_played.emit()

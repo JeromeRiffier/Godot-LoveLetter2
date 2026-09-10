@@ -11,15 +11,6 @@ const GARDE: CardInfos = preload("uid://dplbbqbi70nc4")
 const ESPIONNE: CardInfos = preload("uid://dsgiyq5mteexx")
 
 const BaseDeck: Array[CardInfos] = [
-		BARON, #debug
-		GARDE, #debug
-		GARDE, #debug
-		PRINCESS, #debug
-		GARDE, #debug
-		ROI, #debug
-		
-		
-		
 		PRINCESS, 
 		COMTESSE, 
 		ROI, 
@@ -40,7 +31,14 @@ const BaseDeck: Array[CardInfos] = [
 		GARDE, 
 		GARDE, 
 		ESPIONNE, 
-		ESPIONNE
+		ESPIONNE,
+		
+		GARDE, #debug
+		GARDE, #debug
+		PRINCESS, #debug
+		GARDE, #debug
+		ROI, #debug
+		CHANCELIER, #debug
 	]
 const CardTypes: Array[CardInfos] = [
 		PRINCESS, 
@@ -80,3 +78,8 @@ enum CardValues{
 	}
 
 const CARD_WIDTH:int = 80
+const CARD_MASK:int = 1
+const CARD_SLOT_MASK:int = 2
+const DECK_MASK:int = 4
+const ENEMY_MASK:int = 8
+const PLAYER_MASK:int = 16

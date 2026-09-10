@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccp1fhraevt1s"]
 
 [ext_resource type="Script" uid="uid://cjgerkdybia7t" path="res://Resources/CardsInterface/RoiInterface/roi_interface.gd" id="1_emfdr"]
-[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Resources/CardsInterface/Message/message.tscn" id="2_msnvs"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_msnvs"]
 
 [node name="RoiInterface" type="Node2D" unique_id=1282076885]
 script = ExtResource("1_emfdr")

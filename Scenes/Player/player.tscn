@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://c8k41jkwtj8fm" path="res://Resources/CardsInterface/ComtesseInterface/comtesse_interface.tscn" id="13_06tpx"]
 [ext_resource type="PackedScene" uid="uid://bpjualdhuxrpy" path="res://Resources/CardsInterface/PrincesseInterface/princesse_interface.tscn" id="14_7g0yx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(64, 64)
+
 [node name="Player" type="Marker2D" unique_id=1325730967 groups=["Player"]]
 position = Vector2(526, 342)
 script = ExtResource("1_7g0yx")
@@ -25,6 +28,14 @@ position = Vector2(0, -74)
 [node name="PlayerSprite" parent="." unique_id=562675833 instance=ExtResource("3_7g0yx")]
 position = Vector2(0, 20)
 scale = Vector2(0.5, 0.5)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1755295232]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=750942351]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="CardSlot" parent="." unique_id=412397040 node_paths=PackedStringArray("slot_owner") instance=ExtResource("3_qjkh3")]
 position = Vector2(0, -187)
@@ -51,7 +62,6 @@ player_ref = NodePath("../..")
 player_ref = NodePath("../..")
 
 [node name="ChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_74mp2")]
-visible = false
 player_ref = NodePath("../..")
 
 [node name="RoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_oikmp")]

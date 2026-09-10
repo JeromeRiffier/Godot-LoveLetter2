@@ -19,10 +19,8 @@ func reposition_card(card:Card):
 	animate_card_to_position(card, card.position_in_hand) 
 
 func remove_card_from_hand(card:Card) -> void:
-	var index:int = cards.find(card)
-	if index != -1:
-		cards.pop_at(index)
-		update_hand_positions()
+		cards.erase(card)
+		await update_hand_positions()
 		
 
 func update_hand_positions() -> void:
@@ -30,7 +28,7 @@ func update_hand_positions() -> void:
 		var new_position =  Vector2(calculate_card_positions_x(i), global_position.y)
 		var card := cards[i]
 		card.position_in_hand = new_position
-		animate_card_to_position(card, new_position)
+		await animate_card_to_position(card, new_position)
 func calculate_card_positions_x(index:int) -> float:
 	var total_width := cards.size() * CARD_WIDTH
 	var x_offset := global_position.x + index * CARD_WIDTH - total_width / 2.0 + (CARD_WIDTH / 2.0)
@@ -38,8 +36,4 @@ func calculate_card_positions_x(index:int) -> float:
 func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 	var tween = create_tween()
 	tween.tween_property(card, "global_position", new_position, 0.1)
-
-#func remove_card_from_hand(card:Card) -> void:
-	#if card in cards:
-		#cards.erase(card)
-		#update_hand_positions()
+	await tween.finished

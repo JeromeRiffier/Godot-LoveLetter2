@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgdqm83lybqnc" path="res://Resources/CardsInterface/GardeInterface/garde_interface.gd" id="1_556v5"]
 [ext_resource type="PackedScene" uid="uid://baa7q4t73hvwq" path="res://Scenes/CardSelectionTool/card_selection_tool.tscn" id="2_njyl2"]
-[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Resources/CardsInterface/Message/message.tscn" id="3_ytio5"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="3_ytio5"]
 
 [node name="GardeInterface" type="Node2D" unique_id=89186548]
 script = ExtResource("1_556v5")
