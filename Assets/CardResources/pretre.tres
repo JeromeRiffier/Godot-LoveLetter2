@@ -7,5 +7,6 @@
 script = ExtResource("1_i8t51")
 title = "PRÊTRE"
 description = "Regarde la main d'un joueur"
+value = 2
 texture = ExtResource("2_uorai")
 metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

@@ -1,6 +1,5 @@
 class_name CardSelectionTool extends Node2D
 
-const CARD_WIDTH:int = 80
 const CARD_SCENE = preload("uid://c7em3t5lv5vr0")
 const BOTTOM_MARGIN:int = 100
 
@@ -85,8 +84,8 @@ func calculate_card_positions_y() -> float:
 	else:
 		return screen_bottom + BOTTOM_MARGIN
 func calculate_card_positions_x(index:int) -> float:
-	var total_width := cards.size() * CARD_WIDTH
-	var x_offset := screen_center_x + index * CARD_WIDTH - total_width / 2.0 + (CARD_WIDTH / 2.0)
+	var total_width := cards.size() * Constant.CARD_WIDTH
+	var x_offset := screen_center_x + index * Constant.CARD_WIDTH - total_width / 2.0 + (Constant.CARD_WIDTH / 2.0)
 	return x_offset
 func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 	var tween = create_tween()

@@ -7,5 +7,6 @@
 script = ExtResource("1_1il8s")
 title = "GARDE"
 description = "Attaque un joueur"
+value = 1
 texture = ExtResource("2_p3m3d")
 metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

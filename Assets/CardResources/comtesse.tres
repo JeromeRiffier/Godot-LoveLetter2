@@ -7,5 +7,6 @@
 script = ExtResource("1_pbtl4")
 title = "COMTESSE"
 description = "Ne fais rien mais obligé de la jouer si ton autre carte est un prince ou un roi"
+value = 8
 texture = ExtResource("2_ddmnv")
 metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

@@ -7,5 +7,6 @@
 script = ExtResource("1_kyb31")
 title = "CHANCELIER"
 description = "pioche 2, choisi qui tu garde et remet le reste sous le paquet"
+value = 6
 texture = ExtResource("2_fu0xh")
 metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

@@ -11,7 +11,14 @@ const GARDE: CardInfos = preload("uid://dplbbqbi70nc4")
 const ESPIONNE: CardInfos = preload("uid://dsgiyq5mteexx")
 
 const BaseDeck: Array[CardInfos] = [
+		BARON, #debug
+		GARDE, #debug
+		GARDE, #debug
+		PRINCESS, #debug
+		GARDE, #debug
 		ROI, #debug
+		
+		
 		
 		PRINCESS, 
 		COMTESSE, 
@@ -71,3 +78,5 @@ enum CardValues{
 		Garde=1,
 		Espionne=0
 	}
+
+const CARD_WIDTH:int = 80

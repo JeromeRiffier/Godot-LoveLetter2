@@ -7,5 +7,6 @@
 script = ExtResource("1_egdwn")
 title = "ROI"
 description = "Echange ta carte avec un autre joueur"
+value = 7
 texture = ExtResource("2_20g11")
 metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

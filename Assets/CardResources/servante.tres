@@ -7,5 +7,6 @@
 script = ExtResource("1_ja8mh")
 title = "SERVANTE"
 description = "Protege pendant 1 tour"
+value = 4
 texture = ExtResource("2_2jrrk")
 metadata/_custom_type_script = "uid://cp1o01hq8ru7b"

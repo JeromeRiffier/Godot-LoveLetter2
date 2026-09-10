@@ -7,5 +7,6 @@
 script = ExtResource("1_ym3ww")
 title = "BARON"
 description = "Compare ta main"
+value = 3
 texture = ExtResource("2_ck1qs")
 metadata/_custom_type_script = "uid://cp1o01hq8ru7b"
