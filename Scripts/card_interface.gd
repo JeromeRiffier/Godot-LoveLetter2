@@ -2,20 +2,17 @@
 ## the use function will be overriden by the real user of this class
 class_name CardInterface extends Node2D
 
-@export var player_ref:Player
+@export var player_ref:RealPlayer
 
 
 signal card_played
 
 
 func enter() -> void:
-	print("OUECH")
 	if player_ref:
 		player_ref.is_protected = false
-	use()
 
-func use() -> void:
-	pass
 
 func validate() -> void:
+	await  get_tree().create_timer(0.1).timeout
 	card_played.emit()

@@ -1,6 +1,7 @@
 class_name ServanteInterface extends CardInterface
 
 
-func use() -> void:
+func enter() -> void:
+	super() # Execute parenter enter func
 	player_ref.is_protected = true
 	validate()

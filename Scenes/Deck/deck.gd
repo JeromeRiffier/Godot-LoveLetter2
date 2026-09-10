@@ -24,7 +24,7 @@ func draw_card() -> Card:
 	card.set_infos(infos)
 	return card
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			var space_state := get_world_2d().direct_space_state

@@ -44,3 +44,7 @@ func is_card_playable(card:Card) -> bool:
 	if is_roi_or_prince and hand_contain_comtesse:
 		return false
 	return true
+
+func kill() -> void:
+	is_alive = false
+	print(self," is dead")

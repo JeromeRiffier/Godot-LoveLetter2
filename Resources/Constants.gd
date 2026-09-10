@@ -11,12 +11,17 @@ const GARDE: CardInfos = preload("uid://dplbbqbi70nc4")
 const ESPIONNE: CardInfos = preload("uid://dsgiyq5mteexx")
 
 const BaseDeck: Array[CardInfos] = [
+		GARDE, #debug
+		
 		PRINCESS, 
 		COMTESSE, 
 		ROI, 
 		CHANCELIER, 
 		CHANCELIER, 
 		PRINCE, 
+		
+		GARDE, #debug
+		
 		PRINCE, 
 		SERVANTE, 
 		SERVANTE, 

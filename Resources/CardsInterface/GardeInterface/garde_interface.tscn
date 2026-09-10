@@ -1,6 +1,27 @@
 [gd_scene format=3 uid="uid://odskjtydb46r"]
 
 [ext_resource type="Script" uid="uid://cgdqm83lybqnc" path="res://Resources/CardsInterface/GardeInterface/garde_interface.gd" id="1_556v5"]
+[ext_resource type="PackedScene" uid="uid://baa7q4t73hvwq" path="res://Scenes/CardSelectionTool/card_selection_tool.tscn" id="2_njyl2"]
+[ext_resource type="FontFile" uid="uid://cb4d8fs5w486n" path="res://Assets/fonts/home-video/HomeVideo-Regular.otf" id="3_ytio5"]
 
 [node name="GardeInterface" type="Node2D" unique_id=89186548]
 script = ExtResource("1_556v5")
+
+[node name="CardSelectionTool" parent="." unique_id=338857962 instance=ExtResource("2_njyl2")]
+
+[node name="Label" type="Label" parent="." unique_id=12568273]
+offset_left = -65.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ytio5")
+theme_override_font_sizes/font_size = 43
+text = "test "
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="card_selected" from="CardSelectionTool" to="." method="_on_card_selection_tool_card_selected"]

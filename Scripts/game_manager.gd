@@ -1,7 +1,7 @@
 class_name GameManager extends Node2D
 
 @export var deck:Deck
-@export var the_player:Player
+@export var the_player:RealPlayer
 
 var players: Array[Player]
 var game_is_running:bool = true
@@ -12,6 +12,9 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	 #endregion
 	## Connect signals
+	var realPlayerIndex := players.find_custom(func (player:Player) -> bool: return player is RealPlayer)
+	if realPlayerIndex != -1:
+		players[realPlayerIndex].need_to_select_enemy.connect(manage_enemy_selection_state)
 	#if deck:
 		#deck.deck_is_empty.connect(func () -> void: game_is_running = false) 
 	## start Round
@@ -24,7 +27,7 @@ func _ready() -> void:
 				game_is_running = false
 				break
 			if not player.is_alive:
-				break
+				continue
 			give_card_to_player(player)
 			player.is_playing = true
 			if player is EnemyAI:
@@ -32,6 +35,8 @@ func _ready() -> void:
 			await player.has_played
 			player.is_playing = false
 	manage_end_of_round()
+
+
 func give_starting_cards() -> void:
 	for player in players:
 		give_card_to_player(player)
@@ -49,3 +54,10 @@ func manage_end_of_round() -> void:
 func set_all_players_alive() -> void:
 	for player in players:
 		player.is_alive = true
+
+func manage_enemy_selection_state(should_be_selectable:bool) -> void:
+	var enemies:Array[EnemyAI]
+	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy is EnemyAI))
+	for enemy in enemies:
+		enemy.selectable = should_be_selectable
+	print("manage_enemy_selection_state")

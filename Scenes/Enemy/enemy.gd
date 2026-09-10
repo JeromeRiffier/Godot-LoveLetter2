@@ -6,9 +6,9 @@ var selectable:bool = false
 var _is_hovered:bool = false
 
 
-signal enemy_selected
+signal enemy_selected(emiter:Player)
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not selectable:
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 			var colision_result := space_state.intersect_point(parameters)
 			if not colision_result.is_empty() && colision_result[0].collider.get_parent() == self:
 				print("Enemy clicked ", name)
-				enemy_selected.emit()
+				enemy_selected.emit(self)
 
 func takeTurn():
 	await get_tree().create_timer(0.2).timeout

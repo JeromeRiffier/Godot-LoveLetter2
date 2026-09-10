@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://baa7q4t73hvwq"]
+
+[ext_resource type="Script" uid="uid://b4fy0uo3nhay1" path="res://Scenes/CardSelectionTool/card_selection_tool.gd" id="1_yjhv0"]
+
+[node name="CardSelectionTool" type="Node2D" unique_id=338857962]
+script = ExtResource("1_yjhv0")
+
+[node name="Cards" type="Node2D" parent="." unique_id=1490985766]
+z_index = 2
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=2072669586]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -360.0
+offset_right = 250.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

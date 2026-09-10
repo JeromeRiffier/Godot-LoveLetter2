@@ -1,6 +1,7 @@
 class_name PrincesseInterface extends CardInterface
 
 
-func use() -> void:
+func enter() -> void:
+	super() # Execute parenter enter func
 	player_ref.is_alive = false
 	validate()

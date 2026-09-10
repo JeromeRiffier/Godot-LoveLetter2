@@ -15,46 +15,45 @@ var card_being_dragged:Card = null
 @onready var espionne_interface: EspionneInterface = $CardsInterfaces/EspionneInterface
 #endregion
 
+signal need_to_select_enemy(value:bool)
 
 func play_card(card:Card) -> void:
-	print("%s play %s" % [name, card.infos.title])
-	espionne_interface.enter()
-	
-	match card.infos.title:
-		'Princesse':
+	print("%s play %s" % [name, card.infos])
+	match card.infos:
+		Constant.PRINCESS:
 			princesse_interface.enter()
 			await princesse_interface.card_played
-		'Comtesse':
+		Constant.COMTESSE:
 			comtesse_interface.enter()
 			await comtesse_interface.card_played
-		'Roi':
+		Constant.ROI:
 			roi_interface.enter()
 			await roi_interface.card_played
-		'Chancelier':
+		Constant.CHANCELIER:
 			chancelier_interface.enter()
 			await chancelier_interface.card_played
-		'Prince':
+		Constant.PRINCE:
 			prince_interface.enter()
 			await prince_interface.card_played
-		'Baron':
+		Constant.BARON:
 			baron_interface.enter()
 			await baron_interface.card_played
-		'Servante':
+		Constant.SERVANTE:
 			servante_interface.enter()
 			await servante_interface.card_played
-		'Prêtre':
+		Constant.PRÊTRE:
 			pretre_interface.enter()
 			await pretre_interface.card_played
-		'Garde':
+		Constant.GARDE:
 			garde_interface.enter()
 			await garde_interface.card_played
-		'Espionne':
+		Constant.ESPIONNE:
 			espionne_interface.enter()
 			await espionne_interface.card_played
 	has_played.emit()
 	
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not is_playing:
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

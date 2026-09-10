@@ -1,5 +1,6 @@
 class_name ChancelierInterface extends CardInterface
 
 
-func use() -> void:
-	pass
+func enter() -> void:
+	super() # Execute parenter enter func
+	validate()

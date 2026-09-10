@@ -1,5 +1,6 @@
 class_name RoiInterface extends CardInterface
 
 
-func use() -> void:
-	pass
+func enter() -> void:
+	super()
+	validate()
