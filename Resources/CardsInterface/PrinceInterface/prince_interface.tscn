@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cpk3m7rohj4or"]
 
 [ext_resource type="Script" uid="uid://c14mru0gjtf56" path="res://Resources/CardsInterface/PrinceInterface/prince_interface.gd" id="1_uw424"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Resources/CardsInterface/Message/message.tscn" id="2_elw17"]
 
 [node name="PrinceInterface" type="Node2D" unique_id=1794671994]
 script = ExtResource("1_uw424")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_elw17")]

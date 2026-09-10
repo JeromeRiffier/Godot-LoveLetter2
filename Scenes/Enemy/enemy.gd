@@ -43,11 +43,7 @@ func takeTurn():
 	card_to_play.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
 	has_played.emit()
 
-func animate_card_to_slot(card:Card) -> void:
-	card.show_card()
-	var tween = create_tween()
-	tween.tween_property(card, "global_position", card_slot.global_position, 0.2 )
-	await tween.finished
+
 
 
 func _on_area_2d_mouse_entered() -> void:

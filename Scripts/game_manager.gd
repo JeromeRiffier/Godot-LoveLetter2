@@ -15,6 +15,8 @@ func _ready() -> void:
 	var realPlayerIndex := players.find_custom(func (player:Player) -> bool: return player is RealPlayer)
 	if realPlayerIndex != -1:
 		players[realPlayerIndex].need_to_select_enemy.connect(manage_enemy_selection_state)
+	for player in players:
+		player.need_card.connect(give_card_to_player)
 	#if deck:
 		#deck.deck_is_empty.connect(func () -> void: game_is_running = false) 
 	## start Round

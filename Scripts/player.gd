@@ -23,7 +23,8 @@ var as_played_spy:bool = false:
 		as_played_spy = value
 		player_sprite.is_spy = value
 
-signal has_played
+signal has_played(emiter:Player)
+signal need_card(emiter:Player)
 
 #func _ready() -> void:
 	### For debug only, card should be received from GameManager
@@ -57,3 +58,18 @@ func is_card_playable(card:Card) -> bool:
 func kill() -> void:
 	is_alive = false
 	print(self," is dead")
+
+func discard(card:Card) -> void:
+	if card.infos == Constant.PRINCESS:
+		kill()
+	hand.remove_card_from_hand(card)
+	animate_card_to_slot(card)
+	if is_alive:
+		need_card.emit(self)
+
+func animate_card_to_slot(card:Card) -> void:
+	card.show_card()
+	var tween = create_tween()
+	tween.tween_property(card, "global_position", card_slot.global_position, 0.2 )
+	await tween.finished
+	print("test")
