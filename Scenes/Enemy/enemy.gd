@@ -8,6 +8,10 @@ var _is_hovered:bool = false
 
 signal enemy_selected(emiter:Player)
 
+func draw_card(card:Card) -> void:
+	card.hide_card()
+	super(card)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not selectable:
 		return
@@ -40,6 +44,7 @@ func takeTurn():
 	has_played.emit()
 
 func animate_card_to_slot(card:Card) -> void:
+	card.show_card()
 	var tween = create_tween()
 	tween.tween_property(card, "global_position", card_slot.global_position, 0.2 )
 	await tween.finished

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cop6o16btv1cu"]
+
+[ext_resource type="FontFile" uid="uid://cb4d8fs5w486n" path="res://Assets/fonts/home-video/HomeVideo-Regular.otf" id="1_gb3x2"]
+[ext_resource type="Script" uid="uid://dg7qsdi8surxs" path="res://Resources/CardsInterface/Message/message.gd" id="2_ohmae"]
+
+[node name="Message" type="Label" unique_id=1474687604]
+offset_left = -65.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_gb3x2")
+theme_override_font_sizes/font_size = 43
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_ohmae")
+metadata/_edit_use_anchors_ = true

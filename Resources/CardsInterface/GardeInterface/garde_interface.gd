@@ -1,7 +1,7 @@
 class_name GardeInterface extends CardInterface
 
 @onready var card_selection_tool: CardSelectionTool = $CardSelectionTool
-@onready var label: Label = $Label
+@onready var message: Message = $Message
 
 var enemy_selected:Player = null
 var card_selected:CardInfos = null
@@ -12,9 +12,8 @@ func enter() -> void:
 	super() # Execute parenter enter func
 	enemy_selected = null
 	card_selected = null
-	display_text("Qui?")
+	message.display_text("Qui?")
 	player_ref.need_to_select_enemy.emit(true) ## Enable enemy selection
-	print("wait for enemy selection")
 	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy != player_ref))
 	connect_enemies_listeners()
 
@@ -31,7 +30,7 @@ func select_enemy(enemy:Player) -> void:
 	player_ref.need_to_select_enemy.emit(false) ## Disable enemy selection
 	enemy_selected = enemy
 	print("Guard selected ",enemy_selected)
-	await display_text("Qu'elle carte?")
+	await message.display_text("Qu'elle carte?")
 	card_selection_tool.activate()
 #endregion
 
@@ -44,20 +43,7 @@ func check_result() -> void:
 	if enemy_selected.hand.cards[0].infos == card_selected:
 		print("kill ",enemy_selected)
 		enemy_selected.kill()
-		await display_text("Bravo!")
+		await message.display_text("Bravo!")
 	else:
-		await display_text("Nope!")
+		await message.display_text("Nope!")
 	validate()
-
-
-func display_text(text:String) -> void:
-	label.add_theme_color_override("font_color", Color.TRANSPARENT)
-	label.text = text
-	label.size = get_tree().root.size
-	label.global_position = Vector2.ZERO
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(label, "theme_override_colors/font_color", Color.WHITE, 1.5)
-	await tween.finished
-	label.add_theme_color_override("font_color", Color.TRANSPARENT)

@@ -39,6 +39,9 @@ func _on_area_2d_mouse_exited() -> void:
 func hide_card() -> void:
 	front = false
 	card_image.texture = CARD_BACK
+func show_card() -> void:
+	front = true
+	card_image.texture = infos.texture
 
 func animated_card_forbiden() -> void:
 	var tween = create_tween()
