@@ -61,7 +61,7 @@ func animate_cards_to_center(player_card:Card,enemy_card:Card) -> void:
 		var new_position =  Vector2(calculate_card_positions_x(i), center_y)
 		var card := cards[i]
 		card.position_in_hand = new_position
-		animate_card_to_position(card, new_position)
+		await animate_card_to_position(card, new_position)
 
 
 func calculate_card_positions_x(index:int) -> float:
@@ -71,4 +71,5 @@ func calculate_card_positions_x(index:int) -> float:
 func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 	var tween = create_tween()
 	tween.tween_property(card, "global_position", new_position, 0.3)
+	await tween.finished
 #endregion

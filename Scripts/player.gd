@@ -48,7 +48,7 @@ signal return_card(card:Card)
 	
 
 func draw_card(card:Card) -> void:
-	hand.add_card_to_hand(card)
+	await hand.add_card_to_hand(card)
 
 func is_card_playable(card:Card) -> bool:
 	var is_roi_or_prince:bool = [Constant.PRINCE, Constant.ROI].has(card.infos)

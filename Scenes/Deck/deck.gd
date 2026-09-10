@@ -3,16 +3,28 @@ class_name Deck extends Node2D
 const CARD_SCENE = preload("uid://c7em3t5lv5vr0")
 
 
+signal deck_is_ready
 signal deck_clicked
 signal deck_is_empty
 @onready var cards :Array[Card]
+
+
+func update_cards_position() -> void:
+	for index in range(cards.size()):
+		var offset:int = cards.size() - index
+		cards[index].position = Vector2(-offset, -offset*0.5)
 
 func _ready() -> void:
 	for cardInfo in Constant.BaseDeck:
 		var card :Card = CARD_SCENE.instantiate()
 		add_child(card)
 		card.set_infos(cardInfo)
+		card.hide_card()
 		cards.push_front(card)
+		update_cards_position()
+		await get_tree().create_timer(0.1).timeout
+	deck_is_ready.emit()
+	print(cards.size())
 
 func shuffle() -> void:
 	cards.shuffle()
@@ -22,12 +34,15 @@ func draw_card() -> Card:
 		deck_is_empty.emit()
 		print('No more cards')
 		return
-	return cards.pop_front()
+	var card :Card = cards.pop_front()
+	update_cards_position()
+	return card
 
 func take_back(card:Card) -> void:
-	var tween = create_tween()
-	tween.tween_property(card, "global_position", global_position, 0.3)
+	card.global_position = global_position
+	card.hide_card()
 	cards.push_back(card)
+	update_cards_position()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

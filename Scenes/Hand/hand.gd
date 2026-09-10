@@ -10,10 +10,10 @@ var cards: Array[Card] = []
 func _ready() -> void:
 	example_card.queue_free()
 
-func add_card_to_hand(card:Card):
+func add_card_to_hand(card:Card) -> void:
 	if card not in cards:
 		cards.push_front(card)
-		update_hand_positions()
+		await update_hand_positions()
 	
 func reposition_card(card:Card):
 	animate_card_to_position(card, card.position_in_hand) 
@@ -35,5 +35,5 @@ func calculate_card_positions_x(index:int) -> float:
 	return x_offset
 func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 	var tween = create_tween()
-	tween.tween_property(card, "global_position", new_position, 0.1)
+	tween.tween_property(card, "global_position", new_position, 0.3)
 	await tween.finished

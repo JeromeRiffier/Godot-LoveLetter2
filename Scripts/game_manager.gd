@@ -21,8 +21,9 @@ func _ready() -> void:
 	#if deck:
 		#deck.deck_is_empty.connect(func () -> void: game_is_running = false) 
 	## start Round
+	await deck.deck_is_ready
 	set_all_players_alive()
-	give_starting_cards()
+	await give_starting_cards()
 	## manage Round
 	while game_is_running:
 		for player in players:
@@ -31,7 +32,7 @@ func _ready() -> void:
 				break
 			if not player.is_alive:
 				continue
-			give_card_to_player(player)
+			await give_card_to_player(player)
 			player.is_playing = true
 			if player is EnemyAI:
 				player.takeTurn()
@@ -42,14 +43,14 @@ func _ready() -> void:
 
 func give_starting_cards() -> void:
 	for player in players:
-		give_card_to_player(player)
+		await give_card_to_player(player)
 
 func give_card_to_player(player:Player) -> void:
 	var card = deck.draw_card()
 	if not card:
 		print("End of game")
 	else:
-		player.draw_card(card)
+		await player.draw_card(card)
 
 func manage_end_of_round() -> void:
 	print("The game as endend, count points, reset deck if needed, ask if ready etc")

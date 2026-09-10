@@ -51,7 +51,7 @@ func play_card(card:Card) -> void:
 			espionne_interface.enter()
 			await espionne_interface.card_played
 	has_played.emit()
-	
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_playing:
@@ -65,6 +65,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			if card_being_dragged:
 				finish_drag()
 
+func draw_card(card:Card) -> void:
+	card.show_card()
+	super(card)
 
 func start_drag(card:Card) -> void:
 	card_being_dragged = card

@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				enemy_selected.emit(self)
 
 func takeTurn():
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.5).timeout
 	
 	## TODO to be reworked
 	var card_to_play:Card = hand.cards[0]
