@@ -5,13 +5,19 @@ class_name Player extends Marker2D
 const CARD_MASK = 1
 const CARD_SLOT_MASK = 2
 @onready var hand: Hand = $Hand
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var card_slot: CardSlot = $CardSlot
+@onready var player_sprite: PlayerSprite = $PlayerSprite
 
 
 var is_playing:bool = false
-var is_protected:bool = false
-var is_alive:bool = false
+var is_protected:bool = false:
+	set(value):
+		is_protected = value
+		player_sprite.is_protected = value
+var is_alive:bool = false:
+	set(value):
+		is_alive = value
+		player_sprite.is_dead = !value
 var as_played_spy:bool = false
 
 signal has_played

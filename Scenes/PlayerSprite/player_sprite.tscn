@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dyfi536mv747q"]
+
+[ext_resource type="Texture2D" uid="uid://db8dqualo2an5" path="res://icon.svg" id="1_tfl5a"]
+[ext_resource type="Texture2D" uid="uid://dfsa8qe30yhbb" path="res://Assets/pictos/death_crosse.png" id="2_00wib"]
+[ext_resource type="Script" uid="uid://b7w6ytt4midl" path="res://Scenes/PlayerSprite/player_sprite.gd" id="2_k2bne"]
+[ext_resource type="Texture2D" uid="uid://b1boyu64jpwcc" path="res://Assets/pictos/shield.png" id="3_k2bne"]
+[ext_resource type="Texture2D" uid="uid://d2vfyc7dq8ln5" path="res://Assets/pictos/death.png" id="4_4oylc"]
+
+[node name="PlayerSprite" type="Sprite2D" unique_id=562675833]
+texture = ExtResource("1_tfl5a")
+script = ExtResource("2_k2bne")
+
+[node name="DeathCrosse" type="Sprite2D" parent="." unique_id=1634828166]
+visible = false
+self_modulate = Color(1, 0.60701716, 0.54817975, 0.31764707)
+texture_filter = 1
+scale = Vector2(8.099999, 8.099999)
+texture = ExtResource("2_00wib")
+
+[node name="Shield" type="Sprite2D" parent="." unique_id=1205076716]
+visible = false
+texture_filter = 1
+position = Vector2(55, 50)
+scale = Vector2(6, 6)
+texture = ExtResource("3_k2bne")
+
+[node name="Death" type="Sprite2D" parent="." unique_id=810566196]
+visible = false
+texture_filter = 1
+position = Vector2(55, 45)
+scale = Vector2(6, 6)
+texture = ExtResource("4_4oylc")
