@@ -39,7 +39,6 @@ player_ref = NodePath("../..")
 player_ref = NodePath("../..")
 
 [node name="PretreInterface" parent="CardsInterfaces" unique_id=633782881 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_0u5uq")]
-visible = false
 player_ref = NodePath("../..")
 
 [node name="ServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_jlvik")]

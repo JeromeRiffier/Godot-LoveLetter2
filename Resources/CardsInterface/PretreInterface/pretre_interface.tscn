@@ -7,3 +7,4 @@
 script = ExtResource("1_8d3iu")
 
 [node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_ssw0f")]
+z_index = 4
