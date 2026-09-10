@@ -57,7 +57,7 @@ func set_all_players_alive() -> void:
 
 func manage_enemy_selection_state(should_be_selectable:bool) -> void:
 	var enemies:Array[EnemyAI]
-	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy is EnemyAI))
+	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy is EnemyAI and enemy.is_alive))
 	for enemy in enemies:
 		enemy.selectable = should_be_selectable
 	print("manage_enemy_selection_state")

@@ -18,7 +18,10 @@ var is_alive:bool = false:
 	set(value):
 		is_alive = value
 		player_sprite.is_dead = !value
-var as_played_spy:bool = false
+var as_played_spy:bool = false:
+	set(value):
+		as_played_spy = value
+		player_sprite.is_spy = value
 
 signal has_played
 

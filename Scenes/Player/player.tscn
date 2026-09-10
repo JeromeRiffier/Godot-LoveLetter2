@@ -23,7 +23,8 @@ script = ExtResource("1_7g0yx")
 position = Vector2(0, -74)
 
 [node name="PlayerSprite" parent="." unique_id=562675833 instance=ExtResource("3_7g0yx")]
-scale = Vector2(0.25, 0.25)
+position = Vector2(0, 20)
+scale = Vector2(0.5, 0.5)
 
 [node name="CardSlot" parent="." unique_id=412397040 node_paths=PackedStringArray("slot_owner") instance=ExtResource("3_qjkh3")]
 position = Vector2(0, -187)

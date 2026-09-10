@@ -11,7 +11,7 @@
 position = Vector2(157, 255)
 
 [node name="Player" parent="." unique_id=1325730967 instance=ExtResource("4_1bvp3")]
-position = Vector2(586, 618)
+position = Vector2(583, 578)
 
 [node name="GameManager" type="Node2D" parent="." unique_id=284890241 node_paths=PackedStringArray("deck", "the_player")]
 script = ExtResource("5_7mycd")
