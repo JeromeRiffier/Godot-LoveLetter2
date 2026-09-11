@@ -3,16 +3,16 @@ class_name RealPlayer extends Player
 var card_being_dragged:Card = null
 
 #region CardsInterfaces
-@onready var princesse_interface: PrincesseInterface = $CardsInterfaces/PrincesseInterface
-@onready var comtesse_interface: ComtesseInterface = $CardsInterfaces/ComtesseInterface
-@onready var roi_interface: RoiInterface = $CardsInterfaces/RoiInterface
-@onready var chancelier_interface: ChancelierInterface = $CardsInterfaces/ChancelierInterface
-@onready var prince_interface: PrinceInterface = $CardsInterfaces/PrinceInterface
-@onready var baron_interface: BaronInterface = $CardsInterfaces/BaronInterface
-@onready var servante_interface: ServanteInterface = $CardsInterfaces/ServanteInterface
-@onready var pretre_interface: PretreInterface = $CardsInterfaces/PretreInterface
-@onready var garde_interface: GardeInterface = $CardsInterfaces/GardeInterface
-@onready var espionne_interface: EspionneInterface = $CardsInterfaces/EspionneInterface
+@onready var princesse_interface: PlayerPrincesseInterface = $CardsInterfaces/PrincesseInterface
+@onready var comtesse_interface: PlayerComtesseInterface = $CardsInterfaces/ComtesseInterface
+@onready var roi_interface: PlayerRoiInterface = $CardsInterfaces/RoiInterface
+@onready var chancelier_interface: PlayerChancelierInterface = $CardsInterfaces/ChancelierInterface
+@onready var prince_interface: PlayerPrinceInterface = $CardsInterfaces/PrinceInterface
+@onready var baron_interface: PlayerBaronInterface = $CardsInterfaces/BaronInterface
+@onready var servante_interface: PlayerServanteInterface = $CardsInterfaces/ServanteInterface
+@onready var pretre_interface: PlayerPretreInterface = $CardsInterfaces/PretreInterface
+@onready var garde_interface: PlayerGardeInterface = $CardsInterfaces/GardeInterface
+@onready var espionne_interface: PlayerEspionneInterface = $CardsInterfaces/EspionneInterface
 #endregion
 
 signal need_to_select_enemy(value:bool)

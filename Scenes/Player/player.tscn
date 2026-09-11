@@ -4,16 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="1_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://dyfi536mv747q" path="res://Scenes/PlayerSprite/player_sprite.tscn" id="3_7g0yx"]
 [ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="3_qjkh3"]
-[ext_resource type="PackedScene" uid="uid://c5kotnghvvdly" path="res://Resources/CardsInterface/RealPlayerInterfaces/EspionneInterface/espionne_interface.tscn" id="5_htcer"]
-[ext_resource type="PackedScene" uid="uid://odskjtydb46r" path="res://Resources/CardsInterface/RealPlayerInterfaces/GardeInterface/garde_interface.tscn" id="6_dd0ac"]
-[ext_resource type="PackedScene" uid="uid://d21usuy3jfyqf" path="res://Resources/CardsInterface/RealPlayerInterfaces/PretreInterface/pretre_interface.tscn" id="7_0u5uq"]
-[ext_resource type="PackedScene" uid="uid://blwfm4ra5adkk" path="res://Resources/CardsInterface/RealPlayerInterfaces/ServanteInterface/servante_interface.tscn" id="8_jlvik"]
-[ext_resource type="PackedScene" uid="uid://cgj76nr5hwytu" path="res://Resources/CardsInterface/RealPlayerInterfaces/BaronInterface/baron_interface.tscn" id="9_gk6dx"]
-[ext_resource type="PackedScene" uid="uid://cpk3m7rohj4or" path="res://Resources/CardsInterface/RealPlayerInterfaces/PrinceInterface/prince_interface.tscn" id="10_jhyir"]
+[ext_resource type="PackedScene" uid="uid://c5kotnghvvdly" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerEspionneInterface/player_espionne_interface.tscn" id="5_htcer"]
+[ext_resource type="PackedScene" uid="uid://odskjtydb46r" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerGardeInterface/player_garde_interface.tscn" id="6_dd0ac"]
+[ext_resource type="PackedScene" uid="uid://d21usuy3jfyqf" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerPretreInterface/player_pretre_interface.tscn" id="7_0u5uq"]
+[ext_resource type="PackedScene" uid="uid://blwfm4ra5adkk" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerServanteInterface/player_servante_interface.tscn" id="8_jlvik"]
+[ext_resource type="PackedScene" uid="uid://cgj76nr5hwytu" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerBaronInterface/player_baron_interface.tscn" id="9_gk6dx"]
+[ext_resource type="PackedScene" uid="uid://cpk3m7rohj4or" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerPrinceInterface/player_prince_interface.tscn" id="10_jhyir"]
 [ext_resource type="PackedScene" uid="uid://dnh7xb10yw55k" path="res://Resources/CardsInterface/RealPlayerInterfaces/ChancelierInterface/chancelier_interface.tscn" id="11_74mp2"]
-[ext_resource type="PackedScene" uid="uid://ccp1fhraevt1s" path="res://Resources/CardsInterface/RealPlayerInterfaces/RoiInterface/roi_interface.tscn" id="12_oikmp"]
-[ext_resource type="PackedScene" uid="uid://c8k41jkwtj8fm" path="res://Resources/CardsInterface/RealPlayerInterfaces/ComtesseInterface/comtesse_interface.tscn" id="13_06tpx"]
-[ext_resource type="PackedScene" uid="uid://bpjualdhuxrpy" path="res://Resources/CardsInterface/RealPlayerInterfaces/PrincesseInterface/princesse_interface.tscn" id="14_7g0yx"]
+[ext_resource type="PackedScene" uid="uid://ccp1fhraevt1s" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerRoiInterface/player_roi_interface.tscn" id="12_oikmp"]
+[ext_resource type="PackedScene" uid="uid://c8k41jkwtj8fm" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerComtesseInterface/player_comtesse_interface.tscn" id="13_06tpx"]
+[ext_resource type="PackedScene" uid="uid://bpjualdhuxrpy" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerPrincesseInterface/player_princesse_interface.tscn" id="14_7g0yx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(64, 64)
@@ -43,6 +43,12 @@ slot_owner = NodePath("..")
 
 [node name="CardsInterfaces" type="Node2D" parent="." unique_id=614064632]
 
+[node name="PrincesseInterface" parent="CardsInterfaces" unique_id=1055253171 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_7g0yx")]
+player_ref = NodePath("../..")
+
+[node name="BaronInterface" parent="CardsInterfaces" unique_id=1014002404 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_gk6dx")]
+player_ref = NodePath("../..")
+
 [node name="EspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_htcer")]
 player_ref = NodePath("../..")
 
@@ -55,20 +61,14 @@ player_ref = NodePath("../..")
 [node name="ServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_jlvik")]
 player_ref = NodePath("../..")
 
-[node name="BaronInterface" parent="CardsInterfaces" unique_id=1014002404 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_gk6dx")]
-player_ref = NodePath("../..")
-
 [node name="PrinceInterface" parent="CardsInterfaces" unique_id=1794671994 node_paths=PackedStringArray("player_ref") instance=ExtResource("10_jhyir")]
-player_ref = NodePath("../..")
-
-[node name="ChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_74mp2")]
 player_ref = NodePath("../..")
 
 [node name="RoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_oikmp")]
 player_ref = NodePath("../..")
 
-[node name="ComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_06tpx")]
+[node name="ChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_74mp2")]
 player_ref = NodePath("../..")
 
-[node name="PrincesseInterface" parent="CardsInterfaces" unique_id=1055253171 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_7g0yx")]
+[node name="ComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_06tpx")]
 player_ref = NodePath("../..")

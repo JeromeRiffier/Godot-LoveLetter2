@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://cgj76nr5hwytu"]
-
-[ext_resource type="Script" uid="uid://pbc3gj6yrmg1" path="res://Resources/CardsInterface/RealPlayerInterfaces/BaronInterface/baron_interface.gd" id="1_6iva4"]
-[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_3xt0f"]
-
-[node name="PlayerBaronInterface" type="Node2D" unique_id=1014002404]
-script = ExtResource("1_6iva4")
-
-[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_3xt0f")]

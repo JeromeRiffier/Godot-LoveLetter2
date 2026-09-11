@@ -1,13 +1,10 @@
 [gd_scene format=3 uid="uid://c687h5qv21enp"]
 
 [ext_resource type="Script" uid="uid://bhamrytmcci3v" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiGardeInterface/enemy_ai_garde_interface.gd" id="1_5cdw5"]
-[ext_resource type="PackedScene" uid="uid://baa7q4t73hvwq" path="res://Scenes/CardSelectionTool/card_selection_tool.tscn" id="2_f7o11"]
 [ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="3_haklf"]
 
 [node name="EnemyAIGardeInterface" type="Node2D" unique_id=89186548]
 script = ExtResource("1_5cdw5")
-
-[node name="CardSelectionTool" parent="." unique_id=338857962 instance=ExtResource("2_f7o11")]
 
 [node name="Message" parent="." unique_id=1474687604 instance=ExtResource("3_haklf")]
 z_index = 6
@@ -16,5 +13,3 @@ offset_top = 0.0
 offset_right = 103.365
 offset_bottom = 40.605
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-
-[connection signal="card_selected" from="CardSelectionTool" to="." method="_on_card_selection_tool_card_selected"]

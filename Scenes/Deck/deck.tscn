@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(70, 94)
 
-[node name="Deck" type="Node2D" unique_id=336770514]
+[node name="Deck" type="Node2D" unique_id=336770514 groups=["Deck"]]
 position = Vector2(499, 217)
 script = ExtResource("1_f0yuw")
 

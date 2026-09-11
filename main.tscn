@@ -7,7 +7,7 @@
 
 [node name="Main" type="Node2D" unique_id=1039833388]
 
-[node name="Deck" parent="." unique_id=336770514 instance=ExtResource("5_lquwl")]
+[node name="Deck" parent="." unique_id=336770514 groups=["Deck"] instance=ExtResource("5_lquwl")]
 position = Vector2(157, 255)
 
 [node name="Player" parent="." unique_id=1325730967 instance=ExtResource("4_1bvp3")]

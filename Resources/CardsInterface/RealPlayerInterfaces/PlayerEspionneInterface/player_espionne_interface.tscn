@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c5kotnghvvdly"]
+
+[ext_resource type="Script" uid="uid://c3r8hd8jt4y6m" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerEspionneInterface/player_espionne_interface.gd" id="1_h0f2m"]
+
+[node name="PlayerEspionneInterface" type="Node2D" unique_id=470700987]
+script = ExtResource("1_h0f2m")

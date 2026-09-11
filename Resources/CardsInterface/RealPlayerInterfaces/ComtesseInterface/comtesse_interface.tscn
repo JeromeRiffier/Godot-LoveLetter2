@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://c8k41jkwtj8fm"]
-
-[ext_resource type="Script" uid="uid://bahedlfjnt4xt" path="res://Resources/CardsInterface/RealPlayerInterfaces/ComtesseInterface/comtesse_interface.gd" id="1_8jbjt"]
-
-[node name="PlayerComtesseInterface" type="Node2D" unique_id=1885424470]
-script = ExtResource("1_8jbjt")

@@ -46,12 +46,6 @@ player_ref = NodePath("../..")
 [node name="EnemyAIBaronInterface" parent="CardsInterfaces" unique_id=1014002404 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_ltwrw")]
 player_ref = NodePath("../..")
 
-[node name="EnemyAIChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_sagrf")]
-player_ref = NodePath("../..")
-
-[node name="EnemyAIComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("6_e37ex")]
-player_ref = NodePath("../..")
-
 [node name="EnemyAIEspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_xx1cj")]
 player_ref = NodePath("../..")
 
@@ -61,13 +55,19 @@ player_ref = NodePath("../..")
 [node name="EnemyAIPretreInterface" parent="CardsInterfaces" unique_id=633782881 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_gkj5d")]
 player_ref = NodePath("../..")
 
+[node name="EnemyAIServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_jt3dl")]
+player_ref = NodePath("../..")
+
 [node name="EnemyAIPrinceInterface" parent="CardsInterfaces" unique_id=1794671994 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_l2qet")]
 player_ref = NodePath("../..")
 
 [node name="EnemyAIRoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_8jp58")]
 player_ref = NodePath("../..")
 
-[node name="EnemyAIServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_jt3dl")]
+[node name="EnemyAIComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("6_e37ex")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_sagrf")]
 player_ref = NodePath("../..")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

@@ -1,7 +1,1 @@
-class_name EnemyAIPrincesseInterface extends CardInterface
-
-
-func enter() -> void:
-	super() # Execute parenter enter func
-	player_ref.kill()
-	validate()
+class_name EnemyAIPrincesseInterface extends PrincesseInterface

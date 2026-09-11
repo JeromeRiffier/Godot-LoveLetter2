@@ -77,4 +77,6 @@ func animate_card_to_slot(card:Card) -> void:
 
 
 func get_vulnerable_enemies() -> Array[Player]:
-	return get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy != self && not enemy.is_protected)
+	var enemies:Array[Player]
+	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy != self && not enemy.is_protected))
+	return enemies
