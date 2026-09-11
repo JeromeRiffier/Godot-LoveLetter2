@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c3ky7mbqnx2w3"]
+
+[ext_resource type="Script" uid="uid://b2qerekv2ps7i" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiPretreInterface/enemy_ai_pretre_interface.gd" id="1_prad7"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_plgsv"]
+
+[node name="EnemyAIPretreInterface" type="Node2D" unique_id=633782881]
+script = ExtResource("1_prad7")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_plgsv")]
+z_index = 4

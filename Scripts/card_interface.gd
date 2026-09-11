@@ -2,7 +2,7 @@
 ## the use function will be overriden by the real user of this class
 class_name CardInterface extends Node2D
 
-@export var player_ref:RealPlayer
+@export var player_ref:Player
 
 var is_active:bool
 

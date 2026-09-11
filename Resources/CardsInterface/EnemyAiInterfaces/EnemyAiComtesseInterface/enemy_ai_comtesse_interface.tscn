@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://wr4gksslsxdw"]
+
+[ext_resource type="Script" uid="uid://cg66dluctfhdc" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiComtesseInterface/enemy_ai_comtesse_interface.gd" id="1_eejke"]
+
+[node name="EnemyAIComtesseInterface" type="Node2D" unique_id=1885424470]
+script = ExtResource("1_eejke")

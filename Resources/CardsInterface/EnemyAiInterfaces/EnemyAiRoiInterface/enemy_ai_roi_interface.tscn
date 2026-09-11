@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://p6ck82122b4p"]
+
+[ext_resource type="Script" uid="uid://cnyu60efuuvyr" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiRoiInterface/enemy_ai_roi_interface.gd" id="1_kqkny"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_j0ojn"]
+
+[node name="EnemyAIRoiInterface" type="Node2D" unique_id=1282076885]
+script = ExtResource("1_kqkny")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_j0ojn")]

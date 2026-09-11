@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cim0iur3ivkl5"]
+
+[ext_resource type="Script" uid="uid://kwkl0avxdvn0" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiChancelierInterface/enemy_ai_chancelier_interface.gd" id="1_q2esv"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_2g78b"]
+
+[node name="EnemyAIChancelierInterface" type="Node2D" unique_id=365958636]
+script = ExtResource("1_q2esv")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_2g78b")]
+z_index = 4

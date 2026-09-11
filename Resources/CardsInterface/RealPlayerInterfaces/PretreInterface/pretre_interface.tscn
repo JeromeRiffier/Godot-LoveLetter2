@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d21usuy3jfyqf"]
+
+[ext_resource type="Script" uid="uid://dft1duwp1ftg8" path="res://Resources/CardsInterface/RealPlayerInterfaces/PretreInterface/pretre_interface.gd" id="1_8d3iu"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_ssw0f"]
+
+[node name="PlayerPretreInterface" type="Node2D" unique_id=633782881]
+script = ExtResource("1_8d3iu")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_ssw0f")]
+z_index = 4

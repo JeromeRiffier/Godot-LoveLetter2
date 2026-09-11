@@ -4,11 +4,21 @@
 [ext_resource type="PackedScene" uid="uid://dyfi536mv747q" path="res://Scenes/PlayerSprite/player_sprite.tscn" id="2_dmwl5"]
 [ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="3_am0pq"]
 [ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="4_eqilm"]
+[ext_resource type="PackedScene" uid="uid://bm0kbijfodot" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiPrincesseInterface/enemy_ai_princesse_interface.tscn" id="5_kpkma"]
+[ext_resource type="PackedScene" uid="uid://wr4gksslsxdw" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiComtesseInterface/enemy_ai_comtesse_interface.tscn" id="6_e37ex"]
+[ext_resource type="PackedScene" uid="uid://bigr8awnwvm2l" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiBaronInterface/enemy_ai_baron_interface.tscn" id="7_ltwrw"]
+[ext_resource type="PackedScene" uid="uid://cim0iur3ivkl5" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiChancelierInterface/enemy_ai_chancelier_interface.tscn" id="8_sagrf"]
+[ext_resource type="PackedScene" uid="uid://bh7hqjlnb2awk" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiEspionneInterface/enemy_ai_espionne_interface.tscn" id="9_xx1cj"]
+[ext_resource type="PackedScene" uid="uid://c687h5qv21enp" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiGardeInterface/enemy_ai_garde_interface.tscn" id="10_re57u"]
+[ext_resource type="PackedScene" uid="uid://c3ky7mbqnx2w3" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiPretreInterface/enemy_ai_pretre_interface.tscn" id="11_gkj5d"]
+[ext_resource type="PackedScene" uid="uid://8k0h6mfxe1xg" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiPrinceInterface/enemy_ai_prince_interface.tscn" id="12_l2qet"]
+[ext_resource type="PackedScene" uid="uid://p6ck82122b4p" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiRoiInterface/enemy_ai_roi_interface.tscn" id="13_8jp58"]
+[ext_resource type="PackedScene" uid="uid://cm2yil65g33ui" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiServanteInterface/enemy_ai_servante_interface.tscn" id="14_jt3dl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(64, 64)
 
-[node name="Enemy" type="Marker2D" unique_id=1283494019 groups=["Player"]]
+[node name="EnemyAI" type="Marker2D" unique_id=1283494019 groups=["Player"]]
 script = ExtResource("1_am0pq")
 
 [node name="PlayerSprite" parent="." unique_id=562675833 instance=ExtResource("2_dmwl5")]
@@ -27,6 +37,38 @@ position = Vector2(0, 96)
 
 [node name="CardSlot" parent="." unique_id=412397040 instance=ExtResource("4_eqilm")]
 position = Vector2(0, 210)
+
+[node name="CardsInterfaces" type="Node2D" parent="." unique_id=363036936]
+
+[node name="EnemyAIPrincesseInterface" parent="CardsInterfaces" unique_id=1055253171 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_kpkma")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIBaronInterface" parent="CardsInterfaces" unique_id=1014002404 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_ltwrw")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_sagrf")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("6_e37ex")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIEspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_xx1cj")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIGardeInterface" parent="CardsInterfaces" unique_id=89186548 node_paths=PackedStringArray("player_ref") instance=ExtResource("10_re57u")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIPretreInterface" parent="CardsInterfaces" unique_id=633782881 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_gkj5d")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIPrinceInterface" parent="CardsInterfaces" unique_id=1794671994 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_l2qet")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIRoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_8jp58")]
+player_ref = NodePath("../..")
+
+[node name="EnemyAIServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_jt3dl")]
+player_ref = NodePath("../..")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

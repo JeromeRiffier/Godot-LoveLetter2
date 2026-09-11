@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cm2yil65g33ui"]
+
+[ext_resource type="Script" uid="uid://bc5ftqmw4ud8e" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiServanteInterface/enemy_ai_servante_interface.gd" id="1_o5qfh"]
+
+[node name="EnemyAIServanteInterface" type="Node2D" unique_id=419780019]
+script = ExtResource("1_o5qfh")

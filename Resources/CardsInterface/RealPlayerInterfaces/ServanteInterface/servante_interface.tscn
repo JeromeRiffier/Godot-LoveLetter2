@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://blwfm4ra5adkk"]
+
+[ext_resource type="Script" uid="uid://cuhl253mv4c01" path="res://Resources/CardsInterface/RealPlayerInterfaces/ServanteInterface/servante_interface.gd" id="1_2kexb"]
+
+[node name="PlayerServanteInterface" type="Node2D" unique_id=419780019]
+script = ExtResource("1_2kexb")

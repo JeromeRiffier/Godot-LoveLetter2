@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bigr8awnwvm2l"]
+
+[ext_resource type="Script" uid="uid://cjhajcwaa2mjj" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiBaronInterface/enemy_ai_baron_interface.gd" id="1_vkuxk"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_17dqw"]
+
+[node name="EnemyAIBaronInterface" type="Node2D" unique_id=1014002404]
+script = ExtResource("1_vkuxk")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_17dqw")]
