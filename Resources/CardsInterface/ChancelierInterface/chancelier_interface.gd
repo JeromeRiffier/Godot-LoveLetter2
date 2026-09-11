@@ -10,16 +10,16 @@ var dragging_card_starting_pos:Vector2
 
 func enter() -> void:
 	super() # Execute parenter enter func
-	#validate()
 	dragging_card = null
 	player_ref.need_card.emit(player_ref)
 	player_ref.need_card.emit(player_ref)
-	await get_tree().create_timer(0.5).timeout
-	while not player_ref.hand.cards.is_empty():
+	await player_ref.hand.card_repositioned
+	for i in range(3):
 		cards.append(player_ref.hand.cards[0])
-		await player_ref.hand.remove_card_from_hand(player_ref.hand.cards[0])
-		await animate_cards_to_center()
-		#await get_tree().create_timer(0.2).timeout
+		player_ref.hand.remove_card_from_hand(player_ref.hand.cards[0])
+		player_ref.hand.card_repositioned
+		animate_cards_to_center()
+	
 	message.display_text("Fait ton choix")
 
 func _unhandled_input(event: InputEvent) -> void:

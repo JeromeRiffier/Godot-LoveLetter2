@@ -22,9 +22,8 @@ func _ready() -> void:
 		card.hide_card()
 		cards.push_front(card)
 		update_cards_position()
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.02).timeout
 	deck_is_ready.emit()
-	print(cards.size())
 
 func shuffle() -> void:
 	cards.shuffle()
