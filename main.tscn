@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/Player/player.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://dtsudnlksde30" path="res://Scripts/game_manager.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/enemy_manager.gd" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://bvuq84ml7j1t7" path="res://Scenes/Deck/deck.tscn" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://brqs2imb2p7gr" path="res://Scenes/Enemy/enemy.tscn" id="6_272bh"]
 
 [node name="Main" type="Node2D" unique_id=1039833388]
 
@@ -17,12 +17,7 @@ position = Vector2(583, 578)
 script = ExtResource("5_7mycd")
 deck = NodePath("../Deck")
 the_player = NodePath("../Player")
+enemy_count = 5
 
-[node name="Enemy" parent="." unique_id=63142111 instance=ExtResource("6_272bh")]
-position = Vector2(377, 45)
-
-[node name="Enemy2" parent="." unique_id=1283494019 instance=ExtResource("6_272bh")]
-position = Vector2(583, 45)
-
-[node name="Enemy3" parent="." unique_id=673368527 instance=ExtResource("6_272bh")]
-position = Vector2(827, 45)
+[node name="EnemyManager" type="Node2D" parent="." unique_id=1467890751]
+script = ExtResource("5_272bh")

@@ -77,3 +77,5 @@ const DECK_MASK:int = 4
 const ENEMY_MASK:int = 8
 const PLAYER_MASK:int = 16
 const MYSTERY_CARD_MARGIN:int = 120
+const ENEMY_Y_POS:int = 45
+const ENEMY_WIDTH:int = 130

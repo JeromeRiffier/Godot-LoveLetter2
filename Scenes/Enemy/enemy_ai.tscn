@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://brqs2imb2p7gr"]
 
-[ext_resource type="Script" uid="uid://dwh77f20eqtmc" path="res://Scenes/Enemy/enemy.gd" id="1_am0pq"]
+[ext_resource type="Script" uid="uid://dwh77f20eqtmc" path="res://Scenes/Enemy/enemy_ai.gd" id="1_am0pq"]
 [ext_resource type="PackedScene" uid="uid://dyfi536mv747q" path="res://Scenes/PlayerSprite/player_sprite.tscn" id="2_dmwl5"]
 [ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="3_am0pq"]
 [ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="4_eqilm"]

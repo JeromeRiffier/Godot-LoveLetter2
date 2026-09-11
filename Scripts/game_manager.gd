@@ -3,10 +3,16 @@ class_name GameManager extends Node2D
 @export var deck:Deck
 @export var the_player:RealPlayer
 
+@onready var enemy_manager: EnemyManager = $"../EnemyManager"
+
+@export var enemy_count:int = 3
+
 var players: Array[Player]
 var game_is_running:bool = true
 
 func _ready() -> void:
+	enemy_manager.spawn_enemies(enemy_count)
+	
 	#region debug For debug only
 	players.assign( get_tree().get_nodes_in_group("Player") )
 	await get_tree().create_timer(0.5).timeout
