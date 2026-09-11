@@ -17,7 +17,6 @@ func enter() -> void:
 	for i in range(3):
 		cards.append(player_ref.hand.cards[0])
 		player_ref.hand.remove_card_from_hand(player_ref.hand.cards[0])
-		player_ref.hand.card_repositioned
 		animate_cards_to_center()
 	
 	message.display_text("Fait ton choix")

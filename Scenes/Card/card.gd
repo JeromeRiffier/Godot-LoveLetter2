@@ -10,7 +10,15 @@ signal hovered(card:Card)
 signal hovered_off(card:Card)
 
 var position_in_hand:Vector2
-var is_dragged:bool=false
+var _starting_z_index : int
+var is_dragged:bool=false:
+	set(value):
+		is_dragged = value
+		if value:
+			_starting_z_index = z_index
+			z_index = 10
+		else:
+			z_index = _starting_z_index
 var front:bool = true
 
 func set_infos(value:CardInfos) -> void:

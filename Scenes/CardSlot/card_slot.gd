@@ -5,6 +5,7 @@ class_name CardSlot extends Node2D
 var cards_played:Array[Card]
 
 func receive_card(card:Card) -> void:
-	for card_played in cards_played:
-		card_played.z_index -= 1
+	card.z_index = 0
 	cards_played.push_front(card)
+	card.reparent(self)
+	self.move_child(card, self.get_child_count()) ## Used to reposition under the deck visually
