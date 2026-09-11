@@ -74,4 +74,3 @@ func animate_card_to_slot(card:Card) -> void:
 	var tween = create_tween()
 	tween.tween_property(card, "global_position", card_slot.global_position, 0.2 )
 	await tween.finished
-	print("test")

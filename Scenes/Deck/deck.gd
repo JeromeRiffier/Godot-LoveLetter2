@@ -25,6 +25,7 @@ func _ready() -> void:
 		await get_tree().create_timer(0.02).timeout
 	deck_is_ready.emit()
 
+
 func shuffle() -> void:
 	cards.shuffle()
 
@@ -34,11 +35,14 @@ func draw_card() -> Card:
 		print('No more cards')
 		return
 	var card :Card = cards.pop_front()
+	card.show_card()
 	update_cards_position()
 	return card
 
 func take_back(card:Card) -> void:
 	card.global_position = global_position
+	card.reparent(self)
+	self.move_child(card, 0) ## Used to reposition under the deck visually
 	card.hide_card()
 	cards.push_back(card)
 	update_cards_position()
