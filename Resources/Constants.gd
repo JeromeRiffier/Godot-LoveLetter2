@@ -76,3 +76,4 @@ const CARD_SLOT_MASK:int = 2
 const DECK_MASK:int = 4
 const ENEMY_MASK:int = 8
 const PLAYER_MASK:int = 16
+const MYSTERY_CARD_MARGIN:int = 120

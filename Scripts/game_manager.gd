@@ -23,6 +23,7 @@ func _ready() -> void:
 	## start Round
 	await deck.deck_is_ready
 	deck.shuffle()
+	deck.put_one_appart()
 	set_all_players_alive()
 	await give_starting_cards()
 	## manage Round
