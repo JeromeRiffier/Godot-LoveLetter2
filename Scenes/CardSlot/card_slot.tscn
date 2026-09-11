@@ -12,12 +12,10 @@ script = ExtResource("1_jmuc5")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=910848234]
 texture_filter = 1
 texture = ExtResource("1_qx3y6")
-offset = Vector2(1, 1)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1667375296]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=371597881]
-position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_g4v7s")
