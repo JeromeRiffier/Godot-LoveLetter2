@@ -3,7 +3,7 @@ class_name Deck extends Node2D
 const CARD_SCENE = preload("uid://c7em3t5lv5vr0")
 
 
-signal deck_is_ready
+signal deck_is_ready(cards:Array[Card])
 signal deck_clicked
 signal deck_is_empty
 @onready var cards :Array[Card]
@@ -23,7 +23,7 @@ func _ready() -> void:
 		cards.push_front(card)
 		update_cards_position()
 		await get_tree().create_timer(0.02).timeout
-	deck_is_ready.emit()
+	deck_is_ready.emit(cards)
 
 func shuffle() -> void:
 	cards.shuffle()

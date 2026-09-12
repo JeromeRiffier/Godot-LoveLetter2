@@ -22,7 +22,8 @@ var as_played_spy:bool = false:
 		player_sprite.is_spy = value
 
 ##Used by children of this class to indicate that there turn is over
-signal has_played(emiter:Player)
+signal has_played(emiter:Player, card:Card)
+signal has_discarded(emiter:Player, card:Card)
 ## Ask GameManager draw a card from the deck and give it to the player
 signal need_card(emiter:Player)
 ## Ask GameManager to take back the card and put it under the deck
@@ -72,6 +73,7 @@ func discard(card:Card) -> void:
 	animate_card_to_slot(card)
 	if is_alive:
 		need_card.emit(self)
+	has_discarded.emit(self, card)
 
 func animate_card_to_slot(card:Card) -> void:
 	card.show_card()

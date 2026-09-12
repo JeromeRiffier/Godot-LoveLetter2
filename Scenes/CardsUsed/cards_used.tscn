@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b8t5l6hoa3tca"]
+
+[ext_resource type="Script" uid="uid://b3q0ci0jplajy" path="res://Scenes/CardsUsed/cards_used.gd" id="1_78rta"]
+
+[node name="CardsUsed" type="Node2D" unique_id=347992877]
+script = ExtResource("1_78rta")
+
+[node name="CardsContainer" type="Node2D" parent="." unique_id=1701071938]

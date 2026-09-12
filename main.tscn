@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://4edqv427g7im"]
 
 [ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/Player/player.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://b8t5l6hoa3tca" path="res://Scenes/CardsUsed/cards_used.tscn" id="5_5vw27"]
 [ext_resource type="Script" uid="uid://dtsudnlksde30" path="res://Scripts/game_manager.gd" id="5_7mycd"]
 [ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/enemy_manager.gd" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://bvuq84ml7j1t7" path="res://Scenes/Deck/deck.tscn" id="5_lquwl"]
@@ -21,3 +22,5 @@ enemy_count = 5
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=1467890751]
 script = ExtResource("5_272bh")
+
+[node name="CardsUsed" parent="." unique_id=347992877 instance=ExtResource("5_5vw27")]

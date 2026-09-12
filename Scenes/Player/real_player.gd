@@ -50,7 +50,7 @@ func play_card(card:Card) -> void:
 		Constant.ESPIONNE:
 			espionne_interface.enter()
 			await espionne_interface.card_played
-	has_played.emit()
+	has_played.emit(self, card)
 
 
 func _unhandled_input(event: InputEvent) -> void:
