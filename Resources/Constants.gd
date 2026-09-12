@@ -70,12 +70,24 @@ enum CardValues{
 		Espionne=0
 	}
 
-const CARD_WIDTH:int = 80
-const CARD_MASK:int = 1
-const CARD_SLOT_MASK:int = 2
+
+#Colision Masks
 const DECK_MASK:int = 4
 const ENEMY_MASK:int = 8
 const PLAYER_MASK:int = 16
+
+#Cards constants
+const CARD_WIDTH:int = 80
+const CARD_MASK:int = 1
+const CARD_SLOT_MASK:int = 2
+
+#Deck constants
 const MYSTERY_CARD_MARGIN:int = 120
+
+#Enemy constants
+
+
+
+
 const ENEMY_Y_POS:int = 45
 const ENEMY_WIDTH:int = 130

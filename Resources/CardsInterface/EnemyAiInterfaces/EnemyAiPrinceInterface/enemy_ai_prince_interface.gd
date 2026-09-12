@@ -8,7 +8,7 @@ func enter() -> void:
 		validate()
 		return
 	var selected_enemy:Player = enemies.pick_random()
-	message.display_text("%s a choisis %s, jette ta carte")
+	message.display_text("%s a choisis %s, jette ta carte" % [player_ref.name, selected_enemy.name])
 	await selected_enemy.discard(selected_enemy.hand.cards[0])
 	validate()
 	

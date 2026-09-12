@@ -43,6 +43,7 @@ func take_back(card:Card) -> void:
 	card.reparent(self)
 	self.move_child(card, 0) ## Used to reposition under the deck visually
 	card.hide_card()
+	card.z_index = 0
 	cards.push_back(card)
 	update_cards_position()
 
