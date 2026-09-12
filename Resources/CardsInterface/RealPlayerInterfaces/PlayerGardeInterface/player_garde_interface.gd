@@ -11,10 +11,10 @@ func enter() -> void:
 #region Enemy selection
 func connect_enemies_listeners() -> void:
 	for enemy in enemies:
-		enemy.selected_enemy.connect(select_enemy)
+		enemy.enemy_selected.connect(select_enemy)
 func disconnect_enemies_listeners() -> void:
 	for enemy in enemies:
-		enemy.selected_enemy.disconnect(select_enemy)
+		enemy.enemy_selected.disconnect(select_enemy)
 
 func select_enemy(enemy:Player) -> void:
 	disconnect_enemies_listeners()

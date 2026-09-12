@@ -20,10 +20,6 @@ var _is_hovered:bool = false
 
 signal enemy_selected(emiter:Player)
 
-func draw_card(card:Card) -> void:
-	card.hide_card()
-	super(card)
-
 func _unhandled_input(event: InputEvent) -> void:
 	if not selectable:
 		return
@@ -51,7 +47,7 @@ func takeTurn():
 	play_card(card_to_play)
 
 func play_card(card:Card) -> void:
-	print("%s play %s" % [name, card.infos])
+	print("%s play %s" % [name, card.infos.title])
 	match card.infos:
 		Constant.PRINCESS:
 			princesse_interface.enter()
@@ -65,6 +61,7 @@ func play_card(card:Card) -> void:
 		Constant.CHANCELIER:
 			chancelier_interface.enter()
 			await chancelier_interface.card_played
+			print('test')
 		Constant.PRINCE:
 			prince_interface.enter()
 			await prince_interface.card_played

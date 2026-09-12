@@ -17,7 +17,7 @@ func _ready() -> void:
 func add_card_to_hand(card: Card) -> void:
 	if card not in cards:
 		cards.push_front(card)
-		await update_hand_positions()
+	await update_hand_positions()
 
 func reposition_card(card: Card) -> void:
 	await animate_card_to_position(card, card.position_in_hand)

@@ -12,7 +12,7 @@ func enter() -> void:
 	selected_enemy = null
 	card_selected = null
 	enemies = player_ref.get_vulnerable_enemies()
-	
+
 
 
 func check_result() -> void:

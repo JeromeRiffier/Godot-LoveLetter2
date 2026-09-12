@@ -23,11 +23,14 @@ func animate_cards_exchange(enemy:Player) -> void:
 	tween.set_parallel()
 	tween.tween_property(enemy_card, "global_position", player_base_position, 0.5)
 	await tween.finished
-	enemy_card.show_card()
-	player_card.hide_card()
 	
-	player_ref.hand.cards[0] = enemy_card
-	enemy.hand.cards[0] = player_card
+	player_ref.hand.remove_card_from_hand(player_card)
+	enemy.hand.remove_card_from_hand(enemy_card)
+	
+	player_ref.hand.add_card_to_hand(enemy_card)
+	enemy.hand.add_card_to_hand(player_card)
+	#player_ref.hand.cards[0] = enemy_card
+	#enemy.hand.cards[0] = player_card
 	await get_tree().create_timer(0.5).timeout
 	
 	

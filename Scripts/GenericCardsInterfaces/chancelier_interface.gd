@@ -7,13 +7,14 @@ var cards:Array[Card]
 
 func enter() -> void:
 	super() # Execute parenter enter func
+	print('ChancelierInterface')
 	player_ref.need_card.emit(player_ref)
 	player_ref.need_card.emit(player_ref)
 	await player_ref.hand.card_repositioned
-	for i in range(3):
+	for i in range(player_ref.hand.cards.size()):
 		cards.append(player_ref.hand.cards[0])
 		player_ref.hand.remove_card_from_hand(player_ref.hand.cards[0])
-		animate_cards_to_center()
+		await animate_cards_to_center()
 	
 #region Card positioning
 func animate_cards_to_center() -> void:

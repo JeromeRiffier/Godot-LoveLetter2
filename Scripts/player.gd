@@ -48,6 +48,10 @@ signal return_card(card:Card)
 	
 
 func draw_card(card:Card) -> void:
+	if self is RealPlayer:
+		card.show_card()
+	else:
+		card.hide_card()
 	await hand.add_card_to_hand(card)
 
 func is_card_playable(card:Card) -> bool:
@@ -78,5 +82,5 @@ func animate_card_to_slot(card:Card) -> void:
 
 func get_vulnerable_enemies() -> Array[Player]:
 	var enemies:Array[Player]
-	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy != self && not enemy.is_protected))
+	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy != self && not enemy.is_protected  &&  enemy.is_alive))
 	return enemies
