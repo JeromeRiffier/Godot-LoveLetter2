@@ -18,7 +18,7 @@ position = Vector2(640, 728)
 script = ExtResource("5_7mycd")
 deck = NodePath("../Deck")
 the_player = NodePath("../Player")
-enemy_count = 5
+enemy_count = 1
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=1467890751]
 script = ExtResource("5_272bh")

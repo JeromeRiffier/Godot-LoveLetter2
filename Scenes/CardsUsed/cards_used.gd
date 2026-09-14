@@ -26,9 +26,10 @@ func _ready() -> void:
 
 ## This func search a card in clone_deck that correspond to the one used but as not already been marked as used by opacity
 ## Using modulate.a == 1 is kind of hacky, I should use a better approach when refactoring
-func card_used(player:Player, card_played:Card) -> void:
-	var index:int = clone_deck.find_custom(func (card:Card) -> bool: return card.infos == card_played.infos && card.modulate.a == 1)
+func card_used(_player:Player, card_played:Card) -> void:
+	var index:int = clone_deck.find_custom(func (card:Card) -> bool: return card.infos == card_played.infos && card.used == false)
 	if index != -1:
+		clone_deck[index].used = true
 		clone_deck[index].modulate.a = 0.5
 
 func construct_from_real_deck(deck_cards:Array[Card]) -> void:

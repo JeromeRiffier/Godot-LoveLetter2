@@ -50,6 +50,7 @@ func play_card(card:Card) -> void:
 		Constant.ESPIONNE:
 			espionne_interface.enter()
 			await espionne_interface.card_played
+	card.used = true
 	has_played.emit(self, card)
 
 
@@ -75,7 +76,7 @@ func start_drag(card:Card) -> void:
 
 func finish_drag() -> void:
 	card_being_dragged.is_dragged = false
-	var card_slot_found = raycast_check_for_card_slot()
+	var card_slot_found := raycast_check_for_card_slot()
 	if card_slot_found and card_slot_found == card_slot:
 		if is_card_playable(card_being_dragged):
 			hand.remove_card_from_hand(card_being_dragged)
@@ -103,7 +104,7 @@ func raycast_check_for_card() -> Card:
 	cards.assign(colision_result.map(
 			func (element:Dictionary) -> Card: return element.collider.get_parent()
 		).filter(
-			func (element) -> bool: return element is Card
+			func (element:Variant) -> bool: return element is Card
 		)
 	)
 	if not cards:
@@ -123,7 +124,7 @@ func ray_cast_at_cursor(collision_mask:int) -> Array[Dictionary]:
 func get_card_with_highest_z_index(cards:Array[Card]) -> Card:
 	if cards.is_empty():
 		return null
-	var highest_card = cards[0]
+	var highest_card := cards[0]
 	for card:Card in cards:
 		if card.z_index > highest_card.z_index:
 			highest_card = card
@@ -139,7 +140,7 @@ func raycast_check_for_card_slot() -> CardSlot:
 	card_slots.assign(colision_result.map(
 			func (element:Dictionary) -> CardSlot: return element.collider.get_parent()
 		).filter(
-			func (element) -> bool: return element is CardSlot
+			func (element:Variant) -> bool: return element is CardSlot
 		)
 	)
 	if not card_slots:

@@ -27,6 +27,6 @@ func animate_cards_exchange(enemy:Player) -> void:
 	await player_ref.hand.remove_card_from_hand(player_card)
 	await enemy.hand.remove_card_from_hand(enemy_card)
 	
-	await player_ref.hand.add_card_to_hand(enemy_card)
-	await enemy.hand.add_card_to_hand(player_card)
+	await player_ref.draw_card(enemy_card)
+	await enemy.draw_card(player_card)
 #endregion

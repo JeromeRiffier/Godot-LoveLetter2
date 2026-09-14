@@ -9,6 +9,9 @@ func enter() -> void:
 		validate()
 		return
 	var selected_enemy:Player = enemies.pick_random()
+	if selected_enemy is RealPlayer:
+		player_ref.hand.cards[0].show_card()
 	await message.display_text("%s à choisis %s" % [player_ref.name, selected_enemy.name])
 	await animate_cards_to_center(player_ref.hand.cards[0], selected_enemy.hand.cards[0])
 	manage_result(selected_enemy)
+#LE PRINCE ENEMYAI NE GERE PAS LE CARTE_SHOW CARTE_HIDE AVEC LE PLAYER

@@ -38,6 +38,9 @@ func _ready() -> void:
 			if deck.cards.is_empty():
 				game_is_running = false
 				break
+			if get_player_alive().size() <= 1:
+				game_is_running = false
+				break
 			if not player.is_alive:
 				continue
 			await give_card_to_player(player)
@@ -54,7 +57,7 @@ func give_starting_cards() -> void:
 		await give_card_to_player(player)
 
 func give_card_to_player(player:Player) -> void:
-	var card = deck.draw_card()
+	var card := deck.draw_card()
 	if not card:
 		print("End of game")
 	else:
@@ -73,3 +76,8 @@ func manage_enemy_selection_state(should_be_selectable:bool) -> void:
 	for enemy in enemies:
 		enemy.selectable = should_be_selectable
 	print("manage_enemy_selection_state")
+
+func get_player_alive() -> Array[Player]:
+	var alive_players: Array[Player]
+	alive_players.assign( players.filter( func (player:Player) -> bool: return player.is_alive) )
+	return alive_players

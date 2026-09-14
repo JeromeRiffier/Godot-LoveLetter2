@@ -42,7 +42,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			parameters.collide_with_areas = true
 			parameters.collision_mask = 1
 			var colision_result := space_state.intersect_point(parameters)
-			var colision_filtered = colision_result.filter(func (result:Dictionary) -> bool: return cards.has(result.collider.get_parent()) )
+			var colision_filtered := colision_result.filter(func (result:Dictionary) -> bool: return cards.has(result.collider.get_parent()) )
 			if not colision_filtered.is_empty():
 				var card:Card = colision_filtered[0].collider.get_parent()
 				card_selected.emit(card.infos)
@@ -61,7 +61,7 @@ func disactivate() -> void:
 
 #region background management
 func set_background_properties() -> void:
-	var tween = create_tween()
+	var tween := create_tween()
 	var color:Color = "#000000dd" if selection_active else "#00000000"
 	tween.tween_property(background_color, "color", color, 0.3)
 	await tween.finished
@@ -73,7 +73,7 @@ func set_background_size() -> void:
 #region Card positioning
 func update_hand_positions() -> void:
 	for i in range(cards.size()):
-		var new_position =  Vector2(calculate_card_positions_x(i), calculate_card_positions_y())
+		var new_position :=  Vector2(calculate_card_positions_x(i), calculate_card_positions_y())
 		var card := cards[i]
 		card.position_in_hand = new_position
 		animate_card_to_position(card, new_position)
@@ -88,7 +88,7 @@ func calculate_card_positions_x(index:int) -> float:
 	var x_offset := screen_center_x + index * Constant.CARD_WIDTH - total_width / 2.0 + (Constant.CARD_WIDTH / 2.0)
 	return x_offset
 func animate_card_to_position(card:Card, new_position:Vector2) -> void:
-	var tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(card, "global_position", new_position, 0.1)
 #endregion
 
@@ -98,7 +98,7 @@ func set_screen_values() -> void:
 	screen_center_x = get_tree().root.size.x /2.0
 	screen_center_y = get_tree().root.size.y /2.0
 	screen_bottom =  get_tree().root.size.y
-func on_viewport_size_changed():
+func on_viewport_size_changed() -> void:
 	set_screen_values()
 	set_background_size()
 	update_hand_positions()

@@ -35,7 +35,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				print("Enemy clicked ", name)
 				enemy_selected.emit(self)
 
-func takeTurn():
+func takeTurn() -> void:
 	await get_tree().create_timer(0.5).timeout
 	
 	## For now AI is stupid and juste take random card
@@ -44,7 +44,7 @@ func takeTurn():
 	hand.remove_card_from_hand(card_to_play)
 	card_slot.receive_card(card_to_play)
 	card_to_play.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
-	play_card(card_to_play)
+	await play_card(card_to_play)
 
 func play_card(card:Card) -> void:
 	print("%s play %s" % [name, card.infos.title])
@@ -80,6 +80,7 @@ func play_card(card:Card) -> void:
 		Constant.ESPIONNE:
 			espionne_interface.enter()
 			await espionne_interface.card_played
+	card.used = true
 	has_played.emit(self, card)
 
 

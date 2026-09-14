@@ -48,7 +48,7 @@ func take_back(card:Card) -> void:
 	update_cards_position()
 
 func put_one_appart() -> void:
-	var tween = create_tween()
+	var tween := create_tween()
 	var random_card:Card = cards.pick_random()
 	cards.erase(random_card)
 	tween.set_parallel()

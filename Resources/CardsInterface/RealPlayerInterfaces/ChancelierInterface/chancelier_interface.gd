@@ -16,14 +16,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
-			var card = detect_card_collision()
+			var card := detect_card_collision()
 			if card:
 				start_dragging(card)
 		else: 
 			if not dragging_card:
 				return
-			var deck = detect_deck_collision()
-			var player = detect_player_collision()
+			var deck := detect_deck_collision()
+			var player := detect_player_collision()
 			if player:
 				manage_player_card_drop()
 			elif deck:
@@ -71,7 +71,7 @@ func detect_card_collision() -> Card:
 	parameters.collide_with_areas = true
 	parameters.collision_mask = Constant.CARD_MASK
 	var colision_result := space_state.intersect_point(parameters)
-	var colision_filtered = colision_result.filter(func (result:Dictionary) -> bool: return cards.has(result.collider.get_parent()) )
+	var colision_filtered := colision_result.filter(func (result:Dictionary) -> bool: return cards.has(result.collider.get_parent()) )
 	if colision_filtered.is_empty():
 		return null
 	var card:Card = colision_filtered[0].collider.get_parent()
