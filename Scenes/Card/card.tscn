@@ -14,6 +14,12 @@ script = ExtResource("1_g0nif")
 texture_filter = 1
 texture = ExtResource("2_g0nif")
 
+[node name="Shadow" type="Sprite2D" parent="CardImage" unique_id=1098142108]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+texture_filter = 1
+texture = ExtResource("2_g0nif")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=357595070]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=213519598]

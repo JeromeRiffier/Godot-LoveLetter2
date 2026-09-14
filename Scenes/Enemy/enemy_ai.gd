@@ -105,4 +105,3 @@ func hide_highlight() -> void:
 	var tween := create_tween()
 	tween.tween_property(highlight_texture, "self_modulate:a", 0.0, 0.3)
 	await tween.finished
-	
