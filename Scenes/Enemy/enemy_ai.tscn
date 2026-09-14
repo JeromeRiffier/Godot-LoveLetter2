@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dwh77f20eqtmc" path="res://Scenes/Enemy/enemy_ai.gd" id="1_am0pq"]
 [ext_resource type="PackedScene" uid="uid://dyfi536mv747q" path="res://Scenes/PlayerSprite/player_sprite.tscn" id="2_dmwl5"]
 [ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="3_am0pq"]
+[ext_resource type="Texture2D" uid="uid://bdvan1leeel7k" path="res://Assets/player_board.png" id="3_e37ex"]
 [ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="4_eqilm"]
+[ext_resource type="Texture2D" uid="uid://qr37k8gst8tr" path="res://Assets/highlight.png" id="4_ltwrw"]
 [ext_resource type="PackedScene" uid="uid://bm0kbijfodot" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiPrincesseInterface/enemy_ai_princesse_interface.tscn" id="5_kpkma"]
 [ext_resource type="PackedScene" uid="uid://wr4gksslsxdw" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiComtesseInterface/enemy_ai_comtesse_interface.tscn" id="6_e37ex"]
 [ext_resource type="PackedScene" uid="uid://bigr8awnwvm2l" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiBaronInterface/enemy_ai_baron_interface.tscn" id="7_ltwrw"]
@@ -16,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cm2yil65g33ui" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiServanteInterface/enemy_ai_servante_interface.tscn" id="14_jt3dl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(64, 64)
+size = Vector2(129, 272)
 
 [node name="EnemyAI" type="Marker2D" unique_id=1283494019 groups=["Player"]]
 script = ExtResource("1_am0pq")
@@ -25,18 +27,40 @@ script = ExtResource("1_am0pq")
 position = Vector2(1, 0)
 scale = Vector2(0.5, 0.5)
 
+[node name="Tapis" type="NinePatchRect" parent="." unique_id=1336137970]
+z_index = -1
+texture_filter = 1
+offset_left = -65.0
+offset_top = -41.0
+offset_right = 65.0
+offset_bottom = 231.0
+texture = ExtResource("3_e37ex")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="Highlight" type="Sprite2D" parent="." unique_id=2008623782]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -10
+position = Vector2(-1.5000075, 94.5)
+scale = Vector2(1.3203125, 2.4609375)
+texture = ExtResource("4_ltwrw")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=1175065453]
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=322002356]
+position = Vector2(0.5, 95)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Hand" parent="." unique_id=1330926806 instance=ExtResource("3_am0pq")]
 position = Vector2(0, 96)
 
 [node name="CardSlot" parent="." unique_id=412397040 instance=ExtResource("4_eqilm")]
-position = Vector2(0, 210)
+position = Vector2(0, 188)
+rotation = 1.5707964
 
 [node name="CardsInterfaces" type="Node2D" parent="." unique_id=363036936]
 

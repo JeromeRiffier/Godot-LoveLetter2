@@ -70,17 +70,12 @@ func discard(card:Card) -> void:
 	if card.infos == Constant.PRINCESS:
 		kill()
 	hand.remove_card_from_hand(card)
-	await animate_card_to_slot(card)
 	if is_alive:
 		need_card.emit(self)
 	card.used = true
 	has_discarded.emit(self, card)
+	await card_slot.receive_card(card)
 
-func animate_card_to_slot(card:Card) -> void:
-	card.show_card()
-	var tween := create_tween()
-	tween.tween_property(card, "global_position", card_slot.global_position, 0.2 )
-	await tween.finished
 
 
 func get_vulnerable_enemies() -> Array[Player]:

@@ -17,8 +17,13 @@ var _is_hovered:bool = false
 @onready var roi_interface: EnemyAIRoiInterface = $CardsInterfaces/EnemyAIRoiInterface
 @onready var servante_interface: EnemyAIServanteInterface = $CardsInterfaces/EnemyAIServanteInterface
 #endregion 
+@onready var highlight_texture: Sprite2D = $Highlight
 
 signal enemy_selected(emiter:Player)
+
+func _ready() -> void:
+	hide_highlight()
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not selectable:
@@ -40,9 +45,8 @@ func takeTurn() -> void:
 	
 	## For now AI is stupid and juste take random card
 	var card_to_play:Card = hand.cards.filter(is_card_playable).pick_random()
-	await animate_card_to_slot(card_to_play)
 	hand.remove_card_from_hand(card_to_play)
-	card_slot.receive_card(card_to_play)
+	await card_slot.receive_card(card_to_play)
 	card_to_play.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
 	await play_card(card_to_play)
 
@@ -87,6 +91,18 @@ func play_card(card:Card) -> void:
 func _on_area_2d_mouse_entered() -> void:
 	if selectable:
 		_is_hovered = true
-		print("TODO Do something visually")
+		show_highlight()
 func _on_area_2d_mouse_exited() -> void:
 	_is_hovered = false
+	hide_highlight()
+
+func show_highlight() -> void:
+	var tween := create_tween()
+	tween.tween_property(highlight_texture, "self_modulate:a", 1.0, 0.3)
+	await tween.finished
+
+func hide_highlight() -> void:
+	var tween := create_tween()
+	tween.tween_property(highlight_texture, "self_modulate:a", 0.0, 0.3)
+	await tween.finished
+	

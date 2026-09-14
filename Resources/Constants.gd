@@ -86,8 +86,5 @@ const MYSTERY_CARD_MARGIN:int = 120
 
 #Enemy constants
 
-
-
-
 const ENEMY_Y_POS:int = 45
-const ENEMY_WIDTH:int = 130
+const ENEMY_WIDTH:int = 160

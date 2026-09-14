@@ -80,7 +80,7 @@ func finish_drag() -> void:
 	if card_slot_found and card_slot_found == card_slot:
 		if is_card_playable(card_being_dragged):
 			hand.remove_card_from_hand(card_being_dragged)
-			card_slot.receive_card(card_being_dragged)
+			await card_slot.receive_card(card_being_dragged)
 			card_being_dragged.global_position = card_slot_found.global_position
 			#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 			card_being_dragged.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
