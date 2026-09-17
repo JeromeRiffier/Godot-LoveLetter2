@@ -1,6 +1,12 @@
 class_name RealPlayer extends Player
 
-var card_being_dragged:Card = null
+var card_being_dragged:Card = null:
+	set(value):
+		if value:
+			value.is_dragged = true
+		else:
+			card_being_dragged.is_dragged = false
+		card_being_dragged = value
 
 #region CardsInterfaces
 @onready var princesse_interface: PlayerPrincesseInterface = $CardsInterfaces/PrincesseInterface
@@ -81,9 +87,6 @@ func finish_drag() -> void:
 		if is_card_playable(card_being_dragged):
 			hand.remove_card_from_hand(card_being_dragged)
 			await card_slot.receive_card(card_being_dragged)
-			card_being_dragged.global_position = card_slot_found.global_position
-			#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
-			card_being_dragged.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
 			play_card(card_being_dragged)
 		else: 
 			await card_being_dragged.animated_card_forbiden()

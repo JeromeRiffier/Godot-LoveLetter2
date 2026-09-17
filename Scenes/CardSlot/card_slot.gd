@@ -15,3 +15,4 @@ func receive_card(card:Card) -> void:
 	tween.tween_property(card, "global_rotation", global_rotation, 0.2 )
 	await tween.finished
 	self.move_child(card, self.get_child_count()) ## Used to reposition under the deck visually
+	card.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 

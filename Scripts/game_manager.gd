@@ -5,7 +5,7 @@ class_name GameManager extends Node2D
 
 @onready var enemy_manager: EnemyManager = $"../EnemyManager"
 
-@export var enemy_count:int = 3
+@export_range(1, 5) var enemy_count:int = 3
 
 var players: Array[Player]
 var game_is_running:bool = true

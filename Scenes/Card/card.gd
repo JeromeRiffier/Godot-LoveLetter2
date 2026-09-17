@@ -18,16 +18,18 @@ var _starting_z_index : int
 		is_dragged = value
 		if value:
 			_starting_z_index = z_index
-			z_index = 10
+			z_index = 100
 			if card_image && shadow:
 				card_image.scale = Vector2(0.9,0.9)
 				shadow.scale = Vector2(1.1,1.1)
 				
 		else:
 			z_index = _starting_z_index
-			if card_image&& shadow:
+			if card_image and shadow:
 				card_image.scale = Vector2.ONE
 				shadow.scale = Vector2.ONE
+				shadow.offset = Vector2.ZERO
+				
 			
 var front:bool = true
 var used:bool = false

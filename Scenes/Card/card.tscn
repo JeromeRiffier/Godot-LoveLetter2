@@ -15,7 +15,7 @@ texture_filter = 1
 texture = ExtResource("2_g0nif")
 
 [node name="Shadow" type="Sprite2D" parent="CardImage" unique_id=1098142108]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 0.1764706)
 show_behind_parent = true
 texture_filter = 1
 texture = ExtResource("2_g0nif")
