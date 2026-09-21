@@ -18,4 +18,5 @@ func select_enemy(enemy:Player) -> void:
 	disconnect_enemies_listeners()
 	player_ref.need_to_select_enemy.emit(false) ## Disable enemy selection
 	await animate_cards_exchange(enemy)
+	player_ref.hand.cards[0].show_card()
 	validate()

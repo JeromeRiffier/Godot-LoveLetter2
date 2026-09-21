@@ -7,7 +7,13 @@ class_name Player extends Marker2D
 @onready var player_sprite: PlayerSprite = $PlayerSprite
 
 
-var is_playing:bool = false
+var is_playing:bool = false:
+	set(value):
+		is_playing = value
+		if value:
+			start_playing()
+		else:
+			stop_playing()
 var is_protected:bool = false:
 	set(value):
 		is_protected = value
@@ -82,3 +88,11 @@ func get_vulnerable_enemies() -> Array[Player]:
 	var enemies:Array[Player]
 	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy != self && not enemy.is_protected  &&  enemy.is_alive))
 	return enemies
+
+## Called everytime is_playing become true
+func start_playing() -> void:
+	pass
+
+## Called everytime is_playing become false
+func stop_playing() -> void:
+	pass

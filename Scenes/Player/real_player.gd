@@ -72,9 +72,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			if card_being_dragged:
 				finish_drag()
 
+func start_playing() -> void:
+	enable_card_selection()
+
+func stop_playing() -> void:
+	disable_card_selection()
+
 func draw_card(card:Card) -> void:
 	card.show_card()
 	super(card)
+	
 
 func start_drag(card:Card) -> void:
 	card_being_dragged = card
@@ -84,18 +91,28 @@ func finish_drag() -> void:
 	card_being_dragged.is_dragged = false
 	var card_slot_found := raycast_check_for_card_slot()
 	if card_slot_found and card_slot_found == card_slot:
-		if is_card_playable(card_being_dragged):
-			hand.remove_card_from_hand(card_being_dragged)
-			await card_slot.receive_card(card_being_dragged)
-			play_card(card_being_dragged)
-		else: 
-			await card_being_dragged.animated_card_forbiden()
-			hand.reposition_card(card_being_dragged)
+		use_card(card_being_dragged)
 	else:
 		hand.reposition_card(card_being_dragged)
 	card_being_dragged = null
 
+func enable_card_selection() -> void:
+	for card in hand.cards:
+		card.selectable = true
+		card.selected.connect(use_card)
+		
+func disable_card_selection() -> void:
+	for card in hand.cards:
+		card.selectable = false
 
+func use_card(card:Card) -> void:
+	if is_card_playable(card):
+		hand.remove_card_from_hand(card)
+		await card_slot.receive_card(card)
+		play_card(card)
+	else: 
+		await card.animated_card_forbiden()
+		hand.reposition_card(card)
 #region input
 ### 
 ## Check if the mouse position collide with a card

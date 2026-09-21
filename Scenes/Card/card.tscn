@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d160y13o56qw3" path="res://Scenes/Card/card.gd" id="1_g0nif"]
 [ext_resource type="Texture2D" uid="uid://diup2dwj83d0i" path="res://Assets/CardTextures/espionne.png" id="2_g0nif"]
+[ext_resource type="PackedScene" uid="uid://jsr5lwilhtvd" path="res://Pointable/pointable.tscn" id="3_ac5pp"]
+[ext_resource type="Texture2D" uid="uid://dlivrbijmbdhc" path="res://Assets/Card_cta.png" id="4_c0g18"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(70, 94)
@@ -25,5 +27,16 @@ texture = ExtResource("2_g0nif")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=213519598]
 shape = SubResource("RectangleShape2D_g4v7s")
 
+[node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("3_ac5pp")]
+
+[node name="CardCta" type="Sprite2D" parent="." unique_id=548313409]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, 57)
+texture = ExtResource("4_c0g18")
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="is__no_more_pointed_at" from="Pointable" to="." method="_on_pointable_is__no_more_pointed_at"]
+[connection signal="is_pointed_at" from="Pointable" to="." method="_on_pointable_is_pointed_at"]
+[connection signal="is_selected" from="Pointable" to="." method="_on_pointable_is_selected"]

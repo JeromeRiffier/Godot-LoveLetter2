@@ -5,6 +5,7 @@ class_name CardSlot extends Node2D
 var cards_played:Array[Card]
 
 func receive_card(card:Card) -> void:
+	card.selectable = false
 	card.z_index = 0
 	cards_played.push_front(card)
 	card.reparent(self)

@@ -15,16 +15,28 @@ var await_cooldown:bool = false:
 
 var pointing_at:Pointable:
 	set(value):
+		if pointing_at:
+			pointing_at.unpoint_at()
 		pointing_at = value
-		crosshair.visible = true if pointing_at else false
+		if value:
+			crosshair.visible = true
+			value.point_at()
+		else:
+			crosshair.visible = false
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if await_cooldown:
 		return
-	if not event.is_action_pressed("right") and not event.is_action_pressed("left") and not event.is_action_pressed("down") and not event.is_action_pressed("up"):
+	if event.is_action_pressed("validate") and pointing_at:
+		pointing_at.validate()
+		get_viewport().set_input_as_handled()
 		return
 		
+	if not event.is_action_pressed("right") and not event.is_action_pressed("left") and not event.is_action_pressed("down") and not event.is_action_pressed("up"):
+		return
+	get_viewport().set_input_as_handled()
+
 	var direction:Vector2 = Input.get_vector("left","right","up","down")
 	await_cooldown = true
 	
@@ -36,7 +48,7 @@ func get_other_pointables() -> Array[Pointable]:
 	var other_pointables:Array[Pointable]
 	var nodes: Array[Node] = get_tree().get_nodes_in_group("Pointable")
 	other_pointables.assign(nodes)
-	return other_pointables.filter(func (pointable:Pointable) -> bool: return pointable != pointing_at)
+	return other_pointables.filter(func (pointable:Pointable) -> bool: return pointable != pointing_at and pointable.is_pointable)
 
 func find_next_pointable(direction:Vector2, pointables:Array[Pointable]) -> Pointable:
 	##Indispensable de normalisé la direction pour les calculs suivants
