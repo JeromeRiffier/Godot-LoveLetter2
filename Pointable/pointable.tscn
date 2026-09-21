@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://jsr5lwilhtvd"]
+
+[ext_resource type="Script" uid="uid://dcia3s4b1cjxc" path="res://Pointable/pointable.gd" id="1_rehie"]
+[ext_resource type="Texture2D" uid="uid://qr37k8gst8tr" path="res://Assets/highlight.png" id="2_2sb6n"]
+
+[node name="Pointable" type="Node2D" unique_id=385352392 groups=["Pointable"]]
+script = ExtResource("1_rehie")
+
+[node name="DEBUG_MARKER" type="Sprite2D" parent="." unique_id=1145695785]
+process_mode = 4
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_2sb6n")

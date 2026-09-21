@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://8k0h6mfxe1xg" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiPrinceInterface/enemy_ai_prince_interface.tscn" id="12_l2qet"]
 [ext_resource type="PackedScene" uid="uid://p6ck82122b4p" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiRoiInterface/enemy_ai_roi_interface.tscn" id="13_8jp58"]
 [ext_resource type="PackedScene" uid="uid://cm2yil65g33ui" path="res://Resources/CardsInterface/EnemyAiInterfaces/EnemyAiServanteInterface/enemy_ai_servante_interface.tscn" id="14_jt3dl"]
+[ext_resource type="PackedScene" uid="uid://jsr5lwilhtvd" path="res://Pointable/pointable.tscn" id="17_sagrf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(129, 272)
@@ -94,5 +95,10 @@ player_ref = NodePath("../..")
 [node name="EnemyAIEspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_xx1cj")]
 player_ref = NodePath("../..")
 
+[node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("17_sagrf")]
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="is__no_more_pointed_at" from="Pointable" to="." method="_on_pointable_is__no_more_pointed_at"]
+[connection signal="is_pointed_at" from="Pointable" to="." method="_on_pointable_is_pointed_at"]
+[connection signal="is_selected" from="Pointable" to="." method="_on_pointable_is_selected"]

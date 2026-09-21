@@ -2,7 +2,11 @@ class_name EnemyAI extends Player
 
 const ENEMY_MASK:int = 8
 
-var selectable:bool = false
+var selectable:bool = false:
+	set(value):
+		selectable = value
+		if pointable:
+			pointable.is_pointable = selectable
 var _is_hovered:bool = false
 
 #region CardsInterfaces
@@ -17,7 +21,10 @@ var _is_hovered:bool = false
 @onready var roi_interface: EnemyAIRoiInterface = $CardsInterfaces/EnemyAIRoiInterface
 @onready var servante_interface: EnemyAIServanteInterface = $CardsInterfaces/EnemyAIServanteInterface
 #endregion 
+
 @onready var highlight_texture: Sprite2D = $Highlight
+@onready var pointable: Pointable = $Pointable
+
 
 signal enemy_selected(emiter:Player)
 
@@ -96,12 +103,25 @@ func _on_area_2d_mouse_exited() -> void:
 	_is_hovered = false
 	hide_highlight()
 
+
+
 func show_highlight() -> void:
 	var tween := create_tween()
 	tween.tween_property(highlight_texture, "self_modulate:a", 1.0, 0.3)
 	await tween.finished
-
 func hide_highlight() -> void:
 	var tween := create_tween()
 	tween.tween_property(highlight_texture, "self_modulate:a", 0.0, 0.3)
 	await tween.finished
+
+#region Controller
+func _on_pointable_is_pointed_at() -> void:
+	show_highlight()
+
+func _on_pointable_is__no_more_pointed_at() -> void:
+	hide_highlight()
+
+func _on_pointable_is_selected() -> void:
+	if selectable:
+		enemy_selected.emit(self)
+#endregion

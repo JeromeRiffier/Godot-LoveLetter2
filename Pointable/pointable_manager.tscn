@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ctyk0niaaxxax"]
+
+[ext_resource type="Script" uid="uid://cm346kja0tyou" path="res://Pointable/pointable_manager.gd" id="1_72k8y"]
+[ext_resource type="Texture2D" uid="uid://dvmac3xq3yrn1" path="res://Assets/crosshair.png" id="2_wtgms"]
+
+[node name="PointableManager" type="Node2D" unique_id=1447748547]
+script = ExtResource("1_72k8y")
+
+[node name="Crosshair" type="Sprite2D" parent="." unique_id=1676225395]
+z_index = 999
+texture = ExtResource("2_wtgms")

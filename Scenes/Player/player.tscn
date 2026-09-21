@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cm027yv0q6vwi" path="res://Scenes/Player/real_player.gd" id="1_7g0yx"]
 [ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="1_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://jsr5lwilhtvd" path="res://Pointable/pointable.tscn" id="2_dey5f"]
 [ext_resource type="PackedScene" uid="uid://dyfi536mv747q" path="res://Scenes/PlayerSprite/player_sprite.tscn" id="3_7g0yx"]
 [ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="3_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://c5kotnghvvdly" path="res://Resources/CardsInterface/RealPlayerInterfaces/PlayerEspionneInterface/player_espionne_interface.tscn" id="5_htcer"]
@@ -21,6 +22,8 @@ size = Vector2(64, 64)
 [node name="Player" type="Marker2D" unique_id=1325730967 groups=["Player"]]
 position = Vector2(526, 342)
 script = ExtResource("1_7g0yx")
+
+[node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("2_dey5f")]
 
 [node name="Hand" parent="." unique_id=1330926806 instance=ExtResource("1_g1dw6")]
 position = Vector2(0, -74)
