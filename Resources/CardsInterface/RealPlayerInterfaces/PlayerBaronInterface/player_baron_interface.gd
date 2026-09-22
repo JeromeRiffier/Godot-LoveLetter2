@@ -8,6 +8,7 @@ func enter() -> void:
 	enemies.assign(player_ref.get_vulnerable_enemies())
 	message.display_text("Qui?")
 	connect_enemies_listeners()
+	pre_point_enemy()
 	
 #region Enemy selection listeners
 func connect_enemies_listeners() -> void:

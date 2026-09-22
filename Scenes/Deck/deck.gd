@@ -39,7 +39,10 @@ func draw_card() -> Card:
 	return card
 
 func take_back(card:Card) -> void:
-	card.global_position = global_position
+	card.selectable = false
+	var tween = create_tween()
+	tween.tween_property(card, "global_position", global_position, 0.3)
+	await tween.finished
 	card.reparent(self)
 	self.move_child(card, 0) ## Used to reposition under the deck visually
 	card.hide_card()
@@ -50,12 +53,12 @@ func take_back(card:Card) -> void:
 func put_one_appart() -> void:
 	var tween := create_tween()
 	var random_card:Card = cards.pick_random()
+	random_card.selectable = false
 	cards.erase(random_card)
 	tween.set_parallel()
 	tween.tween_property(random_card, "global_position:y", self.global_position.y + Constant.MYSTERY_CARD_MARGIN , 0.5)
 	tween.tween_property(random_card, "rotation_degrees", 90, 0.5)
 	await tween.finished
-	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

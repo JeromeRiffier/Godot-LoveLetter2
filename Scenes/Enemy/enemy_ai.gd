@@ -30,7 +30,6 @@ signal enemy_selected(emiter:Player)
 
 func _ready() -> void:
 	hide_highlight()
-	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not selectable:

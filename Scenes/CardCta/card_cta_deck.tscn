@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://7fp5yph3ecyj"]
+
+[ext_resource type="Texture2D" uid="uid://1w5rcd47x5qc" path="res://Assets/Card_cta_deck.png" id="1_gq4ft"]
+[ext_resource type="Script" uid="uid://d1d5b5lbig2cu" path="res://Scenes/CardCta/card_cta_deck.gd" id="2_vsemb"]
+[ext_resource type="PackedScene" uid="uid://jsr5lwilhtvd" path="res://Pointable/pointable.tscn" id="3_idii3"]
+
+[node name="CardCtaDeck" type="Sprite2D" unique_id=886275558]
+z_index = -1
+texture_filter = 1
+texture = ExtResource("1_gq4ft")
+script = ExtResource("2_vsemb")
+
+[node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("3_idii3")]
+
+[connection signal="is__no_more_pointed_at" from="Pointable" to="." method="_on_pointable_is__no_more_pointed_at"]
+[connection signal="is_pointed_at" from="Pointable" to="." method="_on_pointable_is_pointed_at"]
+[connection signal="is_selected" from="Pointable" to="." method="_on_pointable_is_selected"]

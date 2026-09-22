@@ -20,3 +20,8 @@ func validate() -> void:
 	await  get_tree().create_timer(0.1).timeout
 	is_active = false
 	card_played.emit()
+
+func pre_point_enemy() -> void:
+	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")
+	if pointableManager:
+		pointableManager.pre_point_to_pointable()

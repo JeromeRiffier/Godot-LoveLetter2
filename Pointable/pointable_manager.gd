@@ -16,9 +16,11 @@ var await_cooldown:bool = false:
 var pointing_at:Pointable:
 	set(value):
 		if pointing_at:
+			pointing_at.is_selected.disconnect(_on_pointing_at_selected)
 			pointing_at.unpoint_at()
 		pointing_at = value
 		if value:
+			pointing_at.is_selected.connect(_on_pointing_at_selected)
 			crosshair.visible = true
 			value.point_at()
 		else:
@@ -44,10 +46,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	pointing_at = find_next_pointable(direction, other_pointables)
 	move_pointer()
 
-func get_other_pointables() -> Array[Pointable]:
-	var other_pointables:Array[Pointable]
+func get_pointables() -> Array[Pointable]:
+	var pointables:Array[Pointable]
 	var nodes: Array[Node] = get_tree().get_nodes_in_group("Pointable")
-	other_pointables.assign(nodes)
+	pointables.assign(nodes)
+	return pointables.filter(func (pointable:Pointable) -> bool: return  pointable.is_pointable)
+
+func get_other_pointables() -> Array[Pointable]:
+	var other_pointables := get_pointables()
 	return other_pointables.filter(func (pointable:Pointable) -> bool: return pointable != pointing_at and pointable.is_pointable)
 
 func find_next_pointable(direction:Vector2, pointables:Array[Pointable]) -> Pointable:
@@ -91,3 +97,22 @@ func move_pointer() -> void:
 	if not pointing_at:
 		return
 	global_position = pointing_at.global_position
+
+## Used to preselect a pointable to highlight 
+## [br] Highlight the pointable the most left
+func pre_point_to_pointable() -> void:
+	var pointables := get_pointables()
+	var leftest:Pointable = null
+	for pointable in pointables:
+		if not leftest or pointable.global_position.x < leftest.global_position.x:
+			leftest = pointable
+	if leftest:
+		point_to(leftest)
+
+## Force pointer manager to point to a specific pointable
+func point_to(pointable:Pointable) -> void:
+	pointing_at = pointable
+	move_pointer()
+
+func _on_pointing_at_selected() -> void:
+	pointing_at = null

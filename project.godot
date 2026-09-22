@@ -42,6 +42,7 @@ folder_colors={
 
 Player="Node Player or Enemy"
 Pointable=""
+PointableManager=""
 
 [input]
 

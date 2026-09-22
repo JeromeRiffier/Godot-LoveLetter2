@@ -28,7 +28,7 @@ func _ready() -> void:
 		#deck.deck_is_empty.connect(func () -> void: game_is_running = false) 
 	## start Round
 	await deck.deck_is_ready
-	deck.shuffle()
+	#deck.shuffle()
 	deck.put_one_appart()
 	set_all_players_alive()
 	await give_starting_cards()

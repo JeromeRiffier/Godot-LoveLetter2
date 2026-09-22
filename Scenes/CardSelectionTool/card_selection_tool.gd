@@ -52,12 +52,32 @@ func activate() -> void:
 	selection_active = true
 	set_background_properties()
 	update_hand_positions()
+	set_card_selectable()
+	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")
+	if pointableManager:
+		pointableManager.pre_point_to_pointable()
 
 func disactivate() -> void:
 	print("disactivate card selection")
 	selection_active = false
+	set_card_unselectable()
 	set_background_properties()
 	update_hand_positions()
+
+func use_card(card:Card) -> void:
+	card_selected.emit(card.infos)
+	disactivate()
+
+func set_card_selectable() -> void:
+	for card in cards:
+		card.selectable = true
+		card.selected.connect(use_card)
+		
+
+func set_card_unselectable() -> void:
+	for card in cards:
+		card.selectable = false
+		card.selected.disconnect(use_card)
 
 #region background management
 func set_background_properties() -> void:
@@ -90,6 +110,8 @@ func calculate_card_positions_x(index:int) -> float:
 func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 	var tween := create_tween()
 	tween.tween_property(card, "global_position", new_position, 0.1)
+	await tween.finished
+	return 
 #endregion
 
 #region screen responsivness

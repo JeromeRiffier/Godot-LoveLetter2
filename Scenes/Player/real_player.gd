@@ -76,12 +76,12 @@ func start_playing() -> void:
 	enable_card_selection()
 
 func stop_playing() -> void:
-	disable_card_selection()
+	#disable_card_selection()
+	pass
 
 func draw_card(card:Card) -> void:
 	card.show_card()
 	super(card)
-	
 
 func start_drag(card:Card) -> void:
 	card_being_dragged = card
@@ -100,12 +100,16 @@ func enable_card_selection() -> void:
 	for card in hand.cards:
 		card.selectable = true
 		card.selected.connect(use_card)
-		
+	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")
+	if pointableManager:
+		pointableManager.pre_point_to_pointable()
+
 func disable_card_selection() -> void:
 	for card in hand.cards:
 		card.selectable = false
-
+		card.selected.disconnect(use_card)
 func use_card(card:Card) -> void:
+	disable_card_selection()
 	if is_card_playable(card):
 		hand.remove_card_from_hand(card)
 		await card_slot.receive_card(card)

@@ -32,6 +32,8 @@ const BaseDeck: Array[CardInfos] = [
 		GARDE, 
 		ESPIONNE, 
 		ESPIONNE,
+		
+		CHANCELIER, 
 	]
 const CardTypes: Array[CardInfos] = [
 		PRINCESS, 

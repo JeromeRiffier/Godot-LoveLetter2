@@ -7,6 +7,7 @@ func enter() -> void:
 	message.display_text("Qui?")
 	player_ref.need_to_select_enemy.emit(true) ## Enable enemy selection
 	connect_enemies_listeners()
+	pre_point_enemy()
 
 #region Enemy selection
 func connect_enemies_listeners() -> void:

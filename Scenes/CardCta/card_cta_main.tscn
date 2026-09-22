@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ccbss7eafdcln"]
+
+[ext_resource type="Texture2D" uid="uid://b38s0dd4qwdsl" path="res://Assets/Card_cta_main.png" id="1_4fq3n"]
+[ext_resource type="Script" uid="uid://dh3fmr18jvmqc" path="res://Scenes/CardCta/card_cta_main.gd" id="2_m2f7d"]
+[ext_resource type="PackedScene" uid="uid://jsr5lwilhtvd" path="res://Pointable/pointable.tscn" id="3_hkget"]
+
+[node name="CardCtaMain" type="Sprite2D" unique_id=1055607394]
+z_index = -1
+texture_filter = 1
+texture = ExtResource("1_4fq3n")
+script = ExtResource("2_m2f7d")
+
+[node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("3_hkget")]
+
+[connection signal="is__no_more_pointed_at" from="Pointable" to="." method="_on_pointable_is__no_more_pointed_at"]
+[connection signal="is_pointed_at" from="Pointable" to="." method="_on_pointable_is_pointed_at"]
+[connection signal="is_selected" from="Pointable" to="." method="_on_pointable_is_selected"]

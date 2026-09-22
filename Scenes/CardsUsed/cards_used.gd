@@ -37,6 +37,9 @@ func construct_from_real_deck(deck_cards:Array[Card]) -> void:
 		var card:Card = CARD.instantiate()
 		card.scale = Vector2(0.5, 0.5)
 		cards_container.add_child(card)
+		card.card_cta_jouer.visible = false
+		card.card_cta_deck.visible = false
+		card.card_cta_main.visible = false
 		card.set_infos(deck_card.infos)
 		clone_deck.append(card)
 	

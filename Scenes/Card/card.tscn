@@ -3,13 +3,15 @@
 [ext_resource type="Script" uid="uid://d160y13o56qw3" path="res://Scenes/Card/card.gd" id="1_g0nif"]
 [ext_resource type="Texture2D" uid="uid://diup2dwj83d0i" path="res://Assets/CardTextures/espionne.png" id="2_g0nif"]
 [ext_resource type="PackedScene" uid="uid://jsr5lwilhtvd" path="res://Pointable/pointable.tscn" id="3_ac5pp"]
-[ext_resource type="Texture2D" uid="uid://dlivrbijmbdhc" path="res://Assets/Card_cta.png" id="4_c0g18"]
+[ext_resource type="Texture2D" uid="uid://dlivrbijmbdhc" path="res://Assets/Card_cta_jouer.png" id="4_c0g18"]
+[ext_resource type="PackedScene" uid="uid://7fp5yph3ecyj" path="res://Scenes/CardCta/card_cta_deck.tscn" id="5_r5dc4"]
+[ext_resource type="PackedScene" uid="uid://ccbss7eafdcln" path="res://Scenes/CardCta/card_cta_main.tscn" id="6_rffhp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(70, 94)
 
 [node name="Card" type="Node2D" unique_id=1408348641]
-z_index = 1
+z_index = 2
 script = ExtResource("1_g0nif")
 
 [node name="CardImage" type="Sprite2D" parent="." unique_id=407883355]
@@ -29,11 +31,17 @@ shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("3_ac5pp")]
 
-[node name="CardCta" type="Sprite2D" parent="." unique_id=548313409]
+[node name="CardCtaJouer" type="Sprite2D" parent="." unique_id=548313409]
 z_index = -1
 texture_filter = 1
 position = Vector2(0, 57)
 texture = ExtResource("4_c0g18")
+
+[node name="CardCtaDeck" parent="." unique_id=886275558 instance=ExtResource("5_r5dc4")]
+position = Vector2(51.5, -24)
+
+[node name="CardCtaMain" parent="." unique_id=1055607394 instance=ExtResource("6_rffhp")]
+position = Vector2(52, 10)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
