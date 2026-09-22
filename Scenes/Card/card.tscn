@@ -24,12 +24,11 @@ show_behind_parent = true
 texture_filter = 1
 texture = ExtResource("2_g0nif")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=357595070]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=213519598]
-shape = SubResource("RectangleShape2D_g4v7s")
-
 [node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("3_ac5pp")]
+is_draggable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pointable" unique_id=926713954]
+shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="CardCtaJouer" type="Sprite2D" parent="." unique_id=548313409]
 z_index = -1
@@ -43,8 +42,8 @@ position = Vector2(51.5, -24)
 [node name="CardCtaMain" parent="." unique_id=1055607394 instance=ExtResource("6_rffhp")]
 position = Vector2(52, 10)
 
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="is__no_more_pointed_at" from="Pointable" to="." method="_on_pointable_is__no_more_pointed_at"]
 [connection signal="is_pointed_at" from="Pointable" to="." method="_on_pointable_is_pointed_at"]
 [connection signal="is_selected" from="Pointable" to="." method="_on_pointable_is_selected"]
+[connection signal="started_behing_dragged" from="Pointable" to="." method="_on_pointable_started_behing_dragged"]
+[connection signal="stopped_behing_dragged" from="Pointable" to="." method="_on_pointable_stopped_behing_dragged"]

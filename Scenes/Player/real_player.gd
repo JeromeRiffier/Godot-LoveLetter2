@@ -1,12 +1,6 @@
 class_name RealPlayer extends Player
 
-var card_being_dragged:Card = null:
-	set(value):
-		if value:
-			value.is_dragged = true
-		else:
-			card_being_dragged.is_dragged = false
-		card_being_dragged = value
+
 
 #region CardsInterfaces
 @onready var princesse_interface: PlayerPrincesseInterface = $CardsInterfaces/PrincesseInterface
@@ -60,18 +54,6 @@ func play_card(card:Card) -> void:
 	has_played.emit(self, card)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not is_playing:
-		return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.is_pressed():
-			var card:Card = raycast_check_for_card()
-			if hand.cards.has(card):
-				start_drag(card)
-		else:
-			if card_being_dragged:
-				finish_drag()
-
 func start_playing() -> void:
 	enable_card_selection()
 
@@ -82,19 +64,17 @@ func stop_playing() -> void:
 func draw_card(card:Card) -> void:
 	card.show_card()
 	super(card)
+	card.set_draggable(true)
+	if not card.stopping_drag.is_connected(on_card_stopping_drag):
+		card.stopping_drag.connect(on_card_stopping_drag)
 
-func start_drag(card:Card) -> void:
-	card_being_dragged = card
-	card.is_dragged = true
 
-func finish_drag() -> void:
-	card_being_dragged.is_dragged = false
+func on_card_stopping_drag(card:Card) -> void:
 	var card_slot_found := raycast_check_for_card_slot()
 	if card_slot_found and card_slot_found == card_slot:
-		use_card(card_being_dragged)
+		use_card(card)
 	else:
-		hand.reposition_card(card_being_dragged)
-	card_being_dragged = null
+		hand.reposition_card(card)
 
 func enable_card_selection() -> void:
 	for card in hand.cards:
@@ -110,6 +90,9 @@ func disable_card_selection() -> void:
 		card.selected.disconnect(use_card)
 func use_card(card:Card) -> void:
 	disable_card_selection()
+	
+	if card.stopping_drag.is_connected(on_card_stopping_drag):
+		card.stopping_drag.disconnect(on_card_stopping_drag)
 	if is_card_playable(card):
 		hand.remove_card_from_hand(card)
 		await card_slot.receive_card(card)

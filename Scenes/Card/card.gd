@@ -15,28 +15,15 @@ const CURVE_STRENGTH := 9.0
 const CTA_VERTICAL_OFFSET := -22
 const CTA_HORIZONTAL_OFFSET := -50
 
-signal hovered(card:Card)
-signal hovered_off(card:Card)
-signal selected(card:Card)
+signal hovered(emitter:Card)
+signal hovered_off(emitter:Card)
+signal selected(emitter:Card)
+signal starting_drag(emitter:Card)
+signal stopping_drag(emitter:Card)
 
 var position_in_hand:Vector2
 var _starting_z_index : int
-@export var is_dragged:bool=false:
-	set(value):
-		is_dragged = value
-		if value:
-			_starting_z_index = z_index
-			z_index = 100
-			if card_image && shadow:
-				card_image.scale = Vector2(0.9,0.9)
-				shadow.scale = Vector2(1.1,1.1)
-				
-		else:
-			z_index = _starting_z_index
-			if card_image and shadow:
-				card_image.scale = Vector2.ONE
-				shadow.scale = Vector2.ONE
-				shadow.offset = Vector2.ZERO
+@export var is_dragged:bool=false
 var selectable:bool = false:
 	set(value):
 		selectable = value
@@ -62,8 +49,6 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if is_dragged:
-		var mouse_global_pos := get_global_mouse_position()
-		self.global_position = Vector2(clamp(mouse_global_pos.x, 0, get_tree().get_root().size.x), clamp(mouse_global_pos.y, 0, get_tree().get_root().size.y))
 		shadow.offset = get_shadow_offset()
 
 
@@ -95,9 +80,9 @@ func get_shadow_offset() -> Vector2:
 	var percent := (screen_center - global_position) / screen_center
 
 	return Vector2(
-		_shape(percent.x),
-		1.0
-	) * MAX_SHADOW_OFFSET
+		_shape(percent.x)* MAX_SHADOW_OFFSET,
+		14.0
+	) 
 
 func _shape(t: float) -> float:
 	var a := clampf(absf(t), 0.0, 1.0)
@@ -152,3 +137,27 @@ func hide_cta_deck() -> void:
 func hide_cta_main() -> void:
 	card_cta_main.offset.x = CTA_HORIZONTAL_OFFSET
 #endregion
+
+
+func set_draggable(draggable:bool) -> void:
+	pointable.is_draggable = draggable
+
+func _on_pointable_started_behing_dragged() -> void:
+	is_dragged = true
+	_starting_z_index = z_index
+	z_index = 100
+	position_in_hand = global_position
+	if card_image && shadow:
+		card_image.scale = Vector2(0.9,0.9)
+		shadow.scale = Vector2(1.1,1.1)
+	starting_drag.emit(self)
+
+func _on_pointable_stopped_behing_dragged() -> void:
+	is_dragged = false
+	z_index = _starting_z_index
+	if card_image and shadow:
+		card_image.scale = Vector2.ONE
+		shadow.scale = Vector2.ONE
+		shadow.offset = Vector2.ZERO
+	stopping_drag.emit(self)
+	

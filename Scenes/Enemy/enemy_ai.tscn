@@ -51,6 +51,8 @@ texture = ExtResource("4_ltwrw")
 [node name="Area2D" type="Area2D" parent="." unique_id=1175065453]
 collision_layer = 8
 collision_mask = 8
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=322002356]
 position = Vector2(0.5, 95)
@@ -96,6 +98,10 @@ player_ref = NodePath("../..")
 player_ref = NodePath("../..")
 
 [node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("17_sagrf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pointable" unique_id=320226729]
+position = Vector2(0.5, 95)
+shape = SubResource("RectangleShape2D_g4v7s")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

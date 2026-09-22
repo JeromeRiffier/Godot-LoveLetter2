@@ -1,75 +1,67 @@
 class_name PlayerChancelierInterface extends ChancelierInterface
 
 
-var dragging_card:Card
-var dragging_card_starting_pos:Vector2
-
+func _ready() -> void:
+	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")
+	if pointableManager:
+		pointableManager.changed_mode.connect(handle_pointable_controller_mode_change)
 
 func enter() -> void:
 	await super() # Execute parenter enter func
-	dragging_card = null
 	message.display_text("Fait ton choix")
 	enable_card_selection()
+	enable_cards_listener()
 	
+func enable_cards_listener() -> void:
+	for card in cards:
+		enable_card_listener(card)
+func enable_card_listener(card:Card) -> void:
+	card.stopping_drag.connect(card_stopped_dragging)
 
+func disable_cards_listener() -> void:
+	for card in cards:
+		disable_card_listener(card)
+func disable_card_listener(card:Card) -> void:
+	card.stopping_drag.disconnect(card_stopped_dragging)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not is_active:
-		return
-	get_viewport().set_input_as_handled()
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.is_pressed():
-			var card := detect_card_collision()
-			if card:
-				start_dragging(card)
-		else: 
-			if not dragging_card:
-				return
-			var deck := detect_deck_collision()
-			var player := detect_player_collision()
-			if player:
-				manage_player_card_drop(dragging_card)
-			elif deck:
-				manage_deck_card_drop(dragging_card)
-			else:
-				stop_dragging()
-			if cards.is_empty():
-				validate()
-
-
-func start_dragging(card:Card) -> void:
-	dragging_card = card
-	dragging_card_starting_pos = dragging_card.global_position
-func stop_dragging() -> void:
-	if not dragging_card:
-		return
-	dragging_card.global_position = dragging_card_starting_pos
-	dragging_card = null
+func card_stopped_dragging(card:Card) -> void:
+	var deck := detect_deck_collision()
+	var player := detect_player_collision()
+	if player:
+		manage_player_card_drop(card)
+	elif deck:
+		manage_deck_card_drop(card)
+	else:
+		card.global_position = card.position_in_hand
+	if cards.is_empty():
+		validate()
 
 
 func manage_player_card_drop(card:Card) -> void:
 	if player_ref.hand.cards.is_empty():
 		cards.erase(card)
 		await player_ref.draw_card(card)
-		dragging_card = null
+		disable_card_listener(card)
 	else: 
 		message.display_text("Il y a deja une carte dans ton deck")
-		stop_dragging()
 
 func manage_deck_card_drop(card:Card) -> void:
 	if last_card_for_player():
 		message.display_text("La derniere carte et pour toi")
-		stop_dragging()
 	else:
 		player_ref.return_card.emit(card)
 		cards.erase(card)
-		dragging_card = null
+		disable_card_listener(card)
+
 
 
 ## return true if there is only one card left to choose and the player haven't got his
 func last_card_for_player() -> bool:
 	return cards.size() == 1 && player_ref.hand.cards.is_empty()
 
+
+
+#region dragging collision management
 func detect_card_collision() -> Card:
 	var space_state := get_world_2d().direct_space_state
 	var parameters := PhysicsPointQueryParameters2D.new()
@@ -108,24 +100,35 @@ func detect_player_collision() -> bool:
 		printerr("WTF On devrais pas avoir plus RealPlayer")
 		return false
 	return true
+#endregion
 
-func _process(_delta: float) -> void:
-	if dragging_card:
-		dragging_card.global_position = get_global_mouse_position()
-
+#region Controller mode management
+var card_selected:Card
+func handle_pointable_controller_mode_change(is_controller_mode:bool) -> void:
+	if not is_active:
+		return
+	if not is_controller_mode and card_selected:
+		disable_card_cta(card_selected)
+		disable_card_selection()
+		card_selected = null
+	if is_controller_mode and not card_selected:
+		enable_card_selection()
 
 func enable_card_selection() -> void:
 	for card in cards:
 		card.selectable = true
-		card.selected.connect(manage_card_selected)
+		if not card.selected.is_connected(manage_card_selected):
+			card.selected.connect(manage_card_selected)
 	_pre_point()
 
 func disable_card_selection() -> void:
 	for card in cards:
 		card.selectable = false
-		card.selected.disconnect(manage_card_selected)
+		if card.selected.is_connected(manage_card_selected):
+			card.selected.disconnect(manage_card_selected)
 
 func manage_card_selected(card:Card) -> void:
+	card_selected = card
 	disable_card_selection()
 	
 	if not last_card_for_player():
@@ -174,3 +177,4 @@ func _pre_point() -> void:
 	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")
 	if pointableManager:
 		pointableManager.pre_point_to_pointable()
+#endregion

@@ -3,8 +3,11 @@
 [ext_resource type="Script" uid="uid://dcia3s4b1cjxc" path="res://Pointable/pointable.gd" id="1_rehie"]
 [ext_resource type="Texture2D" uid="uid://qr37k8gst8tr" path="res://Assets/highlight.png" id="2_2sb6n"]
 
-[node name="Pointable" type="Node2D" unique_id=385352392 groups=["Pointable"]]
+[node name="Pointable" type="Area2D" unique_id=1834535164 groups=["Pointable"]]
+collision_layer = 32
+collision_mask = 32
 script = ExtResource("1_rehie")
+is_draggable = true
 
 [node name="DEBUG_MARKER" type="Sprite2D" parent="." unique_id=1145695785]
 process_mode = 4

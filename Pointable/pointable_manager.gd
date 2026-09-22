@@ -2,9 +2,19 @@ class_name PointableManager extends Node2D
 
 const CONE_THRESHOLD:float = cos(deg_to_rad(45.0))
 const WEIGHT:float = 2.0
-const INPUT_COOLDOWN:float = 0.2
+const INPUT_COOLDOWN:float = 0.05
 
 @onready var crosshair: Sprite2D = $Crosshair
+
+var controller_mode:bool = false:
+	set(value):
+		if value == controller_mode:
+			return
+		controller_mode = value
+		crosshair.visible = value
+		changed_mode.emit(value)
+		if not value:
+			pointing_at = null
 
 var await_cooldown:bool = false:
 	set(value):
@@ -15,6 +25,8 @@ var await_cooldown:bool = false:
 
 var pointing_at:Pointable:
 	set(value):
+		if value == pointing_at:
+			return
 		if pointing_at:
 			pointing_at.is_selected.disconnect(_on_pointing_at_selected)
 			pointing_at.unpoint_at()
@@ -26,15 +38,61 @@ var pointing_at:Pointable:
 		else:
 			crosshair.visible = false
 
+signal changed_mode(is_controller_mode:bool)
+signal started_dragging(position:Vector2, pointable:Pointable)
+signal stopped_dragging(position:Vector2, pointable:Pointable)
+
+#func _input(event: InputEvent) -> void:
+	#return
+	#if event is InputEventMouseButton:
+		#controller_mode = false
+		#return
+	#if event.is_action_pressed("right") or event.is_action_pressed("left") or event.is_action_pressed("down") or event.is_action_pressed("up"):
+		#controller_mode = true
+		#return
+
+var click_start_position:Vector2 = Vector2.INF
+var is_dragging:bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if await_cooldown:
 		return
+	
+	#region dragging management
+	if event is InputEventMouseMotion and click_start_position != Vector2.INF and not is_dragging:
+		var pointable_under_mouse := find_pointable_under_mouse()
+		if pointable_under_mouse and pointable_under_mouse.is_draggable:
+			is_dragging = true
+			pointing_at = pointable_under_mouse
+			started_dragging.emit(get_global_mouse_position(), pointing_at)
+			pointing_at.start_behing_dragged()
+			click_start_position = get_global_mouse_position()
+		else:
+			click_start_position = Vector2.INF
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released() and is_dragging:
+		is_dragging = false
+		click_start_position = Vector2.INF
+		stopped_dragging.emit(get_global_mouse_position(), pointing_at)
+		pointing_at.stop_behing_dragged()
+		return
+	#endregion
+	
+	#region click management
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		click_start_position = event.position
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released() and click_start_position == event.position:
+		handle_click(event)
+		click_start_position = Vector2.INF
+		return
+	#endregion
+
 	if event.is_action_pressed("validate") and pointing_at:
 		pointing_at.validate()
 		get_viewport().set_input_as_handled()
 		return
-		
+
 	if not event.is_action_pressed("right") and not event.is_action_pressed("left") and not event.is_action_pressed("down") and not event.is_action_pressed("up"):
 		return
 	get_viewport().set_input_as_handled()
@@ -43,8 +101,28 @@ func _unhandled_input(event: InputEvent) -> void:
 	await_cooldown = true
 	
 	var other_pointables := get_other_pointables()
-	pointing_at = find_next_pointable(direction, other_pointables)
+	var next_pointable := find_next_pointable(direction, other_pointables)
+	if next_pointable:
+		pointing_at = next_pointable
+		move_pointer()
+
+func handle_click(_event:InputEventMouseButton) -> void:
+	var pointable := find_pointable_under_mouse()
+	if not pointable:
+		pointing_at = null
+		return
+	if pointable == pointing_at:
+		pointing_at.validate()
+		return
+	pointing_at = pointable
 	move_pointer()
+
+func _process(delta: float) -> void:
+	if is_dragging and pointing_at:
+		var parent := pointing_at.get_parent()
+		if parent is Node2D:
+			parent.global_position = get_global_mouse_position()
+
 
 func get_pointables() -> Array[Pointable]:
 	var pointables:Array[Pointable]
@@ -93,10 +171,32 @@ func find_next_pointable(direction:Vector2, pointables:Array[Pointable]) -> Poin
 	## Si on a trouvé un pointable prometeur on le renvoi
 	return nearest
 
+func find_pointable_under_mouse() -> Pointable:
+	var pointables:Array[Pointable]
+	var space_state := get_world_2d().direct_space_state
+	var parameters := PhysicsPointQueryParameters2D.new()
+	parameters.position = get_global_mouse_position()
+	parameters.collide_with_areas = true
+	parameters.collision_mask = Constant.POINTABLE_MASK
+	var results := space_state.intersect_point(parameters)
+	pointables.assign(
+		results.map(
+			func (element:Dictionary) -> Pointable: return element.collider
+		).filter(
+			func (pointable:Pointable) -> bool: return pointable.is_pointable
+		)
+	)
+	if pointables.is_empty():
+		return null
+	return pointables[0]
+
+
+
 func move_pointer() -> void:
 	if not pointing_at:
 		return
 	global_position = pointing_at.global_position
+
 
 ## Used to preselect a pointable to highlight 
 ## [br] Highlight the pointable the most left
@@ -111,6 +211,8 @@ func pre_point_to_pointable() -> void:
 
 ## Force pointer manager to point to a specific pointable
 func point_to(pointable:Pointable) -> void:
+	if not controller_mode:
+		return
 	pointing_at = pointable
 	move_pointer()
 

@@ -77,6 +77,7 @@ enum CardValues{
 const DECK_MASK:int = 4
 const ENEMY_MASK:int = 8
 const PLAYER_MASK:int = 16
+const POINTABLE_MASK:int = 32
 
 #Cards constants
 const CARD_WIDTH:int = 80
