@@ -115,12 +115,15 @@ func _on_pointable_is_selected() -> void:
 
 #region button_animation
 func show_cta_jouer() -> void:
-		card_cta_jouer.offset.y = 0.0
+	card_cta_jouer.visible = true
+	card_cta_jouer.offset.y = 0.0
 
 func show_cta_deck() -> void:
+	card_cta_deck.visible = true
 	card_cta_deck.offset.x = 0.0
 
 func show_cta_main() -> void:
+	card_cta_main.visible = true
 	card_cta_main.offset.x = 0.0
 
 func hide_all_cta() -> void:
@@ -130,12 +133,15 @@ func hide_all_cta() -> void:
 	
 func hide_cta_jouer() -> void:
 	card_cta_jouer.offset.y = CTA_VERTICAL_OFFSET
+	card_cta_jouer.visible = false
 
 func hide_cta_deck() -> void:
 	card_cta_deck.offset.x = CTA_HORIZONTAL_OFFSET
+	card_cta_deck.visible = false
 
 func hide_cta_main() -> void:
 	card_cta_main.offset.x = CTA_HORIZONTAL_OFFSET
+	card_cta_main.visible = false
 #endregion
 
 
@@ -143,6 +149,7 @@ func set_draggable(draggable:bool) -> void:
 	pointable.is_draggable = draggable
 
 func _on_pointable_started_behing_dragged() -> void:
+	hide_all_cta()
 	is_dragged = true
 	_starting_z_index = z_index
 	z_index = 100

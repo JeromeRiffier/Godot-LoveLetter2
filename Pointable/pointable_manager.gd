@@ -37,6 +37,7 @@ var pointing_at:Pointable:
 			value.point_at()
 		else:
 			crosshair.visible = false
+var dragging:Pointable
 
 signal changed_mode(is_controller_mode:bool)
 signal started_dragging(position:Vector2, pointable:Pointable)
@@ -63,9 +64,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		var pointable_under_mouse := find_pointable_under_mouse()
 		if pointable_under_mouse and pointable_under_mouse.is_draggable:
 			is_dragging = true
-			pointing_at = pointable_under_mouse
-			started_dragging.emit(get_global_mouse_position(), pointing_at)
-			pointing_at.start_behing_dragged()
+			dragging = pointable_under_mouse
+			started_dragging.emit(get_global_mouse_position(), dragging)
+			dragging.start_behing_dragged()
 			click_start_position = get_global_mouse_position()
 		else:
 			click_start_position = Vector2.INF
@@ -73,8 +74,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released() and is_dragging:
 		is_dragging = false
 		click_start_position = Vector2.INF
-		stopped_dragging.emit(get_global_mouse_position(), pointing_at)
-		pointing_at.stop_behing_dragged()
+		stopped_dragging.emit(get_global_mouse_position(), dragging)
+		dragging.stop_behing_dragged()
 		return
 	#endregion
 	
@@ -118,8 +119,8 @@ func handle_click(_event:InputEventMouseButton) -> void:
 	move_pointer()
 
 func _process(delta: float) -> void:
-	if is_dragging and pointing_at:
-		var parent := pointing_at.get_parent()
+	if is_dragging and dragging:
+		var parent := dragging.get_parent()
 		if parent is Node2D:
 			parent.global_position = get_global_mouse_position()
 
