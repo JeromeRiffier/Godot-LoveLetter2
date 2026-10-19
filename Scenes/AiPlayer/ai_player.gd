@@ -1,0 +1,129 @@
+## The AI variant of the player class
+## When it his turn, autonomously make a decision of action 
+## When the action is received we display it
+class_name AiPlayer extends Player
+
+const ENEMY_MASK:int = 8
+
+var selectable:bool = false:
+	set(value):
+		selectable = value
+		if pointable:
+			pointable.is_pointable = selectable
+var _is_hovered:bool = false
+
+#region CardsInterfaces
+@onready var princesse_interface: AiPlayerPrincesseInterface = $CardsInterfaces/AiPlayerPrincesseInterface
+@onready var baron_interface: AiPlayerBaronInterface = $CardsInterfaces/AiPlayerBaronInterface
+@onready var chancelier_interface: AiPlayerChancelierInterface = $CardsInterfaces/AiPlayerChancelierInterface
+@onready var comtesse_interface: AiPlayerComtesseInterface = $CardsInterfaces/AiPlayerComtesseInterface
+@onready var espionne_interface: AiPlayerEspionneInterface = $CardsInterfaces/AiPlayerEspionneInterface
+@onready var garde_interface: AiPlayerGardeInterface = $CardsInterfaces/AiPlayerGardeInterface
+@onready var pretre_interface: AiPlayerPretreInterface = $CardsInterfaces/AiPlayerPretreInterface
+@onready var prince_interface: AiPlayerPrinceInterface = $CardsInterfaces/AiPlayerPrinceInterface
+@onready var roi_interface: AiPlayerRoiInterface = $CardsInterfaces/AiPlayerRoiInterface
+@onready var servante_interface: AiPlayerServanteInterface = $CardsInterfaces/AiPlayerServanteInterface
+#endregion 
+
+@onready var highlight_texture: Sprite2D = $Highlight
+@onready var pointable: Pointable = $Pointable
+
+
+signal enemy_selected(emiter:Player)
+
+func _ready() -> void:
+	hide_highlight()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not selectable:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			var space_state := get_world_2d().direct_space_state
+			var parameters := PhysicsPointQueryParameters2D.new()
+			parameters.position = get_global_mouse_position()
+			parameters.collide_with_areas = true
+			parameters.collision_mask = ENEMY_MASK
+			var colision_result := space_state.intersect_point(parameters)
+			if not colision_result.is_empty() && colision_result[0].collider.get_parent() == self:
+				print("Enemy clicked ", name)
+				enemy_selected.emit(self)
+
+func takeTurn() -> void:
+	await get_tree().create_timer(0.5).timeout
+	
+	## For now AI is stupid and juste take random card
+	var card_to_play:Card = hand.cards.filter(is_card_playable).pick_random()
+	hand.remove_card_from_hand(card_to_play)
+	await card_slot.receive_card(card_to_play)
+	card_to_play.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
+	await play_card(card_to_play)
+
+func play_card(card:Card) -> void:
+	print("%s play %s" % [name, card.infos.title])
+	match card.infos:
+		Constant.PRINCESS:
+			princesse_interface.enter()
+			await princesse_interface.card_played
+		Constant.COMTESSE:
+			comtesse_interface.enter()
+			await comtesse_interface.card_played
+		Constant.ROI:
+			roi_interface.enter()
+			await roi_interface.card_played
+		Constant.CHANCELIER:
+			chancelier_interface.enter()
+			await chancelier_interface.card_played
+			print('test')
+		Constant.PRINCE:
+			prince_interface.enter()
+			await prince_interface.card_played
+		Constant.BARON:
+			baron_interface.enter()
+			await baron_interface.card_played
+		Constant.SERVANTE:
+			servante_interface.enter()
+			await servante_interface.card_played
+		Constant.PRÊTRE:
+			pretre_interface.enter()
+			await pretre_interface.card_played
+		Constant.GARDE:
+			garde_interface.enter()
+			await garde_interface.card_played
+		Constant.ESPIONNE:
+			espionne_interface.enter()
+			await espionne_interface.card_played
+	card.used = true
+	has_played.emit(self, card)
+
+
+func _on_area_2d_mouse_entered() -> void:
+	if selectable:
+		_is_hovered = true
+		show_highlight()
+func _on_area_2d_mouse_exited() -> void:
+	_is_hovered = false
+	hide_highlight()
+
+
+
+func show_highlight() -> void:
+	var tween := create_tween()
+	tween.tween_property(highlight_texture, "self_modulate:a", 1.0, 0.3)
+	await tween.finished
+func hide_highlight() -> void:
+	var tween := create_tween()
+	tween.tween_property(highlight_texture, "self_modulate:a", 0.0, 0.3)
+	await tween.finished
+
+#region Controller
+func _on_pointable_is_pointed_at() -> void:
+	show_highlight()
+
+func _on_pointable_is__no_more_pointed_at() -> void:
+	hide_highlight()
+
+func _on_pointable_is_selected() -> void:
+	if selectable:
+		enemy_selected.emit(self)
+#endregion

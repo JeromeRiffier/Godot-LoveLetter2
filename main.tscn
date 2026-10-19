@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4edqv427g7im"]
 
-[ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/Player/player.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/LocalPlayer/player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b8t5l6hoa3tca" path="res://Scenes/CardsUsed/cards_used.tscn" id="5_5vw27"]
 [ext_resource type="Script" uid="uid://dtsudnlksde30" path="res://Scripts/game_manager.gd" id="5_7mycd"]
 [ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/enemy_manager.gd" id="5_272bh"]
@@ -17,6 +17,7 @@ position = Vector2(640, 728)
 
 [node name="GameManager" type="Node2D" parent="." unique_id=284890241 node_paths=PackedStringArray("deck", "the_player")]
 script = ExtResource("5_7mycd")
+enemy_count = null
 deck = NodePath("../Deck")
 the_player = NodePath("../Player")
 

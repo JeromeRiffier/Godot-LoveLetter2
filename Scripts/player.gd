@@ -1,5 +1,5 @@
 ## Base Player class 
-## Used by RealPlayer and PlayerAI
+## Used by LocalPlayer and PlayerAI
 class_name Player extends Marker2D
 
 @onready var hand: Hand = $Hand
@@ -28,11 +28,13 @@ var as_played_spy:bool = false:
 		player_sprite.is_spy = value
 
 ##Used by children of this class to indicate that there turn is over
+@warning_ignore("unused_signal")
 signal has_played(emiter:Player, card:Card)
 signal has_discarded(emiter:Player, card:Card)
 ## Ask GameManager draw a card from the deck and give it to the player
 signal need_card(emiter:Player)
 ## Ask GameManager to take back the card and put it under the deck
+@warning_ignore("unused_signal")
 signal return_card(card:Card)
 
 #func _ready() -> void:
@@ -55,7 +57,7 @@ signal return_card(card:Card)
 	
 
 func draw_card(card:Card) -> void:
-	if self is RealPlayer:
+	if self is LocalPlayer:
 		card.show_card()
 	else:
 		card.hide_card()

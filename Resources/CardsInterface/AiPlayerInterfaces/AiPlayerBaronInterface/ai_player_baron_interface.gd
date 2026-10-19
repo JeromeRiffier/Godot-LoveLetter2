@@ -1,0 +1,17 @@
+class_name AiPlayerBaronInterface extends BaronInterface
+
+
+func enter() -> void:
+	super() # Execute parenter enter func
+	var enemies := player_ref.get_vulnerable_enemies()
+	if enemies.is_empty():
+		message.display_text("Impossible")
+		validate()
+		return
+	var selected_enemy:Player = enemies.pick_random()
+	if selected_enemy is LocalPlayer:
+		player_ref.hand.cards[0].show_card()
+	await message.display_text("%s à choisis %s" % [player_ref.name, selected_enemy.name])
+	await animate_cards_to_center(player_ref.hand.cards[0], selected_enemy.hand.cards[0])
+	manage_result(selected_enemy)
+#LE PRINCE ENEMYAI NE GERE PAS LE CARTE_SHOW CARTE_HIDE AVEC LE PLAYER

@@ -6,7 +6,7 @@ const CARD_SCENE = preload("uid://c7em3t5lv5vr0")
 signal deck_is_ready(cards:Array[Card])
 signal deck_clicked
 signal deck_is_empty
-@onready var cards :Array[Card]
+@export var cards :Array[Card]
 var mystery_card:Card
 
 func update_cards_position() -> void:
@@ -15,6 +15,11 @@ func update_cards_position() -> void:
 		cards[index].position = Vector2(-offset, -offset*0.5)
 
 func _ready() -> void:
+	reset_deck()
+
+
+func reset_deck() -> void:
+	cards.clear()
 	for cardInfo in Constant.BaseDeck:
 		var card :Card = CARD_SCENE.instantiate()
 		add_child(card)
@@ -40,7 +45,7 @@ func draw_card() -> Card:
 
 func take_back(card:Card) -> void:
 	card.selectable = false
-	var tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(card, "global_position", global_position, 0.3)
 	await tween.finished
 	card.reparent(self)

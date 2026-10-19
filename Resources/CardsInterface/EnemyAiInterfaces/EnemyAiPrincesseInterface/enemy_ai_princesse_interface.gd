@@ -1,1 +1,0 @@
-class_name EnemyAIPrincesseInterface extends PrincesseInterface

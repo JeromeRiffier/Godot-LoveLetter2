@@ -9,7 +9,8 @@ const CARD_PLAYED_WIDTH = 40
 
 var clone_deck:Array[Card]
 
-func _ready() -> void:
+func reset() -> void:
+	_clear_clone_deck()
 	var deck :Deck = get_tree().get_first_node_in_group("Deck")
 	if deck:
 		deck.deck_is_ready.connect(construct_from_real_deck)
@@ -55,7 +56,6 @@ func construct_for_debug() -> void:
 		
 	position_cards()
 
-
 func position_cards() -> void:
 	## Position Y
 	var full_height := _get_max_card_value() * CARD_PLAYED_HEIGHT
@@ -80,3 +80,8 @@ func _get_cards_with_value(value:int) -> Array[Card]:
 
 func _number_of_cards_with_value(value:int) -> int:
 	return _get_cards_with_value(value).size()
+
+func _clear_clone_deck() -> void:
+	for card in clone_deck:
+		card.queue_free()
+	clone_deck.clear()

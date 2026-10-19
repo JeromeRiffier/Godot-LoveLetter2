@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://brqs2imb2p7gr"]
+
+[ext_resource type="Script" uid="uid://dwh77f20eqtmc" path="res://Scenes/AiPlayer/ai_player.gd" id="1_kmdvk"]
+[ext_resource type="PackedScene" uid="uid://dyfi536mv747q" path="res://Scenes/PlayerSprite/player_sprite.tscn" id="2_gtdct"]
+[ext_resource type="Texture2D" uid="uid://bdvan1leeel7k" path="res://Assets/player_board.png" id="3_s8wu4"]
+[ext_resource type="Texture2D" uid="uid://qr37k8gst8tr" path="res://Assets/highlight.png" id="4_ma2k5"]
+[ext_resource type="PackedScene" uid="uid://bubs5svbc6eqb" path="res://Scenes/Hand/hand.tscn" id="5_mac7k"]
+[ext_resource type="PackedScene" uid="uid://dvshmuab1uw5c" path="res://Scenes/CardSlot/card_slot.tscn" id="6_niye7"]
+[ext_resource type="PackedScene" uid="uid://bm0kbijfodot" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerPrincesseInterface/ai_player_princesse_interface.tscn" id="7_50vdf"]
+[ext_resource type="PackedScene" uid="uid://wr4gksslsxdw" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerComtesseInterface/ai_player_comtesse_interface.tscn" id="8_6yxlc"]
+[ext_resource type="PackedScene" uid="uid://p6ck82122b4p" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerRoiInterface/ai_player_roi_interface.tscn" id="9_3qchu"]
+[ext_resource type="PackedScene" uid="uid://cim0iur3ivkl5" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerChancelierInterface/ai_player_chancelier_interface.tscn" id="10_hudo7"]
+[ext_resource type="PackedScene" uid="uid://8k0h6mfxe1xg" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerPrinceInterface/ai_player_prince_interface.tscn" id="11_e7ebf"]
+[ext_resource type="PackedScene" uid="uid://bigr8awnwvm2l" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerBaronInterface/ai_player_baron_interface.tscn" id="12_wgacb"]
+[ext_resource type="PackedScene" uid="uid://cm2yil65g33ui" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerServanteInterface/ai_player_servante_interface.tscn" id="13_c5gnk"]
+[ext_resource type="PackedScene" uid="uid://c3ky7mbqnx2w3" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerPretreInterface/ai_player_pretre_interface.tscn" id="14_j6c5k"]
+[ext_resource type="PackedScene" uid="uid://c687h5qv21enp" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerGardeInterface/ai_player_garde_interface.tscn" id="15_yvtkw"]
+[ext_resource type="PackedScene" uid="uid://bh7hqjlnb2awk" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerEspionneInterface/ai_player_espionne_interface.tscn" id="16_mnu4j"]
+[ext_resource type="PackedScene" uid="uid://jsr5lwilhtvd" path="res://Pointable/pointable.tscn" id="17_ffufx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(129, 272)
+
+[node name="AiPlayer" type="Marker2D" unique_id=1283494019 groups=["Player"]]
+script = ExtResource("1_kmdvk")
+
+[node name="PlayerSprite" parent="." unique_id=562675833 instance=ExtResource("2_gtdct")]
+position = Vector2(1, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tapis" type="NinePatchRect" parent="." unique_id=1336137970]
+z_index = -1
+texture_filter = 1
+offset_left = -65.0
+offset_top = -41.0
+offset_right = 65.0
+offset_bottom = 231.0
+texture = ExtResource("3_s8wu4")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="Highlight" type="Sprite2D" parent="." unique_id=2008623782]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -10
+position = Vector2(-1.5000075, 94.5)
+scale = Vector2(1.3203125, 2.4609375)
+texture = ExtResource("4_ma2k5")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1175065453]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=322002356]
+position = Vector2(0.5, 95)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Hand" parent="." unique_id=1330926806 instance=ExtResource("5_mac7k")]
+position = Vector2(0, 96)
+
+[node name="CardSlot" parent="." unique_id=412397040 instance=ExtResource("6_niye7")]
+position = Vector2(0, 188)
+rotation = 1.5707964
+
+[node name="CardsInterfaces" type="Node2D" parent="." unique_id=363036936]
+
+[node name="AiPlayerPrincesseInterface" parent="CardsInterfaces" unique_id=1055253171 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_50vdf")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_6yxlc")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerRoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_3qchu")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("10_hudo7")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerPrinceInterface" parent="CardsInterfaces" unique_id=1794671994 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_e7ebf")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerBaronInterface" parent="CardsInterfaces" unique_id=1014002404 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_wgacb")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_c5gnk")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerPretreInterface" parent="CardsInterfaces" unique_id=633782881 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_j6c5k")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerGardeInterface" parent="CardsInterfaces" unique_id=89186548 node_paths=PackedStringArray("player_ref") instance=ExtResource("15_yvtkw")]
+player_ref = NodePath("../..")
+
+[node name="AiPlayerEspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("16_mnu4j")]
+player_ref = NodePath("../..")
+
+[node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("17_ffufx")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pointable" unique_id=320226729]
+position = Vector2(0.5, 95)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="is__no_more_pointed_at" from="Pointable" to="." method="_on_pointable_is__no_more_pointed_at"]
+[connection signal="is_pointed_at" from="Pointable" to="." method="_on_pointable_is_pointed_at"]
+[connection signal="is_selected" from="Pointable" to="." method="_on_pointable_is_selected"]

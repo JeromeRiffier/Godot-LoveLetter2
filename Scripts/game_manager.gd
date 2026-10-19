@@ -1,24 +1,25 @@
 class_name GameManager extends Node2D
 
 @export var deck:Deck
-@export var the_player:RealPlayer
-
-@onready var enemy_manager: EnemyManager = $"../EnemyManager"
+@export var the_player:LocalPlayer
+@export var enemy_manager: EnemyManager
+@export var cards_used: CardsPlayed
 
 @export_range(1, 5) var enemy_count:int = 3
 
-var players: Array[Player]
+var players: Array[Player] = []
 var game_is_running:bool = true
 
 func _ready() -> void:
-	enemy_manager.spawn_enemies(enemy_count)
-	
-	#region debug For debug only
-	players.assign( get_tree().get_nodes_in_group("Player") )
-	await get_tree().create_timer(0.5).timeout
-	 #endregion
+	pass
+
+func start_game() -> void:
+	setup_players()
+	deck.reset_deck()
+	deck.shuffle()
+	cards_used.reset()
 	## Connect signals
-	var realPlayerIndex := players.find_custom(func (player:Player) -> bool: return player is RealPlayer)
+	var realPlayerIndex := players.find_custom(func (player:Player) -> bool: return player is LocalPlayer)
 	if realPlayerIndex != -1:
 		players[realPlayerIndex].need_to_select_enemy.connect(manage_enemy_selection_state)
 	for player in players:
@@ -45,13 +46,17 @@ func _ready() -> void:
 				continue
 			await give_card_to_player(player)
 			player.is_playing = true
-			if player is EnemyAI:
+			if player is AiPlayer:
 				player.takeTurn()
 			await player.has_played
 			player.is_playing = false
 	manage_end_of_round()
 
-
+func setup_players() -> void:
+	players.clear()
+	enemy_manager.spawn_enemies(enemy_count)
+	players.append_array(enemy_manager.enemies)
+	players.append(the_player)
 func give_starting_cards() -> void:
 	for player in players:
 		await give_card_to_player(player)
@@ -71,8 +76,8 @@ func set_all_players_alive() -> void:
 		player.is_alive = true
 
 func manage_enemy_selection_state(should_be_selectable:bool) -> void:
-	var enemies:Array[EnemyAI]
-	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy is EnemyAI and enemy.is_alive))
+	var enemies:Array[AiPlayer]
+	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy is AiPlayer and enemy.is_alive))
 	for enemy in enemies:
 		enemy.selectable = should_be_selectable
 	print("manage_enemy_selection_state")

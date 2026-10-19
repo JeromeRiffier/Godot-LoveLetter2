@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://dveye2eqftayu"]
+
+[ext_resource type="Script" uid="uid://pm3cg7g4fgrc" path="res://Scenes/MultiplayerManagement/mutliplayer_management.gd" id="1_hedwd"]
+[ext_resource type="PackedScene" uid="uid://bvuq84ml7j1t7" path="res://Scenes/Deck/deck.tscn" id="2_p4135"]
+[ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/LocalPlayer/player.tscn" id="3_2g0r2"]
+[ext_resource type="Script" uid="uid://dtsudnlksde30" path="res://Scripts/game_manager.gd" id="4_tj227"]
+[ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/enemy_manager.gd" id="5_dfwa4"]
+[ext_resource type="PackedScene" uid="uid://b8t5l6hoa3tca" path="res://Scenes/CardsUsed/cards_used.tscn" id="6_kd2ax"]
+[ext_resource type="PackedScene" uid="uid://ctyk0niaaxxax" path="res://Pointable/pointable_manager.tscn" id="7_kyqgd"]
+
+[node name="MutliplayerManagement" type="Control" unique_id=247659255]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hedwd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1459835106]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=95582312]
+offset_right = 186.0
+offset_bottom = 434.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer" unique_id=827859806]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=231433567]
+layout_mode = 2
+text = "Love-Letter multijoueur"
+
+[node name="NamePanel" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1067451984]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/NamePanel" unique_id=302186228]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/NamePanel/MarginContainer" unique_id=323916298]
+layout_mode = 2
+columns = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/NamePanel/MarginContainer/GridContainer" unique_id=609637339]
+layout_mode = 2
+text = "Nom: "
+
+[node name="NameValue" type="LineEdit" parent="CanvasLayer/CenterContainer/VBoxContainer/NamePanel/MarginContainer/GridContainer" unique_id=1965435139]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="JoinPanel" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=804666413]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel" unique_id=2088679478]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer" unique_id=710916978]
+layout_mode = 2
+
+[node name="Options" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer" unique_id=2139464498]
+layout_mode = 2
+columns = 2
+
+[node name="AddressLabel" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/Options" unique_id=2128499980]
+layout_mode = 2
+text = "Addresse:"
+
+[node name="JoinIp" type="LineEdit" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/Options" unique_id=413574330]
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="PortLabel" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/Options" unique_id=520541994]
+layout_mode = 2
+text = "Port:"
+
+[node name="JoinPort" type="SpinBox" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/Options" unique_id=1503592163]
+layout_mode = 2
+max_value = 99999.0
+value = 47218.0
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer" unique_id=713440315]
+layout_mode = 2
+text = "Rejoindre"
+
+[node name="HostPanel" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=118180740]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/HostPanel" unique_id=907245004]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer" unique_id=1085694420]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer" unique_id=918028460]
+layout_mode = 2
+columns = 2
+
+[node name="PortLabel" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer/GridContainer" unique_id=127271724]
+layout_mode = 2
+text = "Port:"
+
+[node name="HostPort" type="SpinBox" parent="CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer/GridContainer" unique_id=1858734248]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 47218.0
+
+[node name="HostButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer" unique_id=1823659230]
+layout_mode = 2
+text = "Host"
+
+[node name="PlayerListPanel" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=915299859]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/PlayerListPanel" unique_id=1655543277]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/PlayerListPanel/MarginContainer" unique_id=2102688019]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/PlayerListPanel/MarginContainer/VBoxContainer" unique_id=2047721785]
+layout_mode = 2
+text = "Liste des joueurs: "
+
+[node name="PeersList" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/PlayerListPanel/MarginContainer/VBoxContainer" unique_id=1502382131]
+layout_mode = 2
+
+[node name="DisconectPanel" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=2082435650]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/DisconectPanel" unique_id=976613315]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DisconnectButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/DisconectPanel/MarginContainer" unique_id=313548949]
+layout_mode = 2
+text = "Déconnexion"
+
+[node name="StartPanel" type="PanelContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=327897974]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/StartPanel" unique_id=2124184403]
+layout_mode = 2
+text = "Start"
+
+[node name="Deck" parent="." unique_id=336770514 instance=ExtResource("2_p4135")]
+position = Vector2(87, 368)
+
+[node name="Player" parent="." unique_id=1325730967 instance=ExtResource("3_2g0r2")]
+position = Vector2(640, 728)
+
+[node name="GameManager" type="Node2D" parent="." unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "enemy_manager", "cards_used")]
+script = ExtResource("4_tj227")
+deck = NodePath("../Deck")
+the_player = NodePath("../Player")
+enemy_manager = NodePath("../EnemyManager")
+cards_used = NodePath("../CardsUsed")
+
+[node name="EnemyManager" type="Node2D" parent="." unique_id=1334308277]
+script = ExtResource("5_dfwa4")
+
+[node name="CardsUsed" parent="." unique_id=347992877 instance=ExtResource("6_kd2ax")]
+
+[node name="PointableManager" parent="." unique_id=1447748547 instance=ExtResource("7_kyqgd")]
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/DisconectPanel/MarginContainer/DisconnectButton" to="." method="_on_disconnect_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/StartPanel/StartButton" to="." method="_on_start_button_pressed"]

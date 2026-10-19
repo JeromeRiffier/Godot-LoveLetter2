@@ -118,7 +118,7 @@ func handle_click(_event:InputEventMouseButton) -> void:
 	pointing_at = pointable
 	move_pointer()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_dragging and dragging:
 		var parent := dragging.get_parent()
 		if parent is Node2D:

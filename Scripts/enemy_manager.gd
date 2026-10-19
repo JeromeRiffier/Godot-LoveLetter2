@@ -2,11 +2,11 @@ class_name EnemyManager extends Node
 
 const ENEMY_AI = preload("uid://brqs2imb2p7gr")
 
-var enemies: Array[EnemyAI]
+var enemies: Array[AiPlayer]
 
-func spawn_enemies(count:int) -> Array[EnemyAI]:
+func spawn_enemies(count:int) -> Array[AiPlayer]:
 	for i in range(count):
-		var enemy:EnemyAI = ENEMY_AI.instantiate()
+		var enemy:AiPlayer = ENEMY_AI.instantiate()
 		add_child(enemy)
 		enemies.append(enemy)
 	position_enemies()

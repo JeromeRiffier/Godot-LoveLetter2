@@ -91,3 +91,10 @@ const MYSTERY_CARD_MARGIN:int = 120
 
 const ENEMY_Y_POS:int = 45
 const ENEMY_WIDTH:int = 160
+
+const CHARS := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+static func random_string(length: int) -> String:
+	var result := ""
+	for i in length:
+		result += CHARS[randi() % CHARS.length()]
+	return result
