@@ -67,34 +67,34 @@ rotation = 1.5707964
 
 [node name="CardsInterfaces" type="Node2D" parent="." unique_id=363036936]
 
-[node name="AiPlayerPrincesseInterface" parent="CardsInterfaces" unique_id=1055253171 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_50vdf")]
+[node name="PrincesseInterface" parent="CardsInterfaces" unique_id=1055253171 node_paths=PackedStringArray("player_ref") instance=ExtResource("7_50vdf")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_6yxlc")]
+[node name="ComtesseInterface" parent="CardsInterfaces" unique_id=1885424470 node_paths=PackedStringArray("player_ref") instance=ExtResource("8_6yxlc")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerRoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_3qchu")]
+[node name="RoiInterface" parent="CardsInterfaces" unique_id=1282076885 node_paths=PackedStringArray("player_ref") instance=ExtResource("9_3qchu")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("10_hudo7")]
+[node name="ChancelierInterface" parent="CardsInterfaces" unique_id=365958636 node_paths=PackedStringArray("player_ref") instance=ExtResource("10_hudo7")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerPrinceInterface" parent="CardsInterfaces" unique_id=1794671994 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_e7ebf")]
+[node name="PrinceInterface" parent="CardsInterfaces" unique_id=1794671994 node_paths=PackedStringArray("player_ref") instance=ExtResource("11_e7ebf")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerBaronInterface" parent="CardsInterfaces" unique_id=1014002404 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_wgacb")]
+[node name="BaronInterface" parent="CardsInterfaces" unique_id=1014002404 node_paths=PackedStringArray("player_ref") instance=ExtResource("12_wgacb")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_c5gnk")]
+[node name="ServanteInterface" parent="CardsInterfaces" unique_id=419780019 node_paths=PackedStringArray("player_ref") instance=ExtResource("13_c5gnk")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerPretreInterface" parent="CardsInterfaces" unique_id=633782881 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_j6c5k")]
+[node name="PretreInterface" parent="CardsInterfaces" unique_id=633782881 node_paths=PackedStringArray("player_ref") instance=ExtResource("14_j6c5k")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerGardeInterface" parent="CardsInterfaces" unique_id=89186548 node_paths=PackedStringArray("player_ref") instance=ExtResource("15_yvtkw")]
+[node name="GardeInterface" parent="CardsInterfaces" unique_id=89186548 node_paths=PackedStringArray("player_ref") instance=ExtResource("15_yvtkw")]
 player_ref = NodePath("../..")
 
-[node name="AiPlayerEspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("16_mnu4j")]
+[node name="EspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("16_mnu4j")]
 player_ref = NodePath("../..")
 
 [node name="Pointable" parent="." unique_id=385352392 instance=ExtResource("17_ffufx")]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://basy0tkrdil01"]
+
+[ext_resource type="Script" uid="uid://b7to8wdjd4lge" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerPrincesseInterface/network_player_princesse_interface.gd" id="1_v48q1"]
+
+[node name="NetworkPlayerPrincesseInterface" type="Node2D" unique_id=1055253171]
+script = ExtResource("1_v48q1")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bbmhcmjvatygi"]
+
+[ext_resource type="Script" uid="uid://ccesv5ngqb8v8" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerComtesseInterface/netwrok_player_comtesse_interface.gd" id="1_hja6j"]
+
+[node name="NetworkPlayerComtesseInterface" type="Node2D" unique_id=1885424470]
+script = ExtResource("1_hja6j")

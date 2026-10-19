@@ -1,1 +1,1 @@
-class_name PlayerEspionneInterface extends EspionneInterface
+class_name LocalPlayerEspionneInterface extends EspionneInterface

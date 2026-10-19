@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bpifpvtv8lhkq"]
+
+[ext_resource type="Script" uid="uid://bmvw7k604bm3h" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerGardeInterface/network_player_garde_interface.gd" id="1_rak85"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_rmoe2"]
+
+[node name="NetworkPlayerGardeInterface" type="Node2D" unique_id=89186548]
+script = ExtResource("1_rak85")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_rmoe2")]
+z_index = 6
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 103.365
+offset_bottom = 40.605
+theme_override_colors/font_color = Color(1, 1, 1, 1)

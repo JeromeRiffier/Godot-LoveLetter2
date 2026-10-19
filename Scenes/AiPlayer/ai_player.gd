@@ -13,16 +13,16 @@ var selectable:bool = false:
 var _is_hovered:bool = false
 
 #region CardsInterfaces
-@onready var princesse_interface: AiPlayerPrincesseInterface = $CardsInterfaces/AiPlayerPrincesseInterface
-@onready var baron_interface: AiPlayerBaronInterface = $CardsInterfaces/AiPlayerBaronInterface
-@onready var chancelier_interface: AiPlayerChancelierInterface = $CardsInterfaces/AiPlayerChancelierInterface
-@onready var comtesse_interface: AiPlayerComtesseInterface = $CardsInterfaces/AiPlayerComtesseInterface
-@onready var espionne_interface: AiPlayerEspionneInterface = $CardsInterfaces/AiPlayerEspionneInterface
-@onready var garde_interface: AiPlayerGardeInterface = $CardsInterfaces/AiPlayerGardeInterface
-@onready var pretre_interface: AiPlayerPretreInterface = $CardsInterfaces/AiPlayerPretreInterface
-@onready var prince_interface: AiPlayerPrinceInterface = $CardsInterfaces/AiPlayerPrinceInterface
-@onready var roi_interface: AiPlayerRoiInterface = $CardsInterfaces/AiPlayerRoiInterface
-@onready var servante_interface: AiPlayerServanteInterface = $CardsInterfaces/AiPlayerServanteInterface
+@onready var princesse_interface: AiPlayerPrincesseInterface = $CardsInterfaces/PrincesseInterface
+@onready var baron_interface: AiPlayerBaronInterface = $CardsInterfaces/BaronInterface
+@onready var chancelier_interface: AiPlayerChancelierInterface = $CardsInterfaces/ChancelierInterface
+@onready var comtesse_interface: AiPlayerComtesseInterface = $CardsInterfaces/ComtesseInterface
+@onready var espionne_interface: AiPlayerEspionneInterface = $CardsInterfaces/EspionneInterface
+@onready var garde_interface: AiPlayerGardeInterface = $CardsInterfaces/GardeInterface
+@onready var pretre_interface: AiPlayerPretreInterface = $CardsInterfaces/PretreInterface
+@onready var prince_interface: AiPlayerPrinceInterface = $CardsInterfaces/PrinceInterface
+@onready var roi_interface: AiPlayerRoiInterface = $CardsInterfaces/RoiInterface
+@onready var servante_interface: AiPlayerServanteInterface = $CardsInterfaces/ServanteInterface
 #endregion 
 
 @onready var highlight_texture: Sprite2D = $Highlight

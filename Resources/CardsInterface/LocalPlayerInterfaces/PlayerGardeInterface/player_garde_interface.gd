@@ -1,4 +1,4 @@
-class_name PlayerGardeInterface extends GardeInterface
+class_name LocalPlayerGardeInterface extends GardeInterface
 
 @onready var card_selection_tool: CardSelectionTool = $CardSelectionTool
 

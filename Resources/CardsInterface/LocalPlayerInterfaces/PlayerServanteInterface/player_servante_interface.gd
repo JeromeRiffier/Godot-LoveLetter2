@@ -1,1 +1,1 @@
-class_name PlayerServanteInterface extends ServanteInterface
+class_name LocalPlayerServanteInterface extends ServanteInterface

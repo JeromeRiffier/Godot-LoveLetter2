@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://t3u1vdoyvys3"]
+
+[ext_resource type="Script" uid="uid://dyywtgk287wod" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerPrinceInterface/network_player_prince_interface.gd" id="1_rfunk"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_xl7bc"]
+
+[node name="NetworkPlayerPrinceInterface" type="Node2D" unique_id=1794671994]
+script = ExtResource("1_rfunk")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_xl7bc")]

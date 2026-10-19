@@ -1,1 +1,1 @@
-class_name PlayerPrincesseInterface extends PrincesseInterface
+class_name LocalPlayerPrincesseInterface extends PrincesseInterface

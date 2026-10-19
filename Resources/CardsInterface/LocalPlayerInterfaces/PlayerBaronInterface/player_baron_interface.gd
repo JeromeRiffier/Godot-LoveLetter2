@@ -1,4 +1,4 @@
-class_name PlayerBaronInterface extends BaronInterface
+class_name LocalPlayerBaronInterface extends BaronInterface
 
 var enemies:Array[AiPlayer]
 

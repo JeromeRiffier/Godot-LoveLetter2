@@ -1,0 +1,1 @@
+class_name NetworkPlayerPrincesseInterface extends PrincesseInterface

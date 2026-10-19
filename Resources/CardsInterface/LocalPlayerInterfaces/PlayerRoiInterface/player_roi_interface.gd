@@ -1,4 +1,4 @@
-class_name PlayerRoiInterface extends RoiInterface
+class_name LocalPlayerRoiInterface extends RoiInterface
 
 
 func enter() -> void:

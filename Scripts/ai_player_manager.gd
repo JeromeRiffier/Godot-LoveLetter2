@@ -9,7 +9,7 @@ func spawn_ai_players(count:int) -> Array[AiPlayer]:
 		var enemy:AiPlayer = AI_PLAYER.instantiate()
 		add_child(enemy)
 		ai_players.append(enemy)
-	position_ai_players()
+	#position_ai_players()
 	return ai_players
 
 func position_ai_players() -> void:

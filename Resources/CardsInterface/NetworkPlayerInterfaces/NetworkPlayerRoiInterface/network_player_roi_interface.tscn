@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b32cekvk0i4e2"]
+
+[ext_resource type="Script" uid="uid://bfp4xhk5tejvm" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerRoiInterface/network_player_roi_interface.gd" id="1_vafnb"]
+[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_tnu4g"]
+
+[node name="NetworkPlayerRoiInterface" type="Node2D" unique_id=1282076885]
+script = ExtResource("1_vafnb")
+
+[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_tnu4g")]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bhamrytmcci3v" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerGardeInterface/ai_player_garde_interface.gd" id="1_5cdw5"]
 [ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="3_haklf"]
 
-[node name="EnemyAIGardeInterface" type="Node2D" unique_id=89186548]
+[node name="AiPlayerGardeInterface" type="Node2D" unique_id=89186548]
 script = ExtResource("1_5cdw5")
 
 [node name="Message" parent="." unique_id=1474687604 instance=ExtResource("3_haklf")]

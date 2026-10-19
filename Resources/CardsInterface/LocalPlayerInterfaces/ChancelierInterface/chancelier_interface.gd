@@ -1,4 +1,4 @@
-class_name PlayerChancelierInterface extends ChancelierInterface
+class_name LocalPlayerChancelierInterface extends ChancelierInterface
 
 
 func _ready() -> void:

@@ -1,4 +1,4 @@
-class_name PlayerPrinceInterface extends PrinceInterface
+class_name LocalPlayerPrinceInterface extends PrinceInterface
 
 
 

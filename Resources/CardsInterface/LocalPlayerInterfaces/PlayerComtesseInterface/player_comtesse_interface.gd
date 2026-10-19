@@ -1,1 +1,1 @@
-class_name PlayerComtesseInterface extends ComtesseInterface
+class_name LocalPlayerComtesseInterface extends ComtesseInterface

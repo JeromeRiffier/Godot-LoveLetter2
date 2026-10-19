@@ -70,9 +70,9 @@ func quit_game() -> void:
 	connected = false
 
 @rpc("any_peer", "call_local", "reliable")
-func start_game(seed:int) -> void:
+func start_game(seed_key:int) -> void:
 	print('Start game')
-	seed(seed)
+	seed(seed_key)
 
 	game_manager.start_game()
 

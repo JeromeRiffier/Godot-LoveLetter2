@@ -4,15 +4,17 @@ const NETWORK_PLAYER = preload("uid://i32aqpnvupt5")
 
 var network_players: Array[NetworkPlayer]
 
-func spawn_enemies(count:int) -> Array[NetworkPlayer]:
-	for i in range(count):
-		var enemy:AiPlayer = NETWORK_PLAYER.instantiate()
-		add_child(enemy)
-		network_players.append(enemy)
-	position_enemies()
+func spawn_network_players() -> Array[NetworkPlayer]:
+	for peer in multiplayer.get_peers():
+		if peer == multiplayer.get_unique_id():
+			continue ##Skip self since it will be a localPlayer
+		var networkPlayer:NetworkPlayer = NETWORK_PLAYER.instantiate()
+		add_child(networkPlayer)
+		network_players.append(networkPlayer)
+	#position_network_players()
 	return network_players
 
-func position_enemies() -> void:
+func position_network_players() -> void:
 	for i in range(network_players.size()):
 		var new_position := Vector2(calculate_enemy_positions_x(i), Constant.ENEMY_Y_POS)
 		network_players[i].global_position = new_position

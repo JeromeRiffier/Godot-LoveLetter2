@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cdiq1bpgvuh2a" path="res://Scripts/network_player_manager.gd" id="6_2g0r2"]
 [ext_resource type="PackedScene" uid="uid://b8t5l6hoa3tca" path="res://Scenes/CardsUsed/cards_used.tscn" id="6_kd2ax"]
 [ext_resource type="PackedScene" uid="uid://ctyk0niaaxxax" path="res://Pointable/pointable_manager.tscn" id="7_kyqgd"]
+[ext_resource type="Script" uid="uid://cn263b56xchv6" path="res://Scripts/players_position_management.gd" id="9_tj227"]
 
 [node name="MutliplayerManagement" type="Control" unique_id=247659255]
 layout_mode = 3
@@ -170,12 +171,14 @@ position = Vector2(87, 368)
 [node name="Player" parent="." unique_id=1325730967 instance=ExtResource("3_2g0r2")]
 position = Vector2(640, 728)
 
-[node name="GameManager" type="Node2D" parent="." unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "ai_player_manager", "cards_used")]
+[node name="GameManager" type="Node2D" parent="." unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "ai_player_manager", "network_player_manager", "cards_used", "players_position_management")]
 script = ExtResource("4_tj227")
 deck = NodePath("../Deck")
 the_player = NodePath("../Player")
 ai_player_manager = NodePath("../AiPlayerManager")
+network_player_manager = NodePath("../NetworkPlayerManager")
 cards_used = NodePath("../CardsUsed")
+players_position_management = NodePath("../PlayersPositionManagement")
 
 [node name="AiPlayerManager" type="Node2D" parent="." unique_id=1334308277]
 script = ExtResource("5_dfwa4")
@@ -186,6 +189,9 @@ script = ExtResource("6_2g0r2")
 [node name="CardsUsed" parent="." unique_id=347992877 instance=ExtResource("6_kd2ax")]
 
 [node name="PointableManager" parent="." unique_id=1447748547 instance=ExtResource("7_kyqgd")]
+
+[node name="PlayersPositionManagement" type="Node2D" parent="." unique_id=2067700262]
+script = ExtResource("9_tj227")
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]

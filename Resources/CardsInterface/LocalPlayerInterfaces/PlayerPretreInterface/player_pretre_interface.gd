@@ -1,4 +1,4 @@
-class_name PlayerPretreInterface extends PretreInterface
+class_name LocalPlayerPretreInterface extends PretreInterface
 
 
 

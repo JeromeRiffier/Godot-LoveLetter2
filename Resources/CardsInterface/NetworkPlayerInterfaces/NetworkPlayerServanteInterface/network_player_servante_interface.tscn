@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cbal57rg6gebm"]
+
+[ext_resource type="Script" uid="uid://t70guhxe45af" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerServanteInterface/network_player_servante_interface.gd" id="1_d7jcx"]
+
+[node name="NetworkPlayerServanteInterface" type="Node2D" unique_id=419780019]
+script = ExtResource("1_d7jcx")

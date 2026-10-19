@@ -5,16 +5,16 @@ class_name LocalPlayer extends Player
 
 
 #region CardsInterfaces
-@onready var princesse_interface: PlayerPrincesseInterface = $CardsInterfaces/PrincesseInterface
-@onready var comtesse_interface: PlayerComtesseInterface = $CardsInterfaces/ComtesseInterface
-@onready var roi_interface: PlayerRoiInterface = $CardsInterfaces/RoiInterface
-@onready var chancelier_interface: PlayerChancelierInterface = $CardsInterfaces/ChancelierInterface
-@onready var prince_interface: PlayerPrinceInterface = $CardsInterfaces/PrinceInterface
-@onready var baron_interface: PlayerBaronInterface = $CardsInterfaces/BaronInterface
-@onready var servante_interface: PlayerServanteInterface = $CardsInterfaces/ServanteInterface
-@onready var pretre_interface: PlayerPretreInterface = $CardsInterfaces/PretreInterface
-@onready var garde_interface: PlayerGardeInterface = $CardsInterfaces/GardeInterface
-@onready var espionne_interface: PlayerEspionneInterface = $CardsInterfaces/EspionneInterface
+@onready var princesse_interface: LocalPlayerPrincesseInterface = $CardsInterfaces/PrincesseInterface
+@onready var comtesse_interface: LocalPlayerComtesseInterface = $CardsInterfaces/ComtesseInterface
+@onready var roi_interface: LocalPlayerRoiInterface = $CardsInterfaces/RoiInterface
+@onready var chancelier_interface: LocalPlayerChancelierInterface = $CardsInterfaces/ChancelierInterface
+@onready var prince_interface: LocalPlayerPrinceInterface = $CardsInterfaces/PrinceInterface
+@onready var baron_interface: LocalPlayerBaronInterface = $CardsInterfaces/BaronInterface
+@onready var servante_interface: LocalPlayerServanteInterface = $CardsInterfaces/ServanteInterface
+@onready var pretre_interface: LocalPlayerPretreInterface = $CardsInterfaces/PretreInterface
+@onready var garde_interface: LocalPlayerGardeInterface = $CardsInterfaces/GardeInterface
+@onready var espionne_interface: LocalPlayerEspionneInterface = $CardsInterfaces/EspionneInterface
 #endregion
 
 @warning_ignore("unused_signal")

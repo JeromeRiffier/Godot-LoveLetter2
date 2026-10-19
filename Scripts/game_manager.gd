@@ -5,6 +5,7 @@ class_name GameManager extends Node2D
 @export var ai_player_manager: AiPlayerManager
 @export var network_player_manager: NetworkPlayerManager
 @export var cards_used: CardsPlayed
+@export var players_position_management: PlayersPositionManagement
 
 @export_range(1, 5) var enemy_count:int = 3
 
@@ -47,7 +48,7 @@ func start_game() -> void:
 				continue
 			await give_card_to_player(player)
 			player.is_playing = true
-			if player is AiPlayer:
+			if player is not LocalPlayer:
 				player.takeTurn()
 			await player.has_played
 			player.is_playing = false
@@ -55,9 +56,18 @@ func start_game() -> void:
 
 func setup_players() -> void:
 	players.clear()
+	
 	ai_player_manager.spawn_ai_players(enemy_count)
 	players.append_array(ai_player_manager.ai_players)
+	
+	network_player_manager.spawn_network_players()
+	players.append_array(network_player_manager.network_players)
+	
 	players.append(the_player)
+	
+	players.shuffle()
+	
+	players_position_management.position_players(players)
 
 
 func give_starting_cards() -> void:

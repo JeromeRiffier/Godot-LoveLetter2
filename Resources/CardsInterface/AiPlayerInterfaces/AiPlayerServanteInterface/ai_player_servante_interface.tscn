@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bc5ftqmw4ud8e" path="res://Resources/CardsInterface/AiPlayerInterfaces/AiPlayerServanteInterface/ai_player_servante_interface.gd" id="1_o5qfh"]
 
-[node name="EnemyAIServanteInterface" type="Node2D" unique_id=419780019]
+[node name="AiPlayerServanteInterface" type="Node2D" unique_id=419780019]
 script = ExtResource("1_o5qfh")
