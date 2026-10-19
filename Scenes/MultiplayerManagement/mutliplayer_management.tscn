@@ -4,7 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bvuq84ml7j1t7" path="res://Scenes/Deck/deck.tscn" id="2_p4135"]
 [ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/LocalPlayer/player.tscn" id="3_2g0r2"]
 [ext_resource type="Script" uid="uid://dtsudnlksde30" path="res://Scripts/game_manager.gd" id="4_tj227"]
-[ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/enemy_manager.gd" id="5_dfwa4"]
+[ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/ai_player_manager.gd" id="5_dfwa4"]
+[ext_resource type="Script" uid="uid://cdiq1bpgvuh2a" path="res://Scripts/network_player_manager.gd" id="6_2g0r2"]
 [ext_resource type="PackedScene" uid="uid://b8t5l6hoa3tca" path="res://Scenes/CardsUsed/cards_used.tscn" id="6_kd2ax"]
 [ext_resource type="PackedScene" uid="uid://ctyk0niaaxxax" path="res://Pointable/pointable_manager.tscn" id="7_kyqgd"]
 
@@ -169,15 +170,18 @@ position = Vector2(87, 368)
 [node name="Player" parent="." unique_id=1325730967 instance=ExtResource("3_2g0r2")]
 position = Vector2(640, 728)
 
-[node name="GameManager" type="Node2D" parent="." unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "enemy_manager", "cards_used")]
+[node name="GameManager" type="Node2D" parent="." unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "ai_player_manager", "cards_used")]
 script = ExtResource("4_tj227")
 deck = NodePath("../Deck")
 the_player = NodePath("../Player")
-enemy_manager = NodePath("../EnemyManager")
+ai_player_manager = NodePath("../AiPlayerManager")
 cards_used = NodePath("../CardsUsed")
 
-[node name="EnemyManager" type="Node2D" parent="." unique_id=1334308277]
+[node name="AiPlayerManager" type="Node2D" parent="." unique_id=1334308277]
 script = ExtResource("5_dfwa4")
+
+[node name="NetworkPlayerManager" type="Node2D" parent="." unique_id=1372481240]
+script = ExtResource("6_2g0r2")
 
 [node name="CardsUsed" parent="." unique_id=347992877 instance=ExtResource("6_kd2ax")]
 
