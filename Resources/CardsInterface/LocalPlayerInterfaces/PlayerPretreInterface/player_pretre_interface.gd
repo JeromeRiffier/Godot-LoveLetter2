@@ -18,6 +18,7 @@ func disconnect_enemies_listeners() -> void:
 		enemy.enemy_selected.disconnect(select_enemy)
 
 func select_enemy(enemy:Player) -> void:
+	player_action.enemy_selected_index = GameManager.instance.players.find(enemy)
 	disconnect_enemies_listeners()
 	player_ref.need_to_select_enemy.emit(false) ## Disable enemy selection
 	enemy.hand.cards[0].show_card()

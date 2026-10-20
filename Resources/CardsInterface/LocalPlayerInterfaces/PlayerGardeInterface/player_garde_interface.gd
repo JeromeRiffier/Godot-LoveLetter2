@@ -27,6 +27,6 @@ func select_enemy(enemy:Player) -> void:
 #endregion
 
 
-func _on_card_selection_tool_card_selected(card: CardInfos) -> void:
-	card_selected = card
+func _on_card_selection_tool_selected_card(card: CardInfos) -> void:
+	selected_card = card
 	check_result()

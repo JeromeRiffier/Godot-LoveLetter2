@@ -20,41 +20,49 @@ class_name LocalPlayer extends Player
 @warning_ignore("unused_signal")
 signal need_to_select_enemy(value:bool) 
 
+func set_label() -> void:
+	var self_peer_id := multiplayer.get_unique_id()
+	$NameLabel.text = "%s - %s" % [name, self_peer_id]
+
 func play_card(card:Card) -> void:
 	print("%s play %s" % [name, card.infos])
+	var player_action := PlayerAction.new()
+	player_action.player_peer_id = multiplayer.get_unique_id()
+	player_action.player_index = GameManager.instance.players.find(self)
 	match card.infos:
 		Constant.PRINCESS:
 			princesse_interface.enter()
-			await princesse_interface.card_played
+			player_action = await princesse_interface.card_played
 		Constant.COMTESSE:
 			comtesse_interface.enter()
-			await comtesse_interface.card_played
+			player_action = await comtesse_interface.card_played
 		Constant.ROI:
 			roi_interface.enter()
-			await roi_interface.card_played
+			player_action = await roi_interface.card_played
 		Constant.CHANCELIER:
 			chancelier_interface.enter()
-			await chancelier_interface.card_played
+			player_action = await chancelier_interface.card_played
 		Constant.PRINCE:
 			prince_interface.enter()
-			await prince_interface.card_played
+			player_action = await prince_interface.card_played
 		Constant.BARON:
 			baron_interface.enter()
-			await baron_interface.card_played
+			player_action = await baron_interface.card_played
 		Constant.SERVANTE:
 			servante_interface.enter()
-			await servante_interface.card_played
+			player_action = await servante_interface.card_played
 		Constant.PRÊTRE:
 			pretre_interface.enter()
-			await pretre_interface.card_played
+			player_action = await pretre_interface.card_played
 		Constant.GARDE:
 			garde_interface.enter()
-			await garde_interface.card_played
+			player_action = await garde_interface.card_played
 		Constant.ESPIONNE:
 			espionne_interface.enter()
-			await espionne_interface.card_played
+			player_action = await espionne_interface.card_played
 	card.used = true
-	has_played.emit(self, card)
+	has_played.emit(self, card, player_action)
+	print('test')
 
 
 func start_playing() -> void:

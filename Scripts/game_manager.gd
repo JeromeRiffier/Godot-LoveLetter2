@@ -1,5 +1,7 @@
 class_name GameManager extends Node2D
 
+static var instance:GameManager
+
 @export var deck:Deck
 @export var the_player:LocalPlayer
 @export var ai_player_manager: AiPlayerManager
@@ -12,18 +14,28 @@ class_name GameManager extends Node2D
 var players: Array[Player] = []
 var game_is_running:bool = true
 
-func _ready() -> void:
-	pass
+func _enter_tree() -> void:
+	if instance != null and instance != self:
+		queue_free()  # un doublon existe déjà
+		return
+	instance = self
 
-func start_game() -> void:
-	setup_players()
+func _exit_tree() -> void:
+	if instance == self:
+		instance = null
+
+func start_game(players_list:Array[PlayerElement]) -> void:
+	setup_players(players_list)
 	deck.reset_deck()
 	deck.shuffle()
 	cards_used.reset()
+	if not multiplayer.is_server():
+		print('ici')
 	## Connect signals
 	var realPlayerIndex := players.find_custom(func (player:Player) -> bool: return player is LocalPlayer)
 	if realPlayerIndex != -1:
 		players[realPlayerIndex].need_to_select_enemy.connect(manage_enemy_selection_state)
+		players[realPlayerIndex].set_label()
 	for player in players:
 		player.need_card.connect(give_card_to_player)
 		player.return_card.connect(deck.take_back)
@@ -54,21 +66,23 @@ func start_game() -> void:
 			player.is_playing = false
 	manage_end_of_round()
 
-func setup_players() -> void:
+func setup_players(players_list:Array[PlayerElement]) -> void:
 	players.clear()
 	
-	ai_player_manager.spawn_ai_players(enemy_count)
-	players.append_array(ai_player_manager.ai_players)
-	
-	network_player_manager.spawn_network_players()
-	players.append_array(network_player_manager.network_players)
-	
-	players.append(the_player)
-	
-	players.shuffle()
-	
+	for playerElelement in players_list:
+		match playerElelement.type:
+			PlayerElement.PLAYER_TYPE.IA:
+				var aiPlayer := ai_player_manager.spawn_ai_player(playerElelement)
+				players.append(aiPlayer)
+			PlayerElement.PLAYER_TYPE.REAL:
+				if playerElelement.id == multiplayer.get_unique_id():
+					the_player.id = playerElelement.id
+					the_player.name = playerElelement.name
+					players.append(the_player)
+				else:
+					var networkPlayer := network_player_manager.spawn_network_player(playerElelement)
+					players.append(networkPlayer)
 	players_position_management.position_players(players)
-
 
 func give_starting_cards() -> void:
 	for player in players:
@@ -99,3 +113,7 @@ func get_player_alive() -> Array[Player]:
 	var alive_players: Array[Player]
 	alive_players.assign( players.filter( func (player:Player) -> bool: return player.is_alive) )
 	return alive_players
+
+
+func get_player_index(player:Player) -> int:
+	return players.find(player)

@@ -33,6 +33,7 @@ signal enemy_selected(emiter:Player)
 
 func _ready() -> void:
 	hide_highlight()
+	$NameLabel.text = name
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not selectable:
@@ -94,8 +95,7 @@ func play_card(card:Card) -> void:
 			espionne_interface.enter()
 			await espionne_interface.card_played
 	card.used = true
-	has_played.emit(self, card)
-
+	has_played.emit(self, card, null)
 
 func _on_area_2d_mouse_entered() -> void:
 	if selectable:

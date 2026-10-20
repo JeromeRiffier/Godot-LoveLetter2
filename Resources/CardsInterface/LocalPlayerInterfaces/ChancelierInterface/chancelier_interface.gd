@@ -39,9 +39,10 @@ func card_stopped_dragging(card:Card) -> void:
 
 func manage_player_card_drop(card:Card) -> void:
 	if player_ref.hand.cards.is_empty():
-		cards.erase(card)
 		await player_ref.draw_card(card)
 		disable_card_listener(card)
+		cards.erase(card)
+		record_chancelier_card_action(card, Constant.CHANCELIER_CARD_DESTINATION_ENUM.HAND)
 	else: 
 		message.display_text("Il y a deja une carte dans ton deck")
 
@@ -51,9 +52,20 @@ func manage_deck_card_drop(card:Card) -> void:
 	else:
 		player_ref.return_card.emit(card)
 		cards.erase(card)
+		record_chancelier_card_action(card, Constant.CHANCELIER_CARD_DESTINATION_ENUM.DECK)
 		disable_card_listener(card)
 
-
+func record_chancelier_card_action(card:Card, destination:Constant.CHANCELIER_CARD_DESTINATION_ENUM) -> void:
+	var card_index := cards_clone.find(card)
+	match card_index:
+		0:
+			player_action.chancelier_card_destinations.first = destination
+		1:
+			player_action.chancelier_card_destinations.second = destination
+		2:
+			player_action.chancelier_card_destinations.third = destination
+		_:
+			print('ERRRRRROOOOOORRRR')
 
 ## return true if there is only one card left to choose and the player haven't got his
 func last_card_for_player() -> bool:

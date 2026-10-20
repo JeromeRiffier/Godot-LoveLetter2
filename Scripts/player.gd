@@ -5,7 +5,7 @@ class_name Player extends Marker2D
 @onready var hand: Hand = $Hand
 @onready var card_slot: CardSlot = $CardSlot
 @onready var player_sprite: PlayerSprite = $PlayerSprite
-
+var id:int
 
 var is_playing:bool = false:
 	set(value):
@@ -29,7 +29,7 @@ var as_played_spy:bool = false:
 
 ##Used by children of this class to indicate that there turn is over
 @warning_ignore("unused_signal")
-signal has_played(emiter:Player, card:Card)
+signal has_played(emiter:Player, card:Card, action:PlayerAction)
 signal has_discarded(emiter:Player, card:Card)
 ## Ask GameManager draw a card from the deck and give it to the player
 signal need_card(emiter:Player)

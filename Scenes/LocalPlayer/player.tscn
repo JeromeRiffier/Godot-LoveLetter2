@@ -19,7 +19,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(64, 64)
 
-[node name="Player" type="Marker2D" unique_id=1325730967 groups=["Player"]]
+[node name="LocalPlayer" type="Marker2D" unique_id=1325730967 groups=["Player"]]
 position = Vector2(526, 342)
 script = ExtResource("1_7g0yx")
 
@@ -75,3 +75,10 @@ player_ref = NodePath("../..")
 
 [node name="EspionneInterface" parent="CardsInterfaces" unique_id=470700987 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_htcer")]
 player_ref = NodePath("../..")
+
+[node name="NameLabel" type="Label" parent="." unique_id=1521475859]
+offset_left = -31.0
+offset_top = 53.0
+offset_right = 9.0
+offset_bottom = 76.0
+text = "Name"

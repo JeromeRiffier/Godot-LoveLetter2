@@ -3,11 +3,13 @@ class_name ChancelierInterface extends CardInterface
 @onready var message: Message = $Message
 
 var cards:Array[Card]
-
+var cards_clone:Array[Card]
 
 func enter() -> void:
 	super() # Execute parenter enter func
-	print('ChancelierInterface')
+	cards.clear()
+	cards_clone.clear()
+	player_action.card_type_played_index = Constant.CardTypes.find(Constant.CHANCELIER)
 	player_ref.need_card.emit(player_ref)
 	player_ref.need_card.emit(player_ref)
 	await player_ref.hand.card_repositioned
@@ -15,6 +17,7 @@ func enter() -> void:
 		cards.append(player_ref.hand.cards[0])
 		player_ref.hand.remove_card_from_hand(player_ref.hand.cards[0])
 		await animate_cards_to_center()
+	cards_clone = cards.duplicate() ##Should duplicate?
 	
 #region Card positioning
 func animate_cards_to_center() -> void:

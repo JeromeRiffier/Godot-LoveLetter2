@@ -6,20 +6,21 @@ class_name CardInterface extends Node2D
 
 var is_active:bool
 
-
-signal card_played
+var player_action:PlayerAction
+signal card_played(player_action:PlayerAction)
 
 
 func enter() -> void:
 	is_active = true
 	if player_ref:
 		player_ref.is_protected = false
+	player_action = PlayerAction.new()
 
 
 func validate() -> void:
 	await  get_tree().create_timer(0.1).timeout
 	is_active = false
-	card_played.emit()
+	card_played.emit(player_action)
 
 func pre_point_enemy() -> void:
 	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")

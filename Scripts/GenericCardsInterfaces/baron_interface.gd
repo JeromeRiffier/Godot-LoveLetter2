@@ -5,10 +5,12 @@ var cards :Array[Card]
 
 func enter() -> void:
 	super() # Execute parenter enter func
+	player_action.card_type_played_index = Constant.CardTypes.find(Constant.BARON)
 	cards = []
 
 
 func manage_result(enemy:Player) -> void:
+	player_action.enemy_selected_index = GameManager.instance.players.find(enemy)
 	var player_card:Card = player_ref.hand.cards[0]
 	var enemy_card:Card = enemy.hand.cards[0]
 	if player_card.infos.value > enemy_card.infos.value:

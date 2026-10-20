@@ -12,8 +12,8 @@ class_name Lobby extends Control
 @onready var join_port: SpinBox = $CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/Options/JoinPort
 @onready var start_panel: PanelContainer = $CanvasLayer/CenterContainer/VBoxContainer/StartPanel
 @onready var start_button: Button = $CanvasLayer/CenterContainer/VBoxContainer/StartPanel/StartButton
+@onready var ia_number: SpinBox = $CanvasLayer/CenterContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/IaNumber
 
-@onready var game_manager: GameManager = $GameManager
 
 const MAX_PLAYERS: int = 5
 const DEFAULT_PORT: int = 47218
@@ -70,12 +70,38 @@ func quit_game() -> void:
 	connected = false
 
 @rpc("any_peer", "call_local", "reliable")
-func start_game(seed_key:int) -> void:
+func start_game(seed_key:int, players_list_dic:Array) -> void:
 	print('Start game')
 	seed(seed_key)
+	var players_list : Array[PlayerElement] = []
+	players_list.assign(
+		players_list_dic.map(func (dicElement:Dictionary) -> PlayerElement: return PlayerElement.from_dict(dicElement))
+	)
+	GameManager.instance.start_game(players_list)
+	for player in GameManager.instance.players:
+		if player is LocalPlayer:
+			player.has_played.connect(_on_player_action)
 
-	game_manager.start_game()
+func generate_player_list() -> Array[PlayerElement]:
+	var list:Array[PlayerElement] = []
+	for id:int in players.keys():
+		var element := PlayerElement.new()
+		element.id = id
+		element.name = players[id]
+		element.type = PlayerElement.PLAYER_TYPE.REAL
+		list.append(element)
+	for i in range(ia_number.value):
+		var element := PlayerElement.new()
+		element.id = randi()
+		element.name = Constant.random_string(5)
+		element.type = PlayerElement.PLAYER_TYPE.REAL
+		list.append(element)
+	list.shuffle()
+	return list
 
+
+func _on_player_action(player:Player,_card:Card,action:PlayerAction) -> void:
+	print("%s as played" % player.name)
 
 func update_player_list() -> void:
 	for child in peers_list.get_children():
@@ -136,5 +162,6 @@ func _on_disconnect_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	var my_seed := "FixedSeed".hash() ## Find a way to generate the seed and transmit it to each peers
-	start_game.rpc(my_seed)
+	var playersList := generate_player_list().map(func (element:PlayerElement) -> Dictionary: return element.to_dict())
+	start_game.rpc(my_seed, playersList)
 #endregion

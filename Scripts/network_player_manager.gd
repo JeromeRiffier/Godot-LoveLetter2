@@ -3,16 +3,26 @@ class_name NetworkPlayerManager extends Node
 const NETWORK_PLAYER = preload("uid://i32aqpnvupt5")
 
 var network_players: Array[NetworkPlayer]
-
+##Deprecated
 func spawn_network_players() -> Array[NetworkPlayer]:
+	print("spawn_network_players ",multiplayer.get_unique_id(),multiplayer.get_peers())
 	for peer in multiplayer.get_peers():
 		if peer == multiplayer.get_unique_id():
-			continue ##Skip self since it will be a localPlayer
+			continue ##Never append it seems that get_peers return only the other peers
 		var networkPlayer:NetworkPlayer = NETWORK_PLAYER.instantiate()
+		networkPlayer.peer_id  = peer
 		add_child(networkPlayer)
 		network_players.append(networkPlayer)
 	#position_network_players()
 	return network_players
+
+func spawn_network_player(playerData:PlayerElement) -> NetworkPlayer:
+	var networkPlayer:NetworkPlayer = NETWORK_PLAYER.instantiate()
+	networkPlayer.id  = playerData.id
+	networkPlayer.name  = playerData.name
+	add_child(networkPlayer)
+	network_players.append(networkPlayer)
+	return networkPlayer
 
 func position_network_players() -> void:
 	for i in range(network_players.size()):

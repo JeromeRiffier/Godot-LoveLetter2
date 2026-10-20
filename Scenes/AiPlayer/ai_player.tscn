@@ -103,6 +103,13 @@ player_ref = NodePath("../..")
 position = Vector2(0.5, 95)
 shape = SubResource("RectangleShape2D_g4v7s")
 
+[node name="NameLabel" type="Label" parent="." unique_id=1110816691]
+offset_left = -64.0
+offset_top = -65.0
+offset_right = -17.0
+offset_bottom = -42.0
+text = "Name"
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="is__no_more_pointed_at" from="Pointable" to="." method="_on_pointable_is__no_more_pointed_at"]

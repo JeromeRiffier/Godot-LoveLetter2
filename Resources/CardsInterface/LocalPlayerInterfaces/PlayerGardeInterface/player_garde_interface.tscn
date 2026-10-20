@@ -17,4 +17,4 @@ offset_right = 103.365
 offset_bottom = 40.605
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 
-[connection signal="card_selected" from="CardSelectionTool" to="." method="_on_card_selection_tool_card_selected"]
+[connection signal="selected_card" from="CardSelectionTool" to="." method="_on_card_selection_tool_selected_card"]

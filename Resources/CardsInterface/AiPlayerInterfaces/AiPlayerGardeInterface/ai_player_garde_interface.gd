@@ -7,6 +7,6 @@ func enter() -> void:
 		validate()
 		return
 	selected_enemy = enemies.pick_random()
-	card_selected = Constant.CardTypesWithoutGuard.pick_random()
-	await message.display_text("%s à choisis %s et tente %s" % [player_ref.name, selected_enemy.name, card_selected.title])
+	selected_card = Constant.CardTypesWithoutGuard.pick_random()
+	await message.display_text("%s à choisis %s et tente %s" % [player_ref.name, selected_enemy.name, selected_card.title])
 	check_result()

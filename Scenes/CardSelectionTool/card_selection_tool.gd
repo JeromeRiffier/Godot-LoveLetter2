@@ -15,7 +15,7 @@ var screen_bottom:int
 
 @export var selection_active:bool = false
 
-signal card_selected(card:CardInfos)
+signal selected_card(card:CardInfos)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	## Do not forget to disable mouse filtering on any control node to not mess with inputs
@@ -45,7 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var colision_filtered := colision_result.filter(func (result:Dictionary) -> bool: return cards.has(result.collider.get_parent()) )
 			if not colision_filtered.is_empty():
 				var card:Card = colision_filtered[0].collider.get_parent()
-				card_selected.emit(card.infos)
+				selected_card.emit(card.infos)
 				disactivate()
 
 func activate() -> void:
@@ -65,7 +65,7 @@ func disactivate() -> void:
 	update_hand_positions()
 
 func use_card(card:Card) -> void:
-	card_selected.emit(card.infos)
+	selected_card.emit(card.infos)
 	disactivate()
 
 func set_card_selectable() -> void:
