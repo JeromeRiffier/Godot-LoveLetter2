@@ -4,6 +4,10 @@ class_name CardSlot extends Node2D
 
 var cards_played:Array[Card]
 
+
+func _ready() -> void:
+	pass
+
 func receive_card(card:Card) -> void:
 	card.selectable = false
 	card.z_index = 0

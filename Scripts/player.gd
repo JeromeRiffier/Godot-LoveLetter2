@@ -9,11 +9,15 @@ var id:int
 
 var is_playing:bool = false:
 	set(value):
+		if is_playing == value:
+			return
 		is_playing = value
 		if value:
 			start_playing()
 		else:
 			stop_playing()
+		change_playing_state.emit(is_playing)
+
 var is_protected:bool = false:
 	set(value):
 		is_protected = value
@@ -36,7 +40,7 @@ signal need_card(emiter:Player)
 ## Ask GameManager to take back the card and put it under the deck
 @warning_ignore("unused_signal")
 signal return_card(card:Card)
-
+signal change_playing_state(is_playing:bool)
 #func _ready() -> void:
 	### For debug only, card should be received from GameManager
 	#await get_tree().create_timer(0.5).timeout

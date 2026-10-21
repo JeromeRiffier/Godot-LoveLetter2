@@ -14,8 +14,10 @@ func update_cards_position() -> void:
 		var offset:int = cards.size() - index
 		cards[index].position = Vector2(-offset, -offset*0.5)
 
+## Display the deck at ready only when launching the scene directly
 func _ready() -> void:
-	reset_deck()
+	if get_parent() == get_tree().root:
+		reset_deck()
 
 
 func reset_deck() -> void:

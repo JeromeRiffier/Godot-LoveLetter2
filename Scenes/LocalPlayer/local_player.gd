@@ -63,7 +63,6 @@ func play_card(card:Card) -> void:
 	player_action.player_index = GameManager.instance.players.find(self)
 	has_played.emit(self, card, player_action)
 
-
 func start_playing() -> void:
 	enable_card_selection()
 

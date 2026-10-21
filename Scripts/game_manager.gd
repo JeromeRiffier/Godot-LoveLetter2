@@ -14,6 +14,7 @@ static var instance:GameManager
 var players: Array[Player] = []
 var game_is_running:bool = true
 
+#region singleton
 func _enter_tree() -> void:
 	if instance != null and instance != self:
 		queue_free()  # un doublon existe déjà
@@ -23,6 +24,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if instance == self:
 		instance = null
+#endregion
 
 func start_game(players_list:Array[PlayerElement]) -> void:
 	setup_players(players_list)
@@ -53,7 +55,7 @@ func start_game(players_list:Array[PlayerElement]) -> void:
 			if deck.cards.is_empty():
 				game_is_running = false
 				break
-			if get_player_alive().size() <= 1:
+			if get_alive_players().size() <= 1:
 				game_is_running = false
 				break
 			if not player.is_alive:
@@ -68,7 +70,6 @@ func start_game(players_list:Array[PlayerElement]) -> void:
 
 func setup_players(players_list:Array[PlayerElement]) -> void:
 	players.clear()
-	
 	for playerElelement in players_list:
 		match playerElelement.type:
 			PlayerElement.PLAYER_TYPE.IA:
@@ -107,13 +108,8 @@ func manage_enemy_selection_state(should_be_selectable:bool) -> void:
 	enemies.assign(get_tree().get_nodes_in_group("Player").filter(func (enemy:Player) -> bool: return enemy is Player and enemy.is_alive and enemy.id != multiplayer.get_unique_id()))
 	for enemy in enemies:
 		enemy.selectable = should_be_selectable
-	print("manage_enemy_selection_state")
 
-func get_player_alive() -> Array[Player]:
+func get_alive_players() -> Array[Player]:
 	var alive_players: Array[Player]
 	alive_players.assign( players.filter( func (player:Player) -> bool: return player.is_alive) )
 	return alive_players
-
-
-func get_player_index(player:Player) -> int:
-	return players.find(player)
