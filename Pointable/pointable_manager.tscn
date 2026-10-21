@@ -7,5 +7,7 @@
 script = ExtResource("1_72k8y")
 
 [node name="Crosshair" type="Sprite2D" parent="." unique_id=1676225395]
+editor_description = "[DEBUG]"
+visible = false
 z_index = 999
 texture = ExtResource("2_wtgms")

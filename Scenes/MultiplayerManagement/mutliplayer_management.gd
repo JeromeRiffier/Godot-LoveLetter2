@@ -104,7 +104,7 @@ func generate_player_list() -> Array[PlayerElement]:
 		var element := PlayerElement.new()
 		element.id = randi()
 		element.name = Constant.random_string(5)
-		element.type = PlayerElement.PLAYER_TYPE.REAL
+		element.type = PlayerElement.PLAYER_TYPE.IA
 		list.append(element)
 	list.shuffle()
 	return list

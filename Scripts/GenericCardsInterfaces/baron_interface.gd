@@ -29,6 +29,7 @@ func manage_result(enemy:Player) -> void:
 		player_ref.hand.update_hand_positions()
 		enemy.hand.update_hand_positions()
 		enemy_card.hide_card()
+		player_ref.hand.cards[0].show_card()
 	await get_tree().create_timer(1).timeout
 	validate()
 
