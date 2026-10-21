@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b8t5l6hoa3tca" path="res://Scenes/CardsUsed/cards_used.tscn" id="6_kd2ax"]
 [ext_resource type="PackedScene" uid="uid://ctyk0niaaxxax" path="res://Pointable/pointable_manager.tscn" id="7_kyqgd"]
 [ext_resource type="Script" uid="uid://cn263b56xchv6" path="res://Scripts/players_position_management.gd" id="9_tj227"]
+[ext_resource type="PackedScene" uid="uid://vedqief06ywc" path="res://Scenes/MessageManager/message_manager.tscn" id="10_dfwa4"]
 
 [node name="MutliplayerManagement" type="Control" unique_id=247659255]
 layout_mode = 3
@@ -19,6 +20,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_hedwd")
+
+[node name="MessageManager" parent="." unique_id=492521286 instance=ExtResource("10_dfwa4")]
+layout_mode = 1
+mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1459835106]
 

@@ -1,10 +1,6 @@
 [gd_scene format=3 uid="uid://b4bu11l34jryo"]
 
 [ext_resource type="Script" uid="uid://x7kp3pq66shs" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerPretreInterface/network_player_pretre_interface.gd" id="1_vtvpj"]
-[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_shuxu"]
 
 [node name="NetworkPlayerPretreInterface" type="Node2D" unique_id=633782881]
 script = ExtResource("1_vtvpj")
-
-[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_shuxu")]
-z_index = 4

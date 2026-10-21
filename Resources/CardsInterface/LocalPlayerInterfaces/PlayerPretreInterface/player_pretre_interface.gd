@@ -1,10 +1,11 @@
 class_name LocalPlayerPretreInterface extends PretreInterface
 
-
-
 func enter() -> void:
 	super() # Execute parenter enter func
-	message.display_text("Qui?")
+	if enemies.is_empty():
+		await MessageManager.instance.display_text("Tout les joueurs restant sont protégé")
+		return manage_unplayable_case()
+	await MessageManager.instance.display_text("Qui?")
 	connect_enemies_listeners()
 	player_ref.need_to_select_enemy.emit(true) ## Enable enemy selection
 	pre_point_enemy()

@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://dr8ns0unesssk"]
 
 [ext_resource type="Script" uid="uid://hbee1bnefjft" path="res://Resources/CardsInterface/NetworkPlayerInterfaces/NetworkPlayerBaronInterface/netwrok_player_baron_interface.gd" id="1_x417q"]
-[ext_resource type="PackedScene" uid="uid://cop6o16btv1cu" path="res://Scenes/Message/message.tscn" id="2_yvmd8"]
 
 [node name="NetworkPlayerBaronInterface" type="Node2D" unique_id=1014002404]
 script = ExtResource("1_x417q")
-
-[node name="Message" parent="." unique_id=1474687604 instance=ExtResource("2_yvmd8")]

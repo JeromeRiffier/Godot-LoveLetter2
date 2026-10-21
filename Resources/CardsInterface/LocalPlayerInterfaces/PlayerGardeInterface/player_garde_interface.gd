@@ -4,7 +4,10 @@ class_name LocalPlayerGardeInterface extends GardeInterface
 
 func enter() -> void:
 	super() # Execute parenter enter func
-	message.display_text("Qui?")
+	if enemies.is_empty():
+		await MessageManager.instance.display_text("Tout les joueurs restant sont protégé")
+		return manage_unplayable_case()
+	await MessageManager.instance.display_text("Qui?")
 	player_ref.need_to_select_enemy.emit(true) ## Enable enemy selection
 	connect_enemies_listeners()
 	pre_point_enemy()
@@ -21,8 +24,7 @@ func select_enemy(enemy:Player) -> void:
 	disconnect_enemies_listeners()
 	player_ref.need_to_select_enemy.emit(false) ## Disable enemy selection
 	selected_enemy = enemy
-	print("Guard selected ",selected_enemy)
-	await message.display_text("Qu'elle carte?")
+	await MessageManager.instance.display_text("Qu'elle carte?")
 	card_selection_tool.activate()
 #endregion
 

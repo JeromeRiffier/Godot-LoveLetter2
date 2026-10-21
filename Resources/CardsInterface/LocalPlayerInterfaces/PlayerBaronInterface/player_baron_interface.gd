@@ -5,8 +5,10 @@ var enemies:Array[Player]
 func enter() -> void:
 	super() # Execute parenter enter func
 	player_ref.need_to_select_enemy.emit(true) ## Enable enemy selection
-	enemies.assign(player_ref.get_vulnerable_enemies())
-	message.display_text("Qui?")
+	if enemies.is_empty():
+		await MessageManager.instance.display_text("Tout les joueurs restant sont protégé")
+		return manage_unplayable_case()
+	await MessageManager.instance.display_text("Qui?")
 	connect_enemies_listeners()
 	pre_point_enemy()
 	

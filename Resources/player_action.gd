@@ -2,6 +2,7 @@ class_name PlayerAction extends RefCounted
 
 var player_index:int
 var player_peer_id:int
+var action_discarded:bool
 var card_type_played_index:int
 var enemy_selected_index:int
 var card_type_selected_index:int

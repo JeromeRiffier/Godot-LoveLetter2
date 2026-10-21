@@ -1,6 +1,5 @@
 class_name BaronInterface extends CardInterface
 
-@onready var message: Message = $Message
 var cards :Array[Card]
 
 func enter() -> void:
@@ -15,21 +14,20 @@ func manage_result(enemy:Player) -> void:
 	var enemy_card:Card = enemy.hand.cards[0]
 	if player_card.infos.value > enemy_card.infos.value:
 		enemy.kill()
-		await message.display_text("Win!")
+		await MessageManager.instance.display_text("Win!")
 		enemy.discard(enemy_card)
 		player_ref.hand.update_hand_positions()
 	elif player_card.infos.value < enemy_card.infos.value:
 		player_ref.kill()
-		await message.display_text("Lost!")
+		await MessageManager.instance.display_text("Lost!")
 		player_ref.discard(player_card)
 		enemy.hand.update_hand_positions()
 		enemy_card.hide_card()
 	else:
-		await message.display_text("Ex aequo..")
+		await MessageManager.instance.display_text("Ex aequo..")
 		player_ref.hand.update_hand_positions()
 		enemy.hand.update_hand_positions()
 		enemy_card.hide_card()
-		player_ref.hand.cards[0].show_card()
 	await get_tree().create_timer(1).timeout
 	validate()
 

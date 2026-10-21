@@ -1,12 +1,13 @@
 class_name LocalPlayerPrinceInterface extends PrinceInterface
 
-
-
 func enter() -> void:
 	super() # Execute parenter enter func
+	if enemies.is_empty():
+		await MessageManager.instance.display_text("Tout les joueurs restant sont protégé")
+		return manage_unplayable_case()
 	player_ref.need_to_select_enemy.emit(true) ## Enable enemy selection
 	connect_enemies_listeners()
-	message.display_text("Qui?")
+	await MessageManager.instance.display_text("Qui?")
 	pre_point_enemy()
 	
 #region Enemy selection

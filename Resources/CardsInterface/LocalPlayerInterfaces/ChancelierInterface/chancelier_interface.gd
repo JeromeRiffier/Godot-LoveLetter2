@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	await super() # Execute parenter enter func
-	message.display_text("Fait ton choix")
+	await MessageManager.instance.display_text("Fait ton choix")
 	enable_card_selection()
 	enable_cards_listener()
 	
@@ -44,11 +44,11 @@ func manage_player_card_drop(card:Card) -> void:
 		cards.erase(card)
 		record_chancelier_card_action(card, Constant.CHANCELIER_CARD_DESTINATION_ENUM.HAND)
 	else: 
-		message.display_text("Il y a deja une carte dans ton deck")
+		await MessageManager.instance.display_text("Il y a deja une carte dans ton deck")
 
 func manage_deck_card_drop(card:Card) -> void:
 	if last_card_for_player():
-		message.display_text("La derniere carte et pour toi")
+		await MessageManager.instance.display_text("La derniere carte et pour toi")
 	else:
 		player_ref.return_card.emit(card)
 		cards.erase(card)

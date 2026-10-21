@@ -8,7 +8,7 @@ var is_active:bool
 
 var player_action:PlayerAction
 signal card_played(player_action:PlayerAction)
-
+signal display_message(message:String)
 
 func enter() -> void:
 	is_active = true
@@ -26,3 +26,8 @@ func pre_point_enemy() -> void:
 	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")
 	if pointableManager:
 		pointableManager.pre_point_to_pointable()
+
+## Record action as Discarded and validate the CardInterface
+func manage_unplayable_case() -> void:
+	player_action.action_discarded = true
+	validate()

@@ -1,7 +1,5 @@
 class_name ChancelierInterface extends CardInterface
 
-@onready var message: Message = $Message
-
 var cards:Array[Card]
 var cards_clone:Array[Card]
 

@@ -1,8 +1,5 @@
 class_name RoiInterface extends CardInterface
 
-
-@onready var message: Message = $Message
-
 var enemies:Array[Player]
 
 func enter() -> void:
