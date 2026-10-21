@@ -49,17 +49,31 @@ func _unhandled_input(event: InputEvent) -> void:
 				print("Enemy clicked ", name)
 				enemy_selected.emit(self)
 
-func takeTurn() -> void:
-	await get_tree().create_timer(0.5).timeout
-	
-	## For now AI is stupid and juste take random card
-	var card_to_play:Card = hand.cards.filter(is_card_playable).pick_random()
+func reflect_action(action:PlayerAction) -> void:
+	print('reflect')
+	var card_played_info:CardInfos = Constant.CardTypes[action.card_type_played_index]
+	var card_to_play_index:int = hand.cards.find_custom(func (card:Card) -> bool: return card.infos == card_played_info)
+	if  card_to_play_index == -1:
+		print('Were are in trouble')
+	var card_to_play:Card =  hand.cards[card_to_play_index]
 	hand.remove_card_from_hand(card_to_play)
 	await card_slot.receive_card(card_to_play)
 	card_to_play.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
-	await play_card(card_to_play)
+	await play_card(card_to_play, action)
+	
+	
+func takeTurn() -> void:
+	pass
+	#await get_tree().create_timer(0.5).timeout
+	##var action:PlayerAction = await GameManager.
+	### For now AI is stupid and juste take random card
+	#var card_to_play:Card = hand.cards.filter(is_card_playable).pick_random()
+	#hand.remove_card_from_hand(card_to_play)
+	#await card_slot.receive_card(card_to_play)
+	#card_to_play.process_mode = Node.PROCESS_MODE_DISABLED ## I suppose disabling the full node will work as fine as disabling the colisionShape 
+	#await play_card(card_to_play)
 
-func play_card(card:Card) -> void:
+func play_card(card:Card, action:PlayerAction) -> void:
 	print("%s play %s" % [name, card.infos.title])
 	match card.infos:
 		Constant.PRINCESS:
@@ -69,26 +83,26 @@ func play_card(card:Card) -> void:
 			comtesse_interface.enter()
 			await comtesse_interface.card_played
 		Constant.ROI:
-			roi_interface.enter()
+			roi_interface.enter(action)
 			await roi_interface.card_played
 		Constant.CHANCELIER:
-			chancelier_interface.enter()
+			chancelier_interface.enter(action)
 			await chancelier_interface.card_played
 			print('test')
 		Constant.PRINCE:
-			prince_interface.enter()
+			prince_interface.enter(action)
 			await prince_interface.card_played
 		Constant.BARON:
-			baron_interface.enter()
+			baron_interface.enter(action)
 			await baron_interface.card_played
 		Constant.SERVANTE:
 			servante_interface.enter()
 			await servante_interface.card_played
 		Constant.PRÊTRE:
-			pretre_interface.enter()
+			pretre_interface.enter(action)
 			await pretre_interface.card_played
 		Constant.GARDE:
-			garde_interface.enter()
+			garde_interface.enter(action)
 			await garde_interface.card_played
 		Constant.ESPIONNE:
 			espionne_interface.enter()

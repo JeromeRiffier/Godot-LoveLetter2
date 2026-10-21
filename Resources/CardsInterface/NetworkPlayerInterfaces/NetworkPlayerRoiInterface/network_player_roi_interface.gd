@@ -1,12 +1,12 @@
 class_name NetworkPlayerRoiInterface extends RoiInterface
 
 
-func enter() -> void:
+func enter(action:PlayerAction = null) -> void:
 	super() # Execute parenter enter func
 	if enemies.is_empty():
 		message.display_text("Impossible")
 		validate()
 		return
-	var selected_enemy:Player = enemies.pick_random()
+	var selected_enemy:Player = enemies[action.enemy_selected_index]
 	await animate_cards_exchange(selected_enemy)
 	validate()

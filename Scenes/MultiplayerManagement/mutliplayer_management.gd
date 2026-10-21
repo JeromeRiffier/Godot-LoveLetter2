@@ -82,6 +82,16 @@ func start_game(seed_key:int, players_list_dic:Array) -> void:
 		if player is LocalPlayer:
 			player.has_played.connect(_on_player_action)
 
+@rpc("any_peer", "call_remote", "reliable")
+func transmit_actions_to_peers(action_dic:Dictionary) -> void:
+	var action:PlayerAction = PlayerAction.from_dict(action_dic)
+	var player_concerned_index :int = GameManager.instance.players.find_custom(func (player:Player) -> bool: return player.id == action.player_peer_id)
+	if player_concerned_index == -1:
+		print('sompething whent horrybly wrong')
+	var player_concerned :Player = GameManager.instance.players[player_concerned_index]
+	player_concerned.reflect_action(action)
+	print("ok", action)
+
 func generate_player_list() -> Array[PlayerElement]:
 	var list:Array[PlayerElement] = []
 	for id:int in players.keys():
@@ -101,7 +111,7 @@ func generate_player_list() -> Array[PlayerElement]:
 
 
 func _on_player_action(player:Player,_card:Card,action:PlayerAction) -> void:
-	print("%s as played" % player.name)
+	transmit_actions_to_peers.rpc(action.to_dict())
 
 func update_player_list() -> void:
 	for child in peers_list.get_children():

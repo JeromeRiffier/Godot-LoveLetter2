@@ -81,7 +81,7 @@ func discard(card:Card) -> void:
 	if is_alive:
 		need_card.emit(self)
 	card.used = true
-	has_discarded.emit(self, card)
+	has_discarded.emit(self, card, null)
 	await card_slot.receive_card(card)
 
 

@@ -1,14 +1,14 @@
 class_name NetworkPlayerBaronInterface extends BaronInterface
 
 
-func enter() -> void:
+func enter(action:PlayerAction = null) -> void:
 	super() # Execute parenter enter func
 	var enemies := player_ref.get_vulnerable_enemies()
 	if enemies.is_empty():
 		message.display_text("Impossible")
 		validate()
 		return
-	var selected_enemy:Player = enemies.pick_random()
+	var selected_enemy:Player = enemies[action.enemy_selected_index]
 	if selected_enemy is LocalPlayer:
 		player_ref.hand.cards[0].show_card()
 	await message.display_text("%s à choisis %s" % [player_ref.name, selected_enemy.name])

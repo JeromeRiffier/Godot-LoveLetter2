@@ -1,6 +1,6 @@
 class_name LocalPlayerBaronInterface extends BaronInterface
 
-var enemies:Array[AiPlayer]
+var enemies:Array[Player]
 
 func enter() -> void:
 	super() # Execute parenter enter func

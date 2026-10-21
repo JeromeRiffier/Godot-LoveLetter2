@@ -27,8 +27,6 @@ func set_label() -> void:
 func play_card(card:Card) -> void:
 	print("%s play %s" % [name, card.infos])
 	var player_action := PlayerAction.new()
-	player_action.player_peer_id = multiplayer.get_unique_id()
-	player_action.player_index = GameManager.instance.players.find(self)
 	match card.infos:
 		Constant.PRINCESS:
 			princesse_interface.enter()
@@ -61,8 +59,9 @@ func play_card(card:Card) -> void:
 			espionne_interface.enter()
 			player_action = await espionne_interface.card_played
 	card.used = true
+	player_action.player_peer_id = multiplayer.get_unique_id()
+	player_action.player_index = GameManager.instance.players.find(self)
 	has_played.emit(self, card, player_action)
-	print('test')
 
 
 func start_playing() -> void:

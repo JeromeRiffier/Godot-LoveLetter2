@@ -8,34 +8,43 @@ var card_type_selected_index:int
 var chancelier_card_destinations:ChancelierCardDestinations = ChancelierCardDestinations.new()
 
 
+func to_dict() -> Dictionary:
+	return {
+		"player_index":player_index,
+		"player_peer_id":player_peer_id,
+		"card_type_played_index":card_type_played_index,
+		"enemy_selected_index":enemy_selected_index,
+		"card_type_selected_index":card_type_selected_index,
+		"chancelier_card_destinations":chancelier_card_destinations.to_dict(),
+	}
+
+static func from_dict(data: Dictionary) -> PlayerAction:
+	var element := PlayerAction.new()
+	element.player_index = data.player_index
+	element.player_peer_id = data.player_peer_id
+	element.card_type_played_index = data.card_type_played_index
+	element.enemy_selected_index = data.enemy_selected_index
+	element.card_type_selected_index = data.card_type_selected_index
+	element.chancelier_card_destinations = ChancelierCardDestinations.from_dict( data.chancelier_card_destinations)
+	return element
+
+
 class ChancelierCardDestinations :
 	var first:Constant.CHANCELIER_CARD_DESTINATION_ENUM
 	var second:Constant.CHANCELIER_CARD_DESTINATION_ENUM
 	var third:Constant.CHANCELIER_CARD_DESTINATION_ENUM
 
+	
+	func to_dict() -> Dictionary:
+		return {
+			"first":first,
+			"second":second,
+			"third":third,
+		}
 
-
-
-#func take_decision(card:Card) -> PlayerAction:
-	#match card.infos:
-		#Constant.PRINCESS, Constant.COMTESSE, Constant.SERVANTE, Constant.ESPIONNE:
-			#print("Renvoi rien")
-		#Constant.ROI, Constant.BARON, Constant.PRINCE, Constant.PRÊTRE:
-			#print("Renvoi uniquement l'enemy")
-			#var enemies := get_vulnerable_enemies()
-			#var selected_player :Player = enemies.pick_random()
-			#var enemy_index := GameManager.instance.get_player_index(selected_player)
-			#decision.enemy_selected_index = enemy_index
-		#Constant.GARDE:
-			#print("Renvoi l'enemy et un type de carte")
-			#
-			#var enemies := get_vulnerable_enemies()
-			#var selected_player :Player = enemies.pick_random()
-			#var enemy_index := GameManager.instance.get_player_index(selected_player)
-			#decision.enemy_selected_index = enemy_index
-			#
-			#var selected_card :CardInfos= Constant.CardTypesWithoutGuard.pick_random()
-			#decision.card_type_selected_index = Constant.CardTypesWithoutGuard.find(selected_card)
-		#Constant.CHANCELIER:
-			#print("Renvoi la destination des 3 cartes (deck ou main)")
-	#return decision
+	static func from_dict(data: Dictionary) -> ChancelierCardDestinations:
+		var element := ChancelierCardDestinations.new()
+		element.first = data.first
+		element.second = data.second
+		element.third = data.third
+		return element

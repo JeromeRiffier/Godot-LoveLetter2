@@ -30,7 +30,7 @@ var selectable:bool = false:
 		pointable.is_pointable = selectable
 		if not selectable:
 			hide_all_cta()
-var front:bool = true
+@export var front:bool = true
 var used:bool = false
 
 func set_infos(value:CardInfos) -> void:

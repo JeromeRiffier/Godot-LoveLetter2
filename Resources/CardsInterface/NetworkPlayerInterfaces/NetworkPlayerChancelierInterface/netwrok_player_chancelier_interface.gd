@@ -2,18 +2,22 @@ class_name NetworkPlayerChancelierInterface extends ChancelierInterface
 
 
 
-func enter() -> void:
+func enter(action:PlayerAction = null) -> void:
 	await super() # Execute parenter enter func
+	if action.chancelier_card_destinations.first == Constant.CHANCELIER_CARD_DESTINATION_ENUM.HAND:
+		await move_to_hand(cards[0])
+	else:
+		await move_to_deck(cards[0])
 	
-	var card_for_hand:Card = cards.pick_random()
-	cards.erase(card_for_hand)
-	await move_to_hand(card_for_hand)
+	if action.chancelier_card_destinations.second == Constant.CHANCELIER_CARD_DESTINATION_ENUM.HAND:
+		await move_to_hand(cards[1])
+	else:
+		await move_to_deck(cards[1])
 	
-	while not cards.is_empty():
-		var card_for_deck:Card = cards.pick_random()
-		cards.erase(card_for_deck)
-		await move_to_deck(card_for_deck)
-	
+	if action.chancelier_card_destinations.third == Constant.CHANCELIER_CARD_DESTINATION_ENUM.HAND:
+		await move_to_hand(cards[2])
+	else:
+		await move_to_deck(cards[2])
 	validate()
 
 
