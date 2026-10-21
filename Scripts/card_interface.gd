@@ -8,7 +8,6 @@ var is_active:bool
 
 var player_action:PlayerAction
 signal card_played(player_action:PlayerAction)
-signal display_message(message:String)
 
 func enter() -> void:
 	is_active = true

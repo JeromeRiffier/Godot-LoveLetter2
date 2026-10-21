@@ -122,7 +122,7 @@ func _process(_delta: float) -> void:
 	if is_dragging and dragging:
 		var parent := dragging.get_parent()
 		if parent is Node2D:
-			parent.global_position = get_global_mouse_position()
+			parent.global_position = get_local_mouse_position()
 
 
 func get_pointables() -> Array[Pointable]:

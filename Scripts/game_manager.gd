@@ -83,7 +83,7 @@ func setup_players(players_list:Array[PlayerElement]) -> void:
 				else:
 					var networkPlayer := network_player_manager.spawn_network_player(playerElelement)
 					players.append(networkPlayer)
-	players_position_management.position_players(players)
+	players_position_management.position_players()
 
 func give_starting_cards() -> void:
 	for player in players:

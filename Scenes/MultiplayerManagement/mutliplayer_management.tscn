@@ -191,13 +191,13 @@ max_value = 6.0
 [node name="Deck" parent="." unique_id=336770514 instance=ExtResource("2_p4135")]
 position = Vector2(87, 368)
 
-[node name="Player" parent="." unique_id=1325730967 instance=ExtResource("3_2g0r2")]
+[node name="LocalPlayer" parent="." unique_id=1325730967 instance=ExtResource("3_2g0r2")]
 position = Vector2(640, 728)
 
 [node name="GameManager" type="Node2D" parent="." unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "ai_player_manager", "network_player_manager", "cards_used", "players_position_management")]
 script = ExtResource("4_tj227")
 deck = NodePath("../Deck")
-the_player = NodePath("../Player")
+the_player = NodePath("../LocalPlayer")
 ai_player_manager = NodePath("../AiPlayerManager")
 network_player_manager = NodePath("../NetworkPlayerManager")
 cards_used = NodePath("../CardsUsed")

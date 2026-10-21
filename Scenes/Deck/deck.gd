@@ -18,7 +18,15 @@ func update_cards_position() -> void:
 func _ready() -> void:
 	if get_parent() == get_tree().root:
 		reset_deck()
+	get_viewport().size_changed.connect(resize)
+	set_deck_position()
 
+func resize() -> void:
+	set_deck_position()
+
+func set_deck_position() -> void:
+	
+	self.position = Vector2(Constant.DECK_MARGING_LEFT, get_tree().root.size.y- Constant.DECK_MARGING_BOTTOM)
 
 func reset_deck() -> void:
 	cards.clear()

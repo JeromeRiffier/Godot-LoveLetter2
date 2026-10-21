@@ -13,6 +13,9 @@ signal card_repositioned
 
 func _ready() -> void:
 	example_card.queue_free()
+	get_viewport().size_changed.connect(_apply_positions.bind(true))
+
+
 
 func add_card_to_hand(card: Card) -> void:
 	if card not in cards:
@@ -45,7 +48,7 @@ func update_hand_positions() -> void:
 	_updating_positions = false
 	card_repositioned.emit()
 
-func _apply_positions() -> void:
+func _apply_positions(skip_animation:bool = false) -> void:
 	if cards.is_empty():
 		return
 
@@ -53,7 +56,7 @@ func _apply_positions() -> void:
 	for i in cards.size():
 		var new_position := Vector2(calculate_card_positions_x(i), global_position.y)
 		cards[i].position_in_hand = new_position
-		tween.tween_property(cards[i], "global_position", new_position, 0.3)
+		tween.tween_property(cards[i], "global_position", new_position,0.0 if skip_animation else 0.3)
 	await tween.finished
 
 func calculate_card_positions_x(index: int) -> float:

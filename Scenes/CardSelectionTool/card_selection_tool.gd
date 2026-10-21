@@ -21,7 +21,7 @@ func _ready() -> void:
 	## Do not forget to disable mouse filtering on any control node to not mess with inputs
 	#background_color.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_screen_values()
-	get_tree().root.size_changed.connect(on_viewport_size_changed)
+	get_viewport().size_changed.connect(on_viewport_size_changed)
 	for cardInfo in Constant.CardTypesWithoutGuard:
 		var card_node:Card = CARD_SCENE.instantiate()
 		cards_node.add_child(card_node)

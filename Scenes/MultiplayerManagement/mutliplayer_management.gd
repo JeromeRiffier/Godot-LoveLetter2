@@ -32,6 +32,7 @@ var connected:bool = false:
 signal players_changed
 
 func _ready() -> void:
+	
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)

@@ -1,13 +1,16 @@
 class_name CardsPlayed extends Node2D
 
 const CARD = preload("uid://c7em3t5lv5vr0")
-const CONTAINER_X_POSITION = 60
+const CONTAINER_X_POSITION = 40
 const CARD_PLAYED_HEIGHT = 50
 const CARD_PLAYED_WIDTH = 40
 
 @onready var cards_container: Node2D = $CardsContainer
 
 var clone_deck:Array[Card]
+
+func _ready() -> void:
+	get_viewport().size_changed.connect(place_card_container)
 
 func reset() -> void:
 	_clear_clone_deck()
@@ -22,8 +25,9 @@ func reset() -> void:
 	for player in players:
 		player.has_played.connect(card_used)
 		player.has_discarded.connect(card_used)
-	
-	cards_container.global_position = Vector2(get_tree().root.size.x - CONTAINER_X_POSITION, get_tree().root.size.y /2.0)
+
+func place_card_container() -> void:
+	cards_container.global_position = Vector2(get_tree().root.size.x - CONTAINER_X_POSITION, get_tree().root.size.y - _get_full_height())
 
 ## This func search a card in clone_deck that correspond to the one used but as not already been marked as used by opacity
 ## Using modulate.a == 1 is kind of hacky, I should use a better approach when refactoring
@@ -45,6 +49,7 @@ func construct_from_real_deck(deck_cards:Array[Card]) -> void:
 		clone_deck.append(card)
 	
 	position_cards()
+	place_card_container()
 
 func construct_for_debug() -> void:
 	for cardInfo in Constant.BaseDeck:
@@ -58,9 +63,9 @@ func construct_for_debug() -> void:
 
 func position_cards() -> void:
 	## Position Y
-	var full_height := _get_max_card_value() * CARD_PLAYED_HEIGHT
+	var full_height := _get_full_height()
 	for card in clone_deck:
-		card.position.y = (CARD_PLAYED_HEIGHT * card.infos.value * -1.0 ) + full_height / 2.0
+		card.position.y = (CARD_PLAYED_HEIGHT * card.infos.value * -1.0 ) + full_height - CARD_PLAYED_HEIGHT
 	
 	## Position X
 	for value in range(_get_max_card_value()):
@@ -68,6 +73,11 @@ func position_cards() -> void:
 		for index in range(cards_with_value.size()):
 			cards_with_value[index].position.x = index * CARD_PLAYED_WIDTH * -1
 
+func _get_full_height()->int:
+	return (_get_max_card_value() +1 ) * CARD_PLAYED_HEIGHT
+
+## TODO SHould be replace by a function that return the number of differents card value
+## Since there is one line by value
 func _get_max_card_value() -> int:
 	var max_value := 0
 	for card in clone_deck:

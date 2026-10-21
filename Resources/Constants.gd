@@ -1,4 +1,8 @@
 class_name Constant
+
+const MIN_WINDOW_SIZE:Vector2i= Vector2i(900,700)
+
+
 const PRINCESS: CardInfos = preload("uid://mxkwt1ftts6c")
 const COMTESSE: CardInfos = preload("uid://chy6weh1ghk1s")
 const ROI: CardInfos = preload("uid://rjnbcqdlwdu8")
@@ -88,12 +92,18 @@ const CARD_MASK:int = 1
 const CARD_SLOT_MASK:int = 2
 
 #Deck constants
-const MYSTERY_CARD_MARGIN:int = 120
+const DECK_MARGING_LEFT:int = 130
+const DECK_MARGING_BOTTOM:int = 130
+const MYSTERY_CARD_MARGIN:int = -120
 
 #Enemy constants
 
 const ENEMY_Y_POS:int = 85
 const ENEMY_WIDTH:int = 160
+
+#Players position contants
+const LOCAL_PLAYER_MARGING_BOTTOM:int = 100
+
 
 const CHARS := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 static func random_string(length: int) -> String:
