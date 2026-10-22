@@ -81,7 +81,8 @@ func start_game(seed_key:int, players_list_dic:Array) -> void:
 	GameManager.instance.start_game(players_list)
 	for player in GameManager.instance.players:
 		if player is LocalPlayer:
-			player.has_played.connect(_on_player_action)
+			if not player.has_played.is_connected(_on_player_action):
+				player.has_played.connect(_on_player_action)
 
 @rpc("any_peer", "call_remote", "reliable")
 func transmit_actions_to_peers(action_dic:Dictionary) -> void:
@@ -111,7 +112,7 @@ func generate_player_list() -> Array[PlayerElement]:
 	return list
 
 
-func _on_player_action(player:Player,_card:Card,action:PlayerAction) -> void:
+func _on_player_action(_player:Player,_card:Card,action:PlayerAction) -> void:
 	transmit_actions_to_peers.rpc(action.to_dict())
 
 func update_player_list() -> void:

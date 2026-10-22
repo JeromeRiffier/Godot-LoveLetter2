@@ -1,6 +1,6 @@
 class_name Constant
 
-const MIN_WINDOW_SIZE:Vector2i= Vector2i(900,700)
+const MIN_WINDOW_SIZE:Vector2= Vector2i(800.0,800.0)
 
 
 const PRINCESS: CardInfos = preload("uid://mxkwt1ftts6c")

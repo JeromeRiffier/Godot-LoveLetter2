@@ -21,11 +21,11 @@ func position_players() -> void:
 		non_local_players[i].global_position = new_position
 	var localPlayer := _get_local_players(players)
 	if localPlayer:
-		localPlayer.position = Vector2(get_tree().root.size.x /2.0, get_tree().root.size.y - Constant.LOCAL_PLAYER_MARGING_BOTTOM)
+		localPlayer.position = Vector2(get_viewport_rect().size.x /2.0, get_viewport_rect().size.y - Constant.LOCAL_PLAYER_MARGING_BOTTOM)
 
 func calculate_enemy_positions_x(index: int, number_of_other_players:int) -> float:
 	var total_width := number_of_other_players * Constant.ENEMY_WIDTH
-	return get_tree().root.size.x /2.0 + index * Constant.ENEMY_WIDTH - total_width / 2.0 + (Constant.ENEMY_WIDTH / 2.0)
+	return get_viewport_rect().size.x /2.0 + index * Constant.ENEMY_WIDTH - total_width / 2.0 + (Constant.ENEMY_WIDTH / 2.0)
 
 func _get_non_local_players(players:Array[Player]) -> Array[Player]:
 	return players.filter(func (player:Player) -> bool: return player is not LocalPlayer)

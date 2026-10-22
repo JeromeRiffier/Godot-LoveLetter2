@@ -1,4 +1,4 @@
-class_name AiPlayerManager extends Node
+class_name AiPlayerManager extends Node2D
 
 const AI_PLAYER = preload("uid://brqs2imb2p7gr")
 
@@ -30,4 +30,4 @@ func position_ai_players() -> void:
 
 func calculate_enemy_positions_x(index: int) -> float:
 	var total_width := ai_players.size() * Constant.ENEMY_WIDTH
-	return get_tree().root.size.x /2.0 + index * Constant.ENEMY_WIDTH - total_width / 2.0 + (Constant.ENEMY_WIDTH / 2.0)
+	return get_viewport_rect().size.x /2.0 + index * Constant.ENEMY_WIDTH - total_width / 2.0 + (Constant.ENEMY_WIDTH / 2.0)

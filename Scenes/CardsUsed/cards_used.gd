@@ -15,7 +15,7 @@ func _ready() -> void:
 func reset() -> void:
 	_clear_clone_deck()
 	var deck :Deck = get_tree().get_first_node_in_group("Deck")
-	if deck:
+	if deck and not deck.deck_is_ready.is_connected(construct_from_real_deck):
 		deck.deck_is_ready.connect(construct_from_real_deck)
 	else:
 		construct_for_debug()
@@ -23,11 +23,13 @@ func reset() -> void:
 	var players:Array[Player]
 	players.assign( get_tree().get_nodes_in_group("Player"))
 	for player in players:
-		player.has_played.connect(card_used)
-		player.has_discarded.connect(card_used)
+		if not player.has_played.is_connected(card_used):
+			player.has_played.connect(card_used)
+		if not player.has_discarded.is_connected(card_used):
+			player.has_discarded.connect(card_used)
 
 func place_card_container() -> void:
-	cards_container.global_position = Vector2(get_tree().root.size.x - CONTAINER_X_POSITION, get_tree().root.size.y - _get_full_height())
+	cards_container.global_position = Vector2(get_viewport_rect().size.x - CONTAINER_X_POSITION, get_viewport_rect().size.y - _get_full_height())
 
 ## This func search a card in clone_deck that correspond to the one used but as not already been marked as used by opacity
 ## Using modulate.a == 1 is kind of hacky, I should use a better approach when refactoring

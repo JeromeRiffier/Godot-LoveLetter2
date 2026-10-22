@@ -20,7 +20,7 @@ func _ready() -> void:
 func display_text(message:String, duration:float = 1.5) -> void:
 	label.add_theme_color_override("font_color", Color.TRANSPARENT)
 	label.text = message
-	label.size = get_tree().root.size
+	label.size = get_viewport_rect().size
 	label.global_position = Vector2.ZERO
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)

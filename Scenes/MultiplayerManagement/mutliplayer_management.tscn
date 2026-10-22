@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://pm3cg7g4fgrc" path="res://Scenes/MultiplayerManagement/mutliplayer_management.gd" id="1_hedwd"]
 [ext_resource type="PackedScene" uid="uid://bvuq84ml7j1t7" path="res://Scenes/Deck/deck.tscn" id="2_p4135"]
 [ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/LocalPlayer/player.tscn" id="3_2g0r2"]
+[ext_resource type="Script" uid="uid://cdw47emejnagv" path="res://Scripts/viewport_scale_manager.gd" id="3_kd2ax"]
 [ext_resource type="Script" uid="uid://dtsudnlksde30" path="res://Scripts/game_manager.gd" id="4_tj227"]
 [ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/ai_player_manager.gd" id="5_dfwa4"]
 [ext_resource type="Script" uid="uid://cdiq1bpgvuh2a" path="res://Scripts/network_player_manager.gd" id="6_2g0r2"]
@@ -21,11 +22,14 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_hedwd")
 
-[node name="MessageManager" parent="." unique_id=492521286 instance=ExtResource("10_dfwa4")]
-layout_mode = 1
+[node name="MessageCanvasLayer" type="CanvasLayer" parent="." unique_id=1657849281]
+
+[node name="MessageManager" parent="MessageCanvasLayer" unique_id=492521286 instance=ExtResource("10_dfwa4")]
 mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1459835106]
+editor_description = "The setup panel canvas layer"
+layer = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=95582312]
 offset_right = 186.0
@@ -188,13 +192,44 @@ text = "Nombre d'IA:"
 layout_mode = 2
 max_value = 6.0
 
-[node name="Deck" parent="." unique_id=336770514 instance=ExtResource("2_p4135")]
+[node name="ViewportScaleManager" type="Control" parent="." unique_id=1816426498 node_paths=PackedStringArray("container", "viewport")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_kd2ax")
+container = NodePath("CenterContainer/SubViewportContainer")
+viewport = NodePath("CenterContainer/SubViewportContainer/SubViewport")
+
+[node name="CenterContainer" type="CenterContainer" parent="ViewportScaleManager" unique_id=1789486038]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ViewportScaleManager/CenterContainer" unique_id=1047820665]
+propagate_maximum_size = false
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="ViewportScaleManager/CenterContainer/SubViewportContainer" unique_id=1690264621]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(900, 900)
+render_target_update_mode = 4
+
+[node name="GameWindow" type="CanvasLayer" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport" unique_id=1395554810]
+
+[node name="Deck" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=336770514 instance=ExtResource("2_p4135")]
 position = Vector2(87, 368)
 
-[node name="LocalPlayer" parent="." unique_id=1325730967 instance=ExtResource("3_2g0r2")]
+[node name="LocalPlayer" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1325730967 instance=ExtResource("3_2g0r2")]
 position = Vector2(640, 728)
 
-[node name="GameManager" type="Node2D" parent="." unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "ai_player_manager", "network_player_manager", "cards_used", "players_position_management")]
+[node name="GameManager" type="Node2D" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "ai_player_manager", "network_player_manager", "cards_used", "players_position_management")]
 script = ExtResource("4_tj227")
 deck = NodePath("../Deck")
 the_player = NodePath("../LocalPlayer")
@@ -203,17 +238,17 @@ network_player_manager = NodePath("../NetworkPlayerManager")
 cards_used = NodePath("../CardsUsed")
 players_position_management = NodePath("../PlayersPositionManagement")
 
-[node name="AiPlayerManager" type="Node2D" parent="." unique_id=1334308277]
+[node name="AiPlayerManager" type="Node2D" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1334308277]
 script = ExtResource("5_dfwa4")
 
-[node name="NetworkPlayerManager" type="Node2D" parent="." unique_id=1372481240]
+[node name="NetworkPlayerManager" type="Node2D" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1372481240]
 script = ExtResource("6_2g0r2")
 
-[node name="CardsUsed" parent="." unique_id=347992877 instance=ExtResource("6_kd2ax")]
+[node name="CardsUsed" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=347992877 instance=ExtResource("6_kd2ax")]
 
-[node name="PointableManager" parent="." unique_id=1447748547 instance=ExtResource("7_kyqgd")]
+[node name="PointableManager" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1447748547 instance=ExtResource("7_kyqgd")]
 
-[node name="PlayersPositionManagement" type="Node2D" parent="." unique_id=2067700262]
+[node name="PlayersPositionManagement" type="Node2D" parent="ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=2067700262]
 script = ExtResource("9_tj227")
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

@@ -33,7 +33,7 @@ func manage_result(enemy:Player) -> void:
 
 #region Card positioning
 func animate_cards_to_center(player_card:Card,enemy_card:Card) -> void:
-	var center_y := (get_tree().root.size.y /2.0) +  80.0
+	var center_y := (get_viewport_rect().size.y /2.0) +  80.0
 	cards.assign([player_card, enemy_card])
 	for i in range(cards.size()):
 		var new_position :=  Vector2(calculate_card_positions_x(i), center_y)
@@ -44,7 +44,7 @@ func animate_cards_to_center(player_card:Card,enemy_card:Card) -> void:
 
 func calculate_card_positions_x(index:int) -> float:
 	var total_width := cards.size() * Constant.CARD_WIDTH
-	var x_offset := get_tree().root.size.x /2.0 + index * Constant.CARD_WIDTH - total_width / 2.0 + (Constant.CARD_WIDTH / 2.0)
+	var x_offset := get_viewport_rect().size.x /2.0 + index * Constant.CARD_WIDTH - total_width / 2.0 + (Constant.CARD_WIDTH / 2.0)
 	return x_offset
 func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 	var tween := create_tween()

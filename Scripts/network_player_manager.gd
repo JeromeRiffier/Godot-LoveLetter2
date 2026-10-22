@@ -1,4 +1,4 @@
-class_name NetworkPlayerManager extends Node
+class_name NetworkPlayerManager extends Node2D
 
 const NETWORK_PLAYER = preload("uid://i32aqpnvupt5")
 
@@ -31,4 +31,4 @@ func position_network_players() -> void:
 
 func calculate_enemy_positions_x(index: int) -> float:
 	var total_width := network_players.size() * Constant.ENEMY_WIDTH
-	return get_tree().root.size.x /2.0 + index * Constant.ENEMY_WIDTH - total_width / 2.0 + (Constant.ENEMY_WIDTH / 2.0)
+	return get_viewport_rect().size.x /2.0 + index * Constant.ENEMY_WIDTH - total_width / 2.0 + (Constant.ENEMY_WIDTH / 2.0)

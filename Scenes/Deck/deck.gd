@@ -25,8 +25,7 @@ func resize() -> void:
 	set_deck_position()
 
 func set_deck_position() -> void:
-	
-	self.position = Vector2(Constant.DECK_MARGING_LEFT, get_tree().root.size.y- Constant.DECK_MARGING_BOTTOM)
+	self.position = Vector2(Constant.DECK_MARGING_LEFT, get_viewport_rect().size.y- Constant.DECK_MARGING_BOTTOM)
 
 func reset_deck() -> void:
 	cards.clear()

@@ -39,8 +39,10 @@ func start_game(players_list:Array[PlayerElement]) -> void:
 		players[realPlayerIndex].need_to_select_enemy.connect(manage_enemy_selection_state)
 		players[realPlayerIndex].set_label()
 	for player in players:
-		player.need_card.connect(give_card_to_player)
-		player.return_card.connect(deck.take_back)
+		if not player.need_card.is_connected(give_card_to_player):
+			player.need_card.connect(give_card_to_player)
+		if not player.return_card.is_connected(deck.take_back):
+			player.return_card.connect(deck.take_back)
 	#if deck:
 		#deck.deck_is_empty.connect(func () -> void: game_is_running = false) 
 	## start Round

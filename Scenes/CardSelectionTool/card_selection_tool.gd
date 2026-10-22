@@ -11,7 +11,7 @@ var cards:Array[Card]
 
 var screen_center_x:float
 var screen_center_y:float
-var screen_bottom:int
+var screen_bottom:float
 
 @export var selection_active:bool = false
 
@@ -117,9 +117,10 @@ func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 #region screen responsivness
 func set_screen_values() -> void:
 	print("set_screen_values")
-	screen_center_x = get_tree().root.size.x /2.0
-	screen_center_y = get_tree().root.size.y /2.0
-	screen_bottom =  get_tree().root.size.y
+	screen_center_x = get_viewport_rect().size.x /2.0
+	screen_center_y = get_viewport_rect().size.y /2.0
+	screen_bottom =  get_viewport_rect().size.y
+
 func on_viewport_size_changed() -> void:
 	set_screen_values()
 	set_background_size()
