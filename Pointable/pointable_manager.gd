@@ -43,6 +43,7 @@ signal changed_mode(is_controller_mode:bool)
 signal started_dragging(position:Vector2, pointable:Pointable)
 signal stopped_dragging(position:Vector2, pointable:Pointable)
 
+
 #func _input(event: InputEvent) -> void:
 	#return
 	#if event is InputEventMouseButton:
