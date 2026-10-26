@@ -13,6 +13,7 @@ var connected:bool = false:
 		connection_changed.emit(connected)
 
 signal players_changed
+signal registration_failed(reason:String)
 signal connection_changed(is_connected:bool)
 static var instance:Lobby
 #region singleton
@@ -62,9 +63,11 @@ func join_game(ip: String, port:int, player_name: String) -> void:
 	multiplayer.multiplayer_peer = peer
 	await get_tree().create_timer(0.3).timeout
 	var status := peer.get_connection_status()
+	if multiplayer.multiplayer_peer != peer:
+		return # Déjà refusé ou déconnecté pendant l'attente
 	if status == MultiplayerPeer.CONNECTION_CONNECTED:
 		connected = true
-	else: 
+	else:
 		multiplayer.multiplayer_peer.close()
 		MessageManager.instance.display_text("Impossible de joindre la partie")
 		
@@ -118,12 +121,27 @@ func register_player(player_name: String) -> void:
 	if not multiplayer.is_server():
 		return
 	var id := multiplayer.get_remote_sender_id()
+	if _is_name_taken(player_name):
+		registration_refused.rpc_id(id, "Le prénom \"%s\" est déjà pris, choisis-en un autre" % player_name)
+		# Filet de sécurité si le client ne se déconnecte pas de lui-même
+		await get_tree().create_timer(1.0).timeout
+		if multiplayer.get_peers().has(id):
+			multiplayer.multiplayer_peer.disconnect_peer(id)
+		return
 	var element := PlayerElement.new()
 	element.id = id
 	element.name = player_name
 	element.type = PlayerElement.PLAYER_TYPE.REAL
 	players.append(element)
 	sync_players.rpc(players.map(func (new_player:PlayerElement) -> Dictionary:return  new_player.to_dict()))
+
+# Exécuté sur le client refusé, appelé par le serveur
+@rpc("authority", "reliable")
+func registration_refused(reason: String) -> void:
+	MessageManager.instance.display_text(reason)
+	registration_failed.emit(reason)
+	multiplayer.multiplayer_peer.close()
+	_on_server_disconnected()
 
 func register_ai() -> void:
 	if players.size() >= MAX_PLAYERS:
@@ -191,3 +209,6 @@ func _on_start_button_pressed() -> void:
 func _get_players_name() -> Array[String]:
 	return players.map(func (player:PlayerElement) -> String: return player.name)
 	
+func _is_name_taken(player_name: String) -> bool:
+	var normalized := player_name.strip_edges().to_lower()
+	return players.any(func (player:PlayerElement) -> bool: return player.name.strip_edges().to_lower() == normalized)
