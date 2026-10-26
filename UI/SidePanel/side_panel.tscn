@@ -13,7 +13,7 @@ shader = ExtResource("1_hb1xn")
 shader_parameter/fill_color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 shader_parameter/border_color = Color(1, 0.38431373, 1, 1)
 shader_parameter/border_width = 1.0
-shader_parameter/node_width = 150.0
+shader_parameter/node_width = 200.0
 shader_parameter/node_height = 10.0
 shader_parameter/extend = 100000.0
 
@@ -24,7 +24,7 @@ border_width_right = 2
 border_color = Color(0.9626444, 0.7128107, 0.86194086, 1)
 
 [node name="SidePanel" type="Control" unique_id=1034076944]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0

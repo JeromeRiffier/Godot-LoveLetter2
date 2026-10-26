@@ -3,7 +3,6 @@
 class_name LocalPlayer extends Player
 
 
-
 #region CardsInterfaces
 @onready var princesse_interface: LocalPlayerPrincesseInterface = $CardsInterfaces/PrincesseInterface
 @onready var comtesse_interface: LocalPlayerComtesseInterface = $CardsInterfaces/ComtesseInterface
@@ -19,6 +18,8 @@ class_name LocalPlayer extends Player
 
 @warning_ignore("unused_signal")
 signal need_to_select_enemy(value:bool) 
+
+
 
 func set_label() -> void:
 	var self_peer_id := multiplayer.get_unique_id()
@@ -109,6 +110,7 @@ func use_card(card:Card) -> void:
 	else: 
 		await card.animated_card_forbiden()
 		hand.reposition_card(card)
+
 #region input
 ### 
 ## Check if the mouse position collide with a card

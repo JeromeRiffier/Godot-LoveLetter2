@@ -207,7 +207,11 @@ func _on_start_button_pressed() -> void:
 #endregion
 
 func _get_players_name() -> Array[String]:
-	return players.map(func (player:PlayerElement) -> String: return player.name)
+	var names :Array[String]=[]
+	names.assign(
+		players.map(func (player:PlayerElement) -> String: return player.name)
+	)
+	return names
 	
 func _is_name_taken(player_name: String) -> bool:
 	var normalized := player_name.strip_edges().to_lower()

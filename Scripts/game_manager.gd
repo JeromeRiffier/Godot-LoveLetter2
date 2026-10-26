@@ -14,6 +14,8 @@ static var instance:GameManager
 var players: Array[Player] = []
 var game_is_running:bool = true
 signal game_start
+signal game_stopped
+
 #region singleton
 func _enter_tree() -> void:
 	if instance != null and instance != self:
@@ -100,6 +102,7 @@ func give_card_to_player(player:Player) -> void:
 		await player.draw_card(card)
 
 func manage_end_of_round() -> void:
+	game_stopped.emit()
 	print("The game as endend, count points, reset deck if needed, ask if ready etc")
 
 func set_all_players_alive() -> void:

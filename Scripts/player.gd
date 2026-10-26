@@ -41,7 +41,14 @@ signal need_card(emiter:Player)
 @warning_ignore("unused_signal")
 signal return_card(card:Card)
 signal change_playing_state(is_playing:bool)
-#func _ready() -> void:
+
+
+func _ready() -> void:
+	hide()
+	var game_manager := GameManager.instance
+	if game_manager:
+		game_manager.game_start.connect(_show)
+		game_manager.game_stopped.connect(_hide)
 	### For debug only, card should be received from GameManager
 	#await get_tree().create_timer(0.5).timeout
 	#var card:Card = preload("uid://c7em3t5lv5vr0").instantiate()
@@ -59,6 +66,11 @@ signal change_playing_state(is_playing:bool)
 	#await get_tree().create_timer(0.5).timeout
 	#is_playing = true
 	
+func _show() -> void:
+	self.visible=true
+
+func _hide() -> void:
+	self.visible=false
 
 func draw_card(card:Card) -> void:
 	if self is LocalPlayer:

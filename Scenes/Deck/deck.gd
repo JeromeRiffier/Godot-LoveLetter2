@@ -2,6 +2,7 @@ class_name Deck extends Node2D
 
 const CARD_SCENE = preload("uid://c7em3t5lv5vr0")
 
+@onready var deck_zone: Sprite2D = $Deck_zone
 
 signal deck_is_ready(cards:Array[Card])
 signal deck_clicked
@@ -16,6 +17,7 @@ func update_cards_position() -> void:
 
 ## Display the deck at ready only when launching the scene directly
 func _ready() -> void:
+	deck_zone.visible = false
 	if get_parent() == get_tree().root:
 		reset_deck()
 	get_viewport().size_changed.connect(resize)
@@ -28,6 +30,7 @@ func set_deck_position() -> void:
 	self.position = Vector2(Constant.DECK_MARGING_LEFT, get_viewport_rect().size.y- Constant.DECK_MARGING_BOTTOM)
 
 func reset_deck() -> void:
+	deck_zone.visible = true
 	cards.clear()
 	for cardInfo in Constant.BaseDeck:
 		var card :Card = CARD_SCENE.instantiate()
