@@ -44,12 +44,11 @@ theme_override_constants/margin_left = 25
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="ViewportScaleManager" type="Control" parent="HBoxContainer" unique_id=1816426498 node_paths=PackedStringArray("container", "viewport")]
+[node name="ViewportScaleManager" type="Control" parent="HBoxContainer" unique_id=1816426498 node_paths=PackedStringArray("viewport")]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("3_kd2ax")
-container = NodePath("CenterContainer/SubViewportContainer")
 viewport = NodePath("CenterContainer/SubViewportContainer/SubViewport")
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/ViewportScaleManager" unique_id=1789486038]
