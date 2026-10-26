@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cs0aq2ljha4a1"]
+
+[ext_resource type="StyleBox" uid="uid://boln5q6wsfreu" path="res://UI/SidePanel/SidePanelContainerStyle.tres" id="1_2sp4t"]
+[ext_resource type="Script" uid="uid://c1ti3sg3ipyoj" path="res://UI/SidePanel/value_panel.gd" id="2_3lqlv"]
+[ext_resource type="FontFile" uid="uid://cb4d8fs5w486n" path="res://Assets/fonts/home-video/HomeVideo-Regular.otf" id="2_qkcaf"]
+[ext_resource type="FontFile" uid="uid://bkfipduibv6nt" path="res://Assets/fonts/home-video/HomeVideo-Bold.otf" id="4_3lqlv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 3
+anti_aliasing = false
+
+[node name="ValuePanel" type="PanelContainer" unique_id=452700306]
+custom_minimum_size = Vector2(50, 50)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_2sp4t")
+script = ExtResource("2_3lqlv")
+
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=135677637]
+layout_mode = 2
+theme_override_constants/separation = 0
+vertical = true
+
+[node name="Title" type="Label" parent="BoxContainer" unique_id=2088788744]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qkcaf")
+text = "texte"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="BoxContainer" unique_id=1707014404]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="BoxContainer/MarginContainer" unique_id=1219429099]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Value" type="RichTextLabel" parent="BoxContainer/MarginContainer/PanelContainer" unique_id=1239684924]
+custom_maximum_size = Vector2(500, -1)
+clip_contents = false
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_qkcaf")
+theme_override_fonts/bold_font = ExtResource("4_3lqlv")
+theme_override_fonts/bold_italics_font = ExtResource("4_3lqlv")
+bbcode_enabled = true
+text = "0"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,262 @@
+[gd_scene format=3 uid="uid://rvr0rrsj87kf"]
+
+[ext_resource type="StyleBox" uid="uid://boln5q6wsfreu" path="res://UI/SidePanel/SidePanelContainerStyle.tres" id="1_4ypb0"]
+[ext_resource type="Script" uid="uid://cv8durs4wes2x" path="res://UI/NetworkOptionModal/network_option_modal.gd" id="1_fb2j3"]
+[ext_resource type="StyleBox" uid="uid://caofgn5c1fko7" path="res://UI/SidePanel/SidePanelButtonContainerStyle.tres" id="2_fb2j3"]
+[ext_resource type="Texture2D" uid="uid://c1douwtxlfxvq" path="res://Assets/pictos/icon_character_white.png" id="4_sg1y1"]
+
+[node name="NetworkOptionModal" type="TabContainer" unique_id=1669308202]
+custom_minimum_size = Vector2(350, 250)
+offset_right = 300.0
+offset_bottom = 300.0
+current_tab = 2
+tab_0/title = "Host"
+tab_1/title = "Join"
+tab_2/title = "Hosting"
+script = ExtResource("1_fb2j3")
+
+[node name="HostContainer" type="MarginContainer" parent="." unique_id=7205871]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+metadata/_tab_index = 0
+metadata/_tab_name = "Host"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HostContainer" unique_id=30778651]
+layout_mode = 2
+
+[node name="NamePanel" type="PanelContainer" parent="HostContainer/VBoxContainer" unique_id=490063072]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_4ypb0")
+
+[node name="MarginContainer" type="MarginContainer" parent="HostContainer/VBoxContainer/NamePanel" unique_id=1291603462]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="HostContainer/VBoxContainer/NamePanel/MarginContainer" unique_id=1360501675]
+layout_mode = 2
+columns = 2
+
+[node name="NameLabel" type="Label" parent="HostContainer/VBoxContainer/NamePanel/MarginContainer/GridContainer" unique_id=734376518]
+layout_mode = 2
+text = "Nom: "
+
+[node name="NameValue" type="LineEdit" parent="HostContainer/VBoxContainer/NamePanel/MarginContainer/GridContainer" unique_id=1180135681]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HostPanel" type="PanelContainer" parent="HostContainer/VBoxContainer" unique_id=989664099]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_4ypb0")
+
+[node name="MarginContainer" type="MarginContainer" parent="HostContainer/VBoxContainer/HostPanel" unique_id=1640540962]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HostContainer/VBoxContainer/HostPanel/MarginContainer" unique_id=353476102]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="HostContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer" unique_id=1755303545]
+layout_mode = 2
+columns = 2
+
+[node name="PortLabel" type="Label" parent="HostContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer/GridContainer" unique_id=597408748]
+layout_mode = 2
+text = "Port:"
+
+[node name="HostPort" type="SpinBox" parent="HostContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer/GridContainer" unique_id=1271988141]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 47218.0
+
+[node name="Spacer" type="Control" parent="HostContainer/VBoxContainer" unique_id=1056198238]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HostButton" type="Button" parent="HostContainer/VBoxContainer" unique_id=1486792370]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_fb2j3")
+text = "Host"
+
+[node name="CloseButton" type="Button" parent="HostContainer/VBoxContainer" unique_id=1597424057]
+layout_mode = 2
+text = "Retour"
+
+[node name="JoinContainer" type="MarginContainer" parent="." unique_id=1394915562]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+metadata/_tab_index = 1
+metadata/_tab_name = "Join"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JoinContainer" unique_id=1142768061]
+layout_mode = 2
+
+[node name="NamePanel" type="PanelContainer" parent="JoinContainer/VBoxContainer" unique_id=811748671]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_4ypb0")
+
+[node name="MarginContainer" type="MarginContainer" parent="JoinContainer/VBoxContainer/NamePanel" unique_id=720004158]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="JoinContainer/VBoxContainer/NamePanel/MarginContainer" unique_id=1202210802]
+layout_mode = 2
+columns = 2
+
+[node name="NameLabel" type="Label" parent="JoinContainer/VBoxContainer/NamePanel/MarginContainer/GridContainer" unique_id=1463879384]
+layout_mode = 2
+text = "Nom: "
+
+[node name="NameValue" type="LineEdit" parent="JoinContainer/VBoxContainer/NamePanel/MarginContainer/GridContainer" unique_id=543396281]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="JoinPanel" type="PanelContainer" parent="JoinContainer/VBoxContainer" unique_id=277156615]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_4ypb0")
+
+[node name="MarginContainer" type="MarginContainer" parent="JoinContainer/VBoxContainer/JoinPanel" unique_id=1374750]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Options" type="GridContainer" parent="JoinContainer/VBoxContainer/JoinPanel/MarginContainer" unique_id=1325080188]
+layout_mode = 2
+columns = 2
+
+[node name="AddressLabel" type="Label" parent="JoinContainer/VBoxContainer/JoinPanel/MarginContainer/Options" unique_id=1252379709]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Addresse:"
+
+[node name="JoinIp" type="LineEdit" parent="JoinContainer/VBoxContainer/JoinPanel/MarginContainer/Options" unique_id=1333830533]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+
+[node name="PortLabel" type="Label" parent="JoinContainer/VBoxContainer/JoinPanel/MarginContainer/Options" unique_id=615012518]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Port:"
+
+[node name="JoinPort" type="SpinBox" parent="JoinContainer/VBoxContainer/JoinPanel/MarginContainer/Options" unique_id=112912762]
+layout_mode = 2
+max_value = 99999.0
+value = 47218.0
+
+[node name="Spacer" type="Control" parent="JoinContainer/VBoxContainer" unique_id=2126258767]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JoinButton" type="Button" parent="JoinContainer/VBoxContainer" unique_id=824950340]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_fb2j3")
+text = "Rejoindre"
+
+[node name="CloseButton" type="Button" parent="JoinContainer/VBoxContainer" unique_id=2053743152]
+layout_mode = 2
+text = "Retour"
+
+[node name="HostingContainer" type="MarginContainer" parent="." unique_id=1324716253]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+metadata/_tab_index = 2
+metadata/_tab_name = "Hosting"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HostingContainer" unique_id=3232906]
+layout_mode = 2
+
+[node name="PlayersItemList" type="ItemList" parent="HostingContainer/VBoxContainer" unique_id=785552313]
+custom_maximum_size = Vector2(-1, 130)
+layout_mode = 2
+allow_search = false
+auto_height = true
+item_count = 6
+item_0/text = "test"
+item_0/icon = ExtResource("4_sg1y1")
+item_1/text = "machin"
+item_2/text = "connard"
+item_3/text = "zefzef"
+item_4/text = "sdvsdvs"
+item_5/text = "xcvxcv"
+
+[node name="ActionButtonsContainer" type="GridContainer" parent="HostingContainer/VBoxContainer" unique_id=132477961]
+layout_mode = 2
+columns = 2
+
+[node name="AiNumberPanel" type="PanelContainer" parent="HostingContainer/VBoxContainer/ActionButtonsContainer" unique_id=209141133]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_4ypb0")
+
+[node name="AddAiButton" type="Button" parent="HostingContainer/VBoxContainer/ActionButtonsContainer/AiNumberPanel" unique_id=1634056708]
+layout_mode = 2
+text = "Ajouter une IA"
+
+[node name="KickPlayerPanel" type="PanelContainer" parent="HostingContainer/VBoxContainer/ActionButtonsContainer" unique_id=840406094]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_4ypb0")
+
+[node name="KickPlayerButton" type="Button" parent="HostingContainer/VBoxContainer/ActionButtonsContainer/KickPlayerPanel" unique_id=738281841]
+layout_mode = 2
+disabled = true
+text = "Retirer"
+
+[node name="DisconnectPanel" type="PanelContainer" parent="HostingContainer/VBoxContainer" unique_id=2026915679]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_4ypb0")
+
+[node name="DisconnectButton" type="Button" parent="HostingContainer/VBoxContainer/DisconnectPanel" unique_id=870314293]
+layout_mode = 2
+text = "Se deconnecter"
+
+[node name="Spacer" type="Control" parent="HostingContainer/VBoxContainer" unique_id=1583822896]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartGameButton" type="Button" parent="HostingContainer/VBoxContainer" unique_id=1709146131]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_fb2j3")
+text = "Commencer"
+
+[node name="CloseButton" type="Button" parent="HostingContainer/VBoxContainer" unique_id=1032701755]
+layout_mode = 2
+text = "Retour"
+
+[connection signal="pressed" from="HostContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="HostContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="JoinContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="JoinContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="item_selected" from="HostingContainer/VBoxContainer/PlayersItemList" to="." method="_on_players_item_list_item_selected"]
+[connection signal="pressed" from="HostingContainer/VBoxContainer/ActionButtonsContainer/AiNumberPanel/AddAiButton" to="." method="_on_add_ai_button_pressed"]
+[connection signal="pressed" from="HostingContainer/VBoxContainer/ActionButtonsContainer/KickPlayerPanel/KickPlayerButton" to="." method="_on_kick_player_button_pressed"]
+[connection signal="pressed" from="HostingContainer/VBoxContainer/DisconnectPanel/DisconnectButton" to="." method="_on_disconnect_button_pressed"]
+[connection signal="pressed" from="HostingContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="HostingContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

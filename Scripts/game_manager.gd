@@ -13,7 +13,7 @@ static var instance:GameManager
 
 var players: Array[Player] = []
 var game_is_running:bool = true
-
+signal game_start
 #region singleton
 func _enter_tree() -> void:
 	if instance != null and instance != self:
@@ -27,6 +27,7 @@ func _exit_tree() -> void:
 #endregion
 
 func start_game(players_list:Array[PlayerElement]) -> void:
+	game_start.emit()
 	setup_players(players_list)
 	deck.reset_deck()
 	deck.shuffle()

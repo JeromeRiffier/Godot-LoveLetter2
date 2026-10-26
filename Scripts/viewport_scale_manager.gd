@@ -12,7 +12,7 @@ class_name ViewportScaleManager extends Control
 
 func _ready() -> void:
 	viewport.size = Constant.MIN_WINDOW_SIZE
-	container.custom_minimum_size  = Constant.MIN_WINDOW_SIZE
+	#container.custom_minimum_size  = Constant.MIN_WINDOW_SIZE
 	container.pivot_offset = Constant.MIN_WINDOW_SIZE / 2.0
 	resized.connect(_update_scale)
 	queue_redraw()
@@ -24,3 +24,4 @@ func _update_scale() -> void:
 	if integer_scale:
 		s = maxf(1.0, floorf(s))
 	container.scale = Vector2(s, s)
+	#viewport.size_2d_override = size

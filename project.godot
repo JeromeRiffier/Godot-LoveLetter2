@@ -46,6 +46,10 @@ Player="Node Player or Enemy"
 Pointable=""
 PointableManager=""
 
+[gui]
+
+theme/custom_font="uid://cb4d8fs5w486n"
+
 [input]
 
 right={

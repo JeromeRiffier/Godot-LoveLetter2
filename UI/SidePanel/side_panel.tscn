@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://mpadpx06rtby"]
+
+[ext_resource type="Script" uid="uid://bv1160eodrdmn" path="res://UI/SidePanel/side_panel.gd" id="1_64xo4"]
+[ext_resource type="StyleBox" uid="uid://boln5q6wsfreu" path="res://UI/SidePanel/SidePanelContainerStyle.tres" id="1_bqbcl"]
+[ext_resource type="Shader" uid="uid://clke8mntfbw5" path="res://UI/SidePanel/side_panel.gdshader" id="1_hb1xn"]
+[ext_resource type="FontFile" uid="uid://cb4d8fs5w486n" path="res://Assets/fonts/home-video/HomeVideo-Regular.otf" id="1_nqyo5"]
+[ext_resource type="PackedScene" uid="uid://cs0aq2ljha4a1" path="res://UI/SidePanel/value_panel.tscn" id="3_povbp"]
+[ext_resource type="StyleBox" uid="uid://caofgn5c1fko7" path="res://UI/SidePanel/SidePanelButtonContainerStyle.tres" id="4_xt1op"]
+[ext_resource type="PackedScene" uid="uid://dwtglpd63vvvx" path="res://UI/OptionModal/option_modal.tscn" id="7_6y2rt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m76be"]
+shader = ExtResource("1_hb1xn")
+shader_parameter/fill_color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+shader_parameter/border_color = Color(1, 0.38431373, 1, 1)
+shader_parameter/border_width = 1.0
+shader_parameter/node_width = 150.0
+shader_parameter/node_height = 10.0
+shader_parameter/extend = 100000.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.17283267, 0.17283267, 0.17283258, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.9626444, 0.7128107, 0.86194086, 1)
+
+[node name="SidePanel" type="Control" unique_id=1034076944]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+script = ExtResource("1_64xo4")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1268117291]
+material = SubResource("ShaderMaterial_m76be")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yf5fn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=319858707]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=825211931]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="PlayerInfos" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=860805416]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_bqbcl")
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PlayerInfos" unique_id=900559293]
+layout_mode = 2
+
+[node name="PlayerNameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PlayerInfos/GridContainer" unique_id=420924389]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_nqyo5")
+text = "Player name"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=55838232]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+columns = 2
+
+[node name="Manche" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=452700306 instance=ExtResource("3_povbp")]
+layout_mode = 2
+title = "Manche"
+value = "[color=d06600][font_size={22}]0[/font_size][/color]/0"
+
+[node name="Score" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=159182680 instance=ExtResource("3_povbp")]
+layout_mode = 2
+title = "Score"
+value = "0"
+
+[node name="PlayerListValuePanel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=914210922 instance=ExtResource("3_povbp")]
+layout_mode = 2
+title = "Joueurs"
+value = "[p align=r jst=w]jerome : 0
+test : 0
+louis : 0
+[/p]"
+
+[node name="GridContainer2" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1973844031]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+columns = 2
+
+[node name="OptionButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2" unique_id=893491547]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_constants/outline_size = 1
+theme_override_constants/line_spacing = -20
+theme_override_fonts/font = ExtResource("1_nqyo5")
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = ExtResource("4_xt1op")
+text = "Options"
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2" unique_id=1853409285]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OptionModal" parent="." unique_id=858332402 instance=ExtResource("7_6y2rt")]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer2/OptionButton" to="." method="_on_option_button_pressed"]

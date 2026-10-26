@@ -116,7 +116,6 @@ func animate_card_to_position(card:Card, new_position:Vector2) -> void:
 
 #region screen responsivness
 func set_screen_values() -> void:
-	print("set_screen_values")
 	screen_center_x = get_viewport_rect().size.x /2.0
 	screen_center_y = get_viewport_rect().size.y /2.0
 	screen_bottom =  get_viewport_rect().size.y

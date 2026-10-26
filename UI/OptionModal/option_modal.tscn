@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dwtglpd63vvvx"]
+
+[ext_resource type="Script" uid="uid://vvowu1pv1h6v" path="res://UI/OptionModal/option_modal.gd" id="1_7y32l"]
+[ext_resource type="PackedScene" uid="uid://rvr0rrsj87kf" path="res://UI/NetworkOptionModal/network_option_modal.tscn" id="1_8hmf6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdx0e"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 3
+
+[node name="OptionModal" type="CanvasLayer" unique_id=400697946]
+script = ExtResource("1_7y32l")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1700627248]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.12941177)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1381331874]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+
+[node name="MainOptionModal" type="PanelContainer" parent="CenterContainer" unique_id=1073930710]
+custom_minimum_size = Vector2(350, 250)
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_cdx0e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainOptionModal" unique_id=1591577232]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MainOptionModal/VBoxContainer" unique_id=1048545909]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainOptionModal/VBoxContainer/MarginContainer" unique_id=1614897428]
+layout_mode = 2
+
+[node name="OpenNetworkButton" type="Button" parent="CenterContainer/MainOptionModal/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1046789671]
+layout_mode = 2
+text = "Multijoueur"
+
+[node name="CloseButton" type="Button" parent="CenterContainer/MainOptionModal/VBoxContainer" unique_id=975798376]
+layout_mode = 2
+text = "Retour"
+
+[node name="NetworkOptionModal" parent="CenterContainer" unique_id=1458724585 instance=ExtResource("1_8hmf6")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="CenterContainer/MainOptionModal/VBoxContainer/MarginContainer/VBoxContainer/OpenNetworkButton" to="." method="_on_open_network_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MainOptionModal/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="close" from="CenterContainer/NetworkOptionModal" to="." method="_on_network_option_modal_close"]

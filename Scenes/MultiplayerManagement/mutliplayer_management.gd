@@ -1,70 +1,77 @@
 class_name Lobby extends Control
 
-@onready var name_panel: PanelContainer = $CanvasLayer/CenterContainer/VBoxContainer/NamePanel
-@onready var join_panel: PanelContainer = $CanvasLayer/CenterContainer/VBoxContainer/JoinPanel
-@onready var host_panel: PanelContainer = $CanvasLayer/CenterContainer/VBoxContainer/HostPanel
-@onready var player_list_panel: PanelContainer = $CanvasLayer/CenterContainer/VBoxContainer/PlayerListPanel
-@onready var peers_list: GridContainer = $CanvasLayer/CenterContainer/VBoxContainer/PlayerListPanel/MarginContainer/VBoxContainer/PeersList
-@onready var disconect_panel: PanelContainer = $CanvasLayer/CenterContainer/VBoxContainer/DisconectPanel
-@onready var name_value: LineEdit = $CanvasLayer/CenterContainer/VBoxContainer/NamePanel/MarginContainer/GridContainer/NameValue
-@onready var host_port: SpinBox = $CanvasLayer/CenterContainer/VBoxContainer/HostPanel/MarginContainer/VBoxContainer/GridContainer/HostPort
-@onready var join_ip: LineEdit = $CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/Options/JoinIp
-@onready var join_port: SpinBox = $CanvasLayer/CenterContainer/VBoxContainer/JoinPanel/MarginContainer/VBoxContainer/Options/JoinPort
-@onready var start_panel: PanelContainer = $CanvasLayer/CenterContainer/VBoxContainer/StartPanel
-@onready var start_button: Button = $CanvasLayer/CenterContainer/VBoxContainer/StartPanel/StartButton
-@onready var ia_number: SpinBox = $CanvasLayer/CenterContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/IaNumber
-
-
-const MAX_PLAYERS: int = 5
+const MAX_PLAYERS: int = 6
 const DEFAULT_PORT: int = 47218
-var players :Dictionary[int, String] = {}   # peer_id -> nom
 var my_name :String
-
+var players:Array[PlayerElement]
 
 var connected:bool = false:
 	set(value):
+		if value == connected:
+			return
 		connected = value
-		disconect_panel.visible = value
-		player_list_panel.visible = value
-		join_panel.visible = !value
-		host_panel.visible = !value
+		connection_changed.emit(connected)
 
 signal players_changed
+signal connection_changed(is_connected:bool)
+static var instance:Lobby
+#region singleton
+func _enter_tree() -> void:
+	if instance != null and instance != self:
+		queue_free()  # un doublon existe déjà
+		return
+	instance = self
+
+func _exit_tree() -> void:
+	if instance == self:
+		instance = null
+#endregion
 
 func _ready() -> void:
-	
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	players_changed.connect(update_player_list)
-	name_value.text = Constant.random_string(5)
 	connected = false
-	start_panel.visible = false
 
 func host_game(port:int, player_name: String) -> void:
 	if player_name != "":
 		my_name = player_name
 	var peer := ENetMultiplayerPeer.new()
-	peer.create_server(port)
+	var error:= peer.create_server(port)
+	if error:
+		MessageManager.instance.display_text("Le serveur ne peut être créer")
+		return
 	multiplayer.multiplayer_peer = peer
-	players[1] = my_name
+	var element := PlayerElement.new()
+	element.id = 1
+	element.name = my_name
+	element.type = PlayerElement.PLAYER_TYPE.REAL
+	players = [element]
 	players_changed.emit()
 	connected = true
-	start_panel.visible = true
 
 func join_game(ip: String, port:int, player_name: String) -> void:
 	if player_name != "":
 		my_name = player_name
 	var peer := ENetMultiplayerPeer.new()
-	peer.create_client(ip, port)
+	var error:= peer.create_client(ip, port)
+	if error:
+		MessageManager.instance.display_text("Impossible de joindre la partie")
+		print('canont connect')
+		return
 	multiplayer.multiplayer_peer = peer
-	connected = true
-
+	await get_tree().create_timer(0.3).timeout
+	var status := peer.get_connection_status()
+	if status == MultiplayerPeer.CONNECTION_CONNECTED:
+		connected = true
+	else: 
+		multiplayer.multiplayer_peer.close()
+		MessageManager.instance.display_text("Impossible de joindre la partie")
+		
 func quit_game() -> void:
 	if not multiplayer.is_server():
 		multiplayer.multiplayer_peer.disconnect_peer(1) ##Discotnnect the player from the game
 	else:
-		start_panel.visible=false
 		for peer_id in multiplayer.get_peers():
 			multiplayer.multiplayer_peer.disconnect_peer(peer_id) 
 		multiplayer.multiplayer_peer.close()
@@ -94,36 +101,11 @@ func transmit_actions_to_peers(action_dic:Dictionary) -> void:
 	player_concerned.reflect_action(action)
 	print("ok", action)
 
-func generate_player_list() -> Array[PlayerElement]:
-	var list:Array[PlayerElement] = []
-	for id:int in players.keys():
-		var element := PlayerElement.new()
-		element.id = id
-		element.name = players[id]
-		element.type = PlayerElement.PLAYER_TYPE.REAL
-		list.append(element)
-	for i in range(ia_number.value):
-		var element := PlayerElement.new()
-		element.id = randi()
-		element.name = Constant.random_string(5)
-		element.type = PlayerElement.PLAYER_TYPE.IA
-		list.append(element)
-	list.shuffle()
-	return list
-
 
 func _on_player_action(_player:Player,_card:Card,action:PlayerAction) -> void:
 	transmit_actions_to_peers.rpc(action.to_dict())
 
-func update_player_list() -> void:
-	for child in peers_list.get_children():
-		child.queue_free()
-	print(players)
-	for player_id in players:
-		var player_name := players[player_id]
-		var node := Label.new()
-		node.text = player_name
-		peers_list.add_child(node)
+
 
 #region Network events
 # Côté client : une fois connecté, on envoie son nom au serveur
@@ -136,44 +118,68 @@ func register_player(player_name: String) -> void:
 	if not multiplayer.is_server():
 		return
 	var id := multiplayer.get_remote_sender_id()
-	players[id] = player_name
-	sync_players.rpc(players)
+	var element := PlayerElement.new()
+	element.id = id
+	element.name = player_name
+	element.type = PlayerElement.PLAYER_TYPE.REAL
+	players.append(element)
+	sync_players.rpc(players.map(func (new_player:PlayerElement) -> Dictionary:return  new_player.to_dict()))
 
+func register_ai() -> void:
+	if players.size() >= MAX_PLAYERS:
+		return
+	var element := PlayerElement.new()
+	element.id = randi()
+	element.name = Constant.random_string(5)
+	element.type = PlayerElement.PLAYER_TYPE.IA
+	players.append(element)
+	sync_players.rpc(players.map(func (new_player:PlayerElement) -> Dictionary:return  new_player.to_dict()))
+
+func kick_player(player_index:int) -> void:
+	if not multiplayer.is_server():
+		return
+	print('kicking %s' % players[player_index].name)
+	if players[player_index].type == PlayerElement.PLAYER_TYPE.IA:
+		players.pop_at(player_index)
+		sync_players.rpc(players.map(func (new_player:PlayerElement) -> Dictionary:return  new_player.to_dict()))
+	else:
+		multiplayer.multiplayer_peer.disconnect_peer(players[player_index].id)
+
+	
 # Exécuté partout (serveur compris grâce à call_local), appelé par le serveur
 @rpc("authority", "call_local", "reliable")
-func sync_players(list: Dictionary) -> void:
-	players = list
+func sync_players(list_dic: Array) -> void:
+	players.assign(
+		list_dic.map(func (dicElement:Dictionary) -> PlayerElement: return PlayerElement.from_dict(dicElement))
+	)
 	players_changed.emit()
 
 func _on_peer_disconnected(id: int) -> void:
 	if multiplayer.is_server():
-		players.erase(id)
-		sync_players.rpc(players)
-
+		var index := players.find_custom(func (player:PlayerElement) -> bool: return player.id  == id)
+		if index != -1:
+			players.pop_at(index)
+		sync_players.rpc(players.map(func (new_player:PlayerElement) -> Dictionary:return  new_player.to_dict()))
+	if multiplayer.get_unique_id() == id:
+		multiplayer.multiplayer_peer = null
+		connected = false
+		players.clear()
+		players_changed.emit()
+	
 func _on_server_disconnected() -> void:
-	players.clear()
 	multiplayer.multiplayer_peer = null
+	connected = false
+	players.clear()
 	players_changed.emit()
 #endregion 
 
 
 #region Node events
-func _on_host_button_pressed() -> void:
-	@warning_ignore("narrowing_conversion")
-	host_game(host_port.value,name_value.text)
-
-
-func _on_join_button_pressed() -> void:
-	@warning_ignore("narrowing_conversion")
-	join_game(join_ip.text, join_port.value, name_value.text)
-
-
-func _on_disconnect_button_pressed() -> void:
-	quit_game()
-
-
 func _on_start_button_pressed() -> void:
 	var my_seed := "FixedSeed".hash() ## Find a way to generate the seed and transmit it to each peers
-	var playersList := generate_player_list().map(func (element:PlayerElement) -> Dictionary: return element.to_dict())
+	var playersList := players.map(func (element:PlayerElement) -> Dictionary: return element.to_dict())
+	var id = multiplayer.get_unique_id()
+	var is_server = multiplayer.is_server()
+	var peerss = multiplayer.get_peers()
 	start_game.rpc(my_seed, playersList)
 #endregion
