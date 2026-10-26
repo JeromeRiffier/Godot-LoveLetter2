@@ -130,7 +130,11 @@ func register_ai() -> void:
 		return
 	var element := PlayerElement.new()
 	element.id = randi()
-	element.name = Constant.random_string(5)
+	var players_name := _get_players_name()
+	var ai_name = Constant.pseudos.pick_random()
+	while players_name.has(ai_name):
+		ai_name = Constant.pseudos.pick_random()
+	element.name = ai_name
 	element.type = PlayerElement.PLAYER_TYPE.IA
 	players.append(element)
 	sync_players.rpc(players.map(func (new_player:PlayerElement) -> Dictionary:return  new_player.to_dict()))
@@ -183,3 +187,7 @@ func _on_start_button_pressed() -> void:
 	var peerss = multiplayer.get_peers()
 	start_game.rpc(my_seed, playersList)
 #endregion
+
+func _get_players_name() -> Array[String]:
+	return players.map(func (player:PlayerElement) -> String: return player.name)
+	

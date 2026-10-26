@@ -111,3 +111,5 @@ static func random_string(length: int) -> String:
 	for i in length:
 		result += CHARS[randi() % CHARS.length()]
 	return result
+
+const pseudos :Array[String] = ["Cunégonde", "Eudoxie", "Firmin", "Philomène", "Anatole", "Gertrude", "Hippolyte", "Berthe", "Eusèbe", "Mélanie", "Honoré", "Adélaïde", "Théophile", "Eulalie", "Aristide", "Léontine", "Barnabé", "Ernestine", "Célestin", "Clotilde", "Fulbert", "Hortense", "Gustave", "Joséphine", "Prosper", "Mathurine", "Isidore", "Germaine", "Anselme", "Pétronille", "Octave", "Marcelline", "Évariste", "Albertine", "Achille", "Ursule", "Désiré", "Augustine", "Norbert", "Edwige", "Casimir", "Philippine", "Gaspard", "Bernadette", "Léopold", "Simone", "Ferdinand", "Yvonne", "Onésime", "Raymonde"]
