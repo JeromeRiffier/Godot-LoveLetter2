@@ -1,30 +1,27 @@
 class_name ViewportScaleManager extends Control
 
+@onready var viewport_container: SubViewportContainer = $SubViewportContainer
 
-## false = tout est visible avec des bandes noires (letterbox)
-## true  = l'écran est rempli et le surplus est rogné
-@export var cover := false
-@export var viewport: SubViewport
-@onready var center_container: CenterContainer = $CenterContainer
+
 func _ready() -> void:
-	viewport.size = Constant.MIN_WINDOW_SIZE
-	#container.custom_minimum_size  = Constant.MIN_WINDOW_SIZE
-	center_container.pivot_offset = Constant.MIN_WINDOW_SIZE / 2.0
 	resized.connect(_update_scale)
-	queue_redraw()
 	_update_scale()
 
+## Force the viewport container to scale down the viewport if it become smaller than Constant.MIN_WINDOW_SIZE
+## While retaining it's ratio
 func _update_scale() -> void:
-	#if size.x >= Constant.MIN_WINDOW_SIZE.x and size.y >= Constant.MIN_WINDOW_SIZE.y:
-		#container.scale = Vector2.ONE
-		#return
-	var ratio_x := size.x / Constant.MIN_WINDOW_SIZE.x
-	var ratio_y := size.y / Constant.MIN_WINDOW_SIZE.y
-	var min_ratio := minf(ratio_x, ratio_y)
-	if min_ratio > 1:
-		center_container.scale = Vector2.ONE
-		viewport.size = size
-	else:
-		viewport.size = Constant.MIN_WINDOW_SIZE
-		center_container.scale =  Vector2(min_ratio, min_ratio)
+	var full_size := size
+	var base := Vector2(Constant.MIN_WINDOW_SIZE)
 	
+	var scale_factor := minf(1.0, minf(full_size.x / base.x, full_size.y / base.y))
+	var new_size := size * (1/scale_factor)
+	
+	## When initializing the control node godot do some strange things and size can be undefined
+	## If we try to set a size with nan it result in an error so this verification is needed
+	if  is_nan(new_size.x) and is_nan(new_size.y):
+		return
+	
+	## Using set_deferred because godot is not happy if we set a size for a control node in the ready function
+	## It would be overriden by some other control node magics
+	viewport_container.set_deferred("size", new_size)
+	viewport_container.set_deferred("scale", Vector2(scale_factor, scale_factor))

@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://dveye2eqftayu"]
+
+[ext_resource type="Script" uid="uid://pm3cg7g4fgrc" path="res://Scenes/MultiplayerManagement/mutliplayer_management.gd" id="1_hedwd"]
+[ext_resource type="PackedScene" uid="uid://bvuq84ml7j1t7" path="res://Scenes/Deck/deck.tscn" id="2_p4135"]
+[ext_resource type="PackedScene" uid="uid://dvn4ow4kk5m22" path="res://Scenes/LocalPlayer/player.tscn" id="3_2g0r2"]
+[ext_resource type="Script" uid="uid://cdw47emejnagv" path="res://Scripts/viewport_scale_manager.gd" id="3_kd2ax"]
+[ext_resource type="PackedScene" uid="uid://mpadpx06rtby" path="res://UI/SidePanel/side_panel.tscn" id="4_kyqgd"]
+[ext_resource type="Script" uid="uid://dtsudnlksde30" path="res://Scripts/game_manager.gd" id="4_tj227"]
+[ext_resource type="Script" uid="uid://da4mk48rbux1a" path="res://Scripts/ai_player_manager.gd" id="5_dfwa4"]
+[ext_resource type="Script" uid="uid://cdiq1bpgvuh2a" path="res://Scripts/network_player_manager.gd" id="6_2g0r2"]
+[ext_resource type="PackedScene" uid="uid://b8t5l6hoa3tca" path="res://Scenes/CardsUsed/cards_used.tscn" id="6_kd2ax"]
+[ext_resource type="PackedScene" uid="uid://ctyk0niaaxxax" path="res://Pointable/pointable_manager.tscn" id="7_kyqgd"]
+[ext_resource type="Script" uid="uid://cn263b56xchv6" path="res://Scripts/players_position_management.gd" id="9_tj227"]
+[ext_resource type="PackedScene" uid="uid://vedqief06ywc" path="res://Scenes/MessageManager/message_manager.tscn" id="10_dfwa4"]
+
+[node name="MutliplayerManagement" type="Control" unique_id=247659255]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hedwd")
+
+[node name="MessageCanvasLayer" type="CanvasLayer" parent="." unique_id=1657849281]
+
+[node name="MessageManager" parent="MessageCanvasLayer" unique_id=492521286 instance=ExtResource("10_dfwa4")]
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=594778206]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1253785161]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+
+[node name="SidePanel" parent="HBoxContainer/MarginContainer" unique_id=1034076944 instance=ExtResource("4_kyqgd")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ViewportScaleManager" type="Control" parent="HBoxContainer" unique_id=1816426498 node_paths=PackedStringArray("viewport")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+script = ExtResource("3_kd2ax")
+viewport = NodePath("CenterContainer/SubViewportContainer/SubViewport")
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/ViewportScaleManager" unique_id=1789486038]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/ViewportScaleManager/CenterContainer" unique_id=1047820665]
+propagate_maximum_size = false
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer" unique_id=1690264621]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+render_target_update_mode = 4
+
+[node name="background" type="ColorRect" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport" unique_id=192187242]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 1, 1, 1)
+
+[node name="GameWindow" type="Node2D" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport" unique_id=1869245386]
+
+[node name="Deck" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=336770514 instance=ExtResource("2_p4135")]
+position = Vector2(87, 368)
+
+[node name="LocalPlayer" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1325730967 instance=ExtResource("3_2g0r2")]
+position = Vector2(640, 728)
+
+[node name="GameManager" type="Node2D" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=484497983 node_paths=PackedStringArray("deck", "the_player", "ai_player_manager", "network_player_manager", "cards_used", "players_position_management")]
+script = ExtResource("4_tj227")
+deck = NodePath("../Deck")
+the_player = NodePath("../LocalPlayer")
+ai_player_manager = NodePath("../AiPlayerManager")
+network_player_manager = NodePath("../NetworkPlayerManager")
+cards_used = NodePath("../CardsUsed")
+players_position_management = NodePath("../PlayersPositionManagement")
+
+[node name="AiPlayerManager" type="Node2D" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1334308277]
+script = ExtResource("5_dfwa4")
+
+[node name="NetworkPlayerManager" type="Node2D" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1372481240]
+script = ExtResource("6_2g0r2")
+
+[node name="CardsUsed" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=347992877 instance=ExtResource("6_kd2ax")]
+
+[node name="PointableManager" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=1447748547 instance=ExtResource("7_kyqgd")]
+
+[node name="PlayersPositionManagement" type="Node2D" parent="HBoxContainer/ViewportScaleManager/CenterContainer/SubViewportContainer/SubViewport/GameWindow" unique_id=2067700262]
+script = ExtResource("9_tj227")

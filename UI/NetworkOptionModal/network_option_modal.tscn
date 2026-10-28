@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c1douwtxlfxvq" path="res://Assets/pictos/icon_character_white.png" id="4_sg1y1"]
 
 [node name="NetworkOptionModal" type="TabContainer" unique_id=1669308202]
-custom_minimum_size = Vector2(350, 250)
+custom_minimum_size = Vector2(350, 350)
 offset_right = 300.0
 offset_bottom = 300.0
 current_tab = 2

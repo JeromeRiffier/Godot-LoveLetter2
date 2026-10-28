@@ -149,7 +149,7 @@ func register_ai() -> void:
 	var element := PlayerElement.new()
 	element.id = randi()
 	var players_name := _get_players_name()
-	var ai_name = Constant.pseudos.pick_random()
+	var ai_name :String= Constant.pseudos.pick_random()
 	while players_name.has(ai_name):
 		ai_name = Constant.pseudos.pick_random()
 	element.name = ai_name
@@ -200,9 +200,9 @@ func _on_server_disconnected() -> void:
 func _on_start_button_pressed() -> void:
 	var my_seed := "FixedSeed".hash() ## Find a way to generate the seed and transmit it to each peers
 	var playersList := players.map(func (element:PlayerElement) -> Dictionary: return element.to_dict())
-	var id = multiplayer.get_unique_id()
-	var is_server = multiplayer.is_server()
-	var peerss = multiplayer.get_peers()
+	var id:int = multiplayer.get_unique_id()
+	var is_server:bool = multiplayer.is_server()
+	var peerss:PackedInt32Array = multiplayer.get_peers()
 	start_game.rpc(my_seed, playersList)
 #endregion
 

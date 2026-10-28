@@ -34,7 +34,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 
 [node name="MainOptionModal" type="PanelContainer" parent="CenterContainer" unique_id=1073930710]
-custom_minimum_size = Vector2(350, 250)
+custom_minimum_size = Vector2(350, 350)
 layout_mode = 2
 offset_transform_enabled = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_cdx0e")
@@ -61,6 +61,7 @@ text = "Retour"
 
 [node name="NetworkOptionModal" parent="CenterContainer" unique_id=1458724585 instance=ExtResource("1_8hmf6")]
 visible = false
+custom_minimum_size = Vector2(350, 350)
 layout_mode = 2
 
 [connection signal="pressed" from="CenterContainer/MainOptionModal/VBoxContainer/MarginContainer/VBoxContainer/OpenNetworkButton" to="." method="_on_open_network_button_pressed"]
