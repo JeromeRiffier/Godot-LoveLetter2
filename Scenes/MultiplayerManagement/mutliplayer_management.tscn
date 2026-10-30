@@ -37,12 +37,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1253785161]
+propagate_maximum_size = false
 layout_mode = 2
 theme_override_constants/margin_left = 25
 
 [node name="SidePanel" parent="HBoxContainer/MarginContainer" unique_id=1034076944 instance=ExtResource("4_kyqgd")]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="ViewportScaleManager" type="Control" parent="HBoxContainer" unique_id=1816426498]
 layout_mode = 2
@@ -61,21 +61,11 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/ViewportScaleManager/SubViewportContainer" unique_id=1690264621]
+transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(1051, 900)
 render_target_update_mode = 4
-
-[node name="background" type="ColorRect" parent="HBoxContainer/ViewportScaleManager/SubViewportContainer/SubViewport" unique_id=192187242]
-z_index = -10
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0, 1, 1, 1)
 
 [node name="GameWindow" type="Node2D" parent="HBoxContainer/ViewportScaleManager/SubViewportContainer/SubViewport" unique_id=1869245386]
 

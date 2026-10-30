@@ -20,15 +20,15 @@ signal selected_card(card:CardInfos)
 func _ready() -> void:
 	## Do not forget to disable mouse filtering on any control node to not mess with inputs
 	#background_color.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	set_screen_values()
+	on_viewport_size_changed()
+	set_background_properties()
 	get_viewport().size_changed.connect(on_viewport_size_changed)
 	for cardInfo in Constant.CardTypesWithoutGuard:
 		var card_node:Card = CARD_SCENE.instantiate()
 		cards_node.add_child(card_node)
 		card_node.set_infos(cardInfo)
 		cards.append(card_node)
-	update_hand_positions()
-	set_background_size()
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not selection_active:
@@ -51,7 +51,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func activate() -> void:
 	selection_active = true
 	set_background_properties()
-	update_hand_positions()
 	set_card_selectable()
 	var pointableManager:PointableManager = get_tree().get_first_node_in_group("PointableManager")
 	if pointableManager:
@@ -86,7 +85,10 @@ func set_background_properties() -> void:
 	tween.tween_property(background_color, "color", color, 0.3)
 	await tween.finished
 func set_background_size() -> void:
-	background_color.size = get_tree().root.size
+	background_color.set_deferred("size", get_viewport_rect().size)
+	var scale_manager := ViewportScaleManager.instance
+	if scale_manager:
+		background_color.scale = Vector2(1/scale_manager.instance.scale_factor, 1/scale_manager.instance.scale_factor)
 	background_color.global_position = Vector2.ZERO
 #endregion
 

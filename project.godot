@@ -16,10 +16,6 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
-[autoload]
-
-MinWindowSize="*uid://dxvverm27s84s"
-
 [debug]
 
 gdscript/warnings/untyped_declaration=1

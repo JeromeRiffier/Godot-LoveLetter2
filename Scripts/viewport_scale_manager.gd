@@ -1,9 +1,25 @@
 class_name ViewportScaleManager extends Control
 
 @onready var viewport_container: SubViewportContainer = $SubViewportContainer
+@onready var side_panel: SidePanel = $"../MarginContainer/SidePanel"
 
+var scale_factor:float
+static var instance:ViewportScaleManager
+
+#region singleton
+func _enter_tree() -> void:
+	if instance != null and instance != self:
+		queue_free()  # un doublon existe déjà
+		return
+	instance = self
+
+func _exit_tree() -> void:
+	if instance == self:
+		instance = null
+#endregion
 
 func _ready() -> void:
+	side_panel.pivot_offset_ratio = Vector2(0.5, 0.5)
 	resized.connect(_update_scale)
 	_update_scale()
 
@@ -13,7 +29,7 @@ func _update_scale() -> void:
 	var full_size := size
 	var base := Vector2(Constant.MIN_WINDOW_SIZE)
 	
-	var scale_factor := minf(1.0, minf(full_size.x / base.x, full_size.y / base.y))
+	scale_factor = minf(1.0, minf(full_size.x / base.x, full_size.y / base.y))
 	var new_size := size * (1/scale_factor)
 	
 	## When initializing the control node godot do some strange things and size can be undefined
@@ -25,3 +41,8 @@ func _update_scale() -> void:
 	## It would be overriden by some other control node magics
 	viewport_container.set_deferred("size", new_size)
 	viewport_container.set_deferred("scale", Vector2(scale_factor, scale_factor))
+	
+	## Using set_deferred because godot is not happy if we set a size for a control node in the ready function
+	## It would be overriden by some other control node magics
+	side_panel.set_deferred("scale", Vector2(scale_factor, scale_factor))
+	

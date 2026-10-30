@@ -200,9 +200,9 @@ func _on_server_disconnected() -> void:
 func _on_start_button_pressed() -> void:
 	var my_seed := "FixedSeed".hash() ## Find a way to generate the seed and transmit it to each peers
 	var playersList := players.map(func (element:PlayerElement) -> Dictionary: return element.to_dict())
-	var id:int = multiplayer.get_unique_id()
-	var is_server:bool = multiplayer.is_server()
-	var peerss:PackedInt32Array = multiplayer.get_peers()
+	#var id:int = multiplayer.get_unique_id()
+	#var is_server:bool = multiplayer.is_server()
+	#var peerss:PackedInt32Array = multiplayer.get_peers()
 	start_game.rpc(my_seed, playersList)
 #endregion
 
